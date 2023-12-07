@@ -1,0 +1,646 @@
+
+/* Estilos para el cuerpo del formulario */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #D2ECFD;
+    height: 100%;
+    margin: 0 ;
+    padding: 0;
+    
+}
+
+
+.iconoOps {
+  display: flex;
+  align-items: center;
+  max-width: 10rem;
+}
+
+
+/* Estilos para la barra de navegación */
+
+
+/* Estilos para el formulario */
+main {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    flex: 1; 
+}
+
+/* Estilos para los campos del formulario */
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px; /* Aumenta el espacio interno */
+    margin-bottom: 20px;
+    border-radius: 3px;
+    border: 1px solid #000000;
+    font-size: 16px;
+    resize: none;
+    box-sizing: border-box;
+    
+}
+
+#icono-tipo {
+    padding-bottom: 10px;
+}
+
+/* Cambiar el color del borde del textarea y enfocar */
+textarea:focus {
+    border-color: #1da1f2; /* Cambiar a un color de borde agradable al enfocar */
+}
+ 
+
+
+
+
+
+.Fecha {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permite que los elementos se muevan a la siguiente línea si no hay suficiente espacio */
+  }
+  
+  .FechaInicio{
+    flex: 1; /* Hace que ocupen el mismo espacio */
+    margin-bottom: 20px;
+    padding: 0px 10px 0px 0;
+    box-sizing: border-box;
+  }
+
+  .FechaFinal {
+    flex: 1; /* Hace que ocupen el mismo espacio */
+    margin-bottom: 20px;
+    padding: 0px 0 0px 10px;
+    box-sizing: border-box;
+  }
+  
+  .FechaDesing {
+    width: 100%; /* Ocupa todo el ancho del contenedor padre */
+    padding: 10px;
+    border: .5px solid #000000;
+    border-radius: 3px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  /* Media query para ajustar los estilos para pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .FechaInicio,
+    .FechaFinal {
+        
+        width: 100%; /* Ocupa el 100% del ancho en pantallas más pequeñas */
+        padding: 10px;
+        
+    }
+  }
+
+
+input[type="Time"] {
+
+    width: 100%;
+    padding: 8px 0px 8px 8px;
+    margin-bottom: 10px;
+    border: .5px solid #000000;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+
+
+/* Estilos para el campo de selección */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #e1e8ed;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+/* Estilos para el botón de enviar */
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+button[type="submit"] {
+    background-color: #1da1f2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.BotonPosicion{
+  display: flex;
+  justify-content: end;
+}
+
+
+button[type="submit"]:hover {
+    background-color: #1990d6;
+}
+
+
+ 
+  .horaEvento{
+  box-sizing: border-box;
+  margin-right: 10px;
+  width: 30%;
+  padding-left: 2rem;
+  }
+  
+  /* Estilos para dispositivos más pequeños */
+  @media (max-width: 768px) {
+    .img1 {
+      flex-direction: column;
+    }
+  
+    .tipoEvento,
+    .horaEvento {
+      width: 100%; /* Ocupa el 100% del ancho en dispositivos más pequeños */
+      margin-right: 0;
+    }
+  }
+  
+
+
+
+
+
+.tweet-composer img {
+    max-height: 20rem;
+    padding: 5px;
+    margin: 0 auto;
+    text-align: center;
+}
+.tweet-composer p {
+    font-size: 16px;
+    color: #555;
+}
+
+
+.tweet-composer  {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 1.3rem;
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    border-bottom: 1px solid #b3b3b3;
+    
+}
+
+.tweet-actions .tweet-button {
+    background-color: #1da1f2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.buttonRequisitos{
+  background-color: #1da1f2;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 1rem;
+}
+ .ConfbuttonRequisitos{
+  display: flex;
+  justify-content: center;
+ }
+
+.tweet-actions .tweet-button:hover {
+    background-color: #1990d6;
+}
+
+
+/* Estilos para la sección de noticias */
+.main-container {
+    display: flex;
+    min-height: 85vh;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+  
+  .column {
+    width: 50%;
+  }
+  .column1 {
+    width: 18%;
+  }
+  .column2 {
+    width: 18%;
+  }
+  
+  .column1 .news-section1 {
+    background-color: #ffffff;
+    border-left: 1px solid #e1e8ed;
+    height: 100%;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.3s ease-in-out;
+    
+  }
+  .news-section {
+    background-color: #ffffff;
+    border-left: 1px solid #e1e8ed;
+    height: 100%;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.3s ease-in-out;
+    
+  }
+  
+  .news-section h2 {
+    font-size: 20px;
+  }
+  
+.Participantes {
+  border: 1px solid black;
+  margin-top: 2rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.Participantes1{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 2rem;
+  width: 70%;
+}
+.campo-vacio {
+  background-color: #ff000025;
+  
+}
+.Campovacio {
+  display: flex;
+}
+
+
+.composer-form select{
+  border: .5px solid #000000;
+}
+ 
+
+
+.tipoeventob {
+  display: flex;
+  justify-content: end;
+}
+.tipoeventob .tweet-button{
+  margin: 1rem;
+}
+
+
+.errorInf {
+  display: flex;
+  justify-content: space-between;
+}
+
+.errorInf p{
+  align-items: center;
+  padding: 0 0.5rem 0rem 0.2rem;
+  margin-top: 13px;
+  margin-bottom: 0;
+  color: red;
+}
+
+.ColorCampoVacio{
+  align-items: center;
+  padding: 0 0.5rem 0rem 0.2rem;
+  margin-top: 13px;
+  margin-bottom: 0;
+  color: red;
+}
+
+.ConjuntoA{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+/* configurarEvento.css */
+#image {
+  display: none; /* Ocultar el campo de carga de la imagen */
+}
+
+.upload-container {
+  border: 2px dashed #ccc; /* Borde punteado gris claro para indicar la zona de carga */
+  text-align: center;
+  cursor: pointer;
+  margin: 0 5px 35px 5px;
+}
+
+.upload-container:hover {
+  border-color: #aaa; /* Cambiar el color del borde cuando se pasa el mouse sobre el área de carga */
+}
+
+.upload-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+  height: 10rem;
+  border: none;
+  display: flex;
+}
+
+.upload-icon img{
+  max-width: 10rem;
+  opacity: 0.5;
+  margin-top: 1rem;
+}
+
+.upload-text {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+#image-preview {
+  max-width: 100%; /* Asegurar que la imagen previa no se desborde del contenedor */
+  max-height: 20rem; /* Altura máxima para la imagen previa */
+  margin-top: 10px;
+}
+
+
+.BotRequisitos {
+  
+  border-radius: 5px;
+  background-color: #1da1f2; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  width: 40px; /* Ancho del botón */
+  height: 40px; /* Altura del botón */
+  font-size: 24px; /* Tamaño del texto */
+  cursor: pointer; /* Cursor al pasar el ratón sobre el botón */
+  justify-content: center; /* Centrar horizontalmente el contenido (ícono o texto) */
+  align-items: center; /* Centrar verticalmente el contenido */
+  transition: background-color 0.3s ease; /* Animación suave para el cambio de color de fondo */
+  margin-left: 1.5rem;
+}
+
+
+.BotRequisitos :hover {
+  background-color: #1990d6;
+}
+
+.Requisitos{
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.distribucionReque{
+  width: 100%;  
+}
+
+
+.iconoEliminar {
+  width: 20px;
+  height: 20px;
+}
+
+.TituloEvento{
+  width: 100%;
+}
+
+.CrearEvento{
+  display: flex;
+  justify-content: center;
+}
+
+
+/*Primera Fila*/
+.PrimeraFila{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/*Segunda Fila*/
+.SegundaFila{
+  display: flex;
+  justify-content: space-between;
+}
+
+.composer-form{
+  width: 100%;
+  padding: 0px 10px 0px 0px;
+}
+
+
+.Modalidad{
+  width: 100%;
+  padding: 0px 0 0px 10px;
+  box-sizing: border-box;  
+}
+
+.Modalidad select{
+  width: 100;
+  border: .5px solid #000000;
+  padding-right: 100px;
+}
+
+.SubirImagen input{
+  display:none;
+}
+
+.ventana-emergente{
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+}
+
+.modalCrearEvento {
+  position: fixed;
+  width: 40%;
+  height: 54%;
+  top: 20%;
+  left: 28.8%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #e9e9e9; /* Fondo blanco del modal */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra alrededor del modal */
+  z-index: 1001; /* Asegura que esté sobre el fondo oscuro */
+}
+
+
+.FondoModal1{
+  background-color: white;
+  box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+  margin: 1rem 3rem 0.1rem 3rem;
+  font-size: 12px;
+  padding: 0.2rem 0;
+}
+
+
+.FondoModal2{
+  background-color: white;
+  box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+  margin: 2rem 3rem 1rem 3rem;
+  font-size: 14px;
+  padding: 1rem 2rem;
+}
+
+.FondoModa3{
+  background-color: white;
+  box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+  margin: 1rem 3rem 0.1rem 3rem;
+  font-size: 12px;
+  padding: 0.2rem 0;
+}
+
+.FondoModal4{
+  background-color: white;
+  box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+  margin: 1rem 2rem 0.1rem 2rem;
+  font-size: 12px;
+  padding: 0.2rem 0;
+}
+
+.modalCrearEvento5{
+  position: fixed;
+  width: 20%;
+  height: 46%;
+  top: 20%;
+  left: 38%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #e9e9e9; /* Fondo blanco del modal */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra alrededor del modal */
+  z-index: 1001; /* Asegura que esté sobre el fondo oscuro */
+}
+.TextoModal{
+ display: flex;
+ justify-content: center;
+ padding: 1rem;
+}
+
+.TextoModal h2{
+text-align: center;
+}
+
+.CrearEvento1{
+  max-width: 80%;
+}
+.descripcionModal{
+  height: 6rem;
+
+}
+
+
+.ventana-emergente3{
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+}
+
+.modalCrearEvento3 {
+  position: fixed;
+  width: 40%;
+  height: 75%;
+  top: 10%;
+  left: 28.8%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #e9e9e9; /* Fondo blanco del modal */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra alrededor del modal */
+  z-index: 1001; /* Asegura que esté sobre el fondo oscuro */
+}
+
+.modalCrearEvento4 {
+  position: fixed;
+  width: 20%;
+  height: 32%;
+  top: 30%;
+  left: 38%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #e9e9e9; /* Fondo blanco del modal */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra alrededor del modal */
+  z-index: 1001; /* Asegura que esté sobre el fondo oscuro */
+}
+
+
+.HoraInicio{
+  width: 15%;
+}
+
+.NombreActividad{
+  width: 80%;
+}
+
+.Acividades span {
+  border: 1px solid black;
+  padding: 0.4rem 1rem;
+}
+
+.Acividades{
+  display: flex;
+
+}
+
+.buttonRequisitos1{
+  background-color: #1da1f2;
+  color: #ffffff;
+  padding: 5px 25.3rem;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 27px;
+  margin-bottom: 1rem;
+}
+
+.buttonRequisitos2{
+  background-color: #1da1f2;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0.8rem 1rem;
+}
+
+.CreadoExitosamente{
+  color: red;
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+}
+
+.ErrorForm{
+  color: red;
+  
+}
+
+

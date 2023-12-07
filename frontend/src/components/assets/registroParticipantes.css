@@ -1,0 +1,327 @@
+/* Estilo del título */
+.centrar-titulo {
+  font-size: 3em;
+  text-align: center;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #3498db, #e74c3c); /* Degradado de azul a rojo */
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background 0.3s ease; 
+}
+
+/* Estilo del subtítulo */
+.subtitulo {
+  color: #2c3e50; /* Azul oscuro */
+  font-weight: bold;
+  font-size: 1.4em; /* Tamaño del texto del subtítulo */
+  margin-bottom: 12px; /* Espacio entre el subtítulo y los elementos siguientes */
+}
+
+/* Contenedor del formulario */
+.contenedor-form {
+
+
+/* Estilos para los campos del formulario */
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0px 10px 0px;
+}
+.hola
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    font-size: 16px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+/* Cambiar el color del borde del textarea y enfocar */
+textarea:focus {
+    border-color: #1da1f2;
+}
+
+.split-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.split-column {
+    flex: 1;
+    margin-bottom: 20px;
+    padding: 0px 20px 0px 0;
+    box-sizing: border-box;
+}
+
+/* Estilos para el campo de selección */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.role-fieldset {
+    
+    border: 1px solid #000; /* Establece un borde alrededor del grupo */
+    padding: 10px; /* Agrega espacio alrededor del contenido del borde */
+}
+/* <<<<<<< HEAD
+/* <<<<<<< HEAD
+=======
+
+>>>>>>> 476be37170815c77c56690c301df917612646c39
+   */
+/* ======= */
+  
+/* >>>>>>> ce594ca9e0fc29db53cde497143c3cf62abad529 */
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  max-width: 800px;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #ecf0f1; /* Gris claro */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sutil sombra */
+}
+
+/* Estilo de las etiquetas */
+.contenedor-form label {
+  margin-bottom: 12px;
+  color: #2c3e50; /* Azul oscuro */
+}
+
+/* Estilo de etiquetas requeridas */
+.contenedor-form label.required::after {
+  content: ' *';
+  color: #e74c3c; /* Rojo */
+}
+
+
+/* Estilo para el campo de entrada de teléfono */
+.contenedor-form input#apellidoPersona {
+  margin-left: 4%;
+  width: 90%;
+  padding: 10px;
+  font-size: 18px; /* Tamaño de fuente más grande */
+  border: none; /* Elimina el borde del input */
+  border-bottom: 2px solid #3498db; /* Borde inferior de 2px y color azul */
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Estilo para el mensaje de error */
+.contenedor-form input#apellidoPersona:focus {
+  border-bottom: 2px solid #007BFF; /* Cambia el color del borde inferior cuando está enfocado */
+}
+
+
+/* Estilo para el campo de entrada de teléfono */
+.contenedor-form input#correoC {
+  margin-left: 4%;
+  width: 90%;
+  padding: 10px;
+  font-size: 18px; /* Tamaño de fuente más grande */
+  border: none; /* Elimina el borde del input */
+  border-bottom: 2px solid #3498db; /* Borde inferior de 2px y color azul */
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Estilo para el mensaje de error */
+.contenedor-form input#correoC:focus {
+  border-bottom: 2px solid #007BFF; /* Cambia el color del borde inferior cuando está enfocado */
+}
+
+
+/* Estilo para el campo de entrada de teléfono */
+.contenedor-form input#idPersona {
+  margin-left: 4%;
+  width: 90%;
+  padding: 10px;
+  font-size: 18px; /* Tamaño de fuente más grande */
+  border: none; /* Elimina el borde del input */
+  border-bottom: 2px solid #3498db; /* Borde inferior de 2px y color azul */
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Estilo para el mensaje de error */
+.contenedor-form input#idPersona:focus {
+  border-bottom: 2px solid #007BFF; /* Cambia el color del borde inferior cuando está enfocado */
+}
+
+/* Estilo para el campo de entrada de teléfono */
+.contenedor-form input#nombrePersona {
+  margin-left: 4%;
+  width: 90%;
+  padding: 10px;
+  font-size: 18px; /* Tamaño de fuente más grande */
+  border: none; /* Elimina el borde del input */
+  border-bottom: 2px solid #3498db; /* Borde inferior de 2px y color azul */
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Estilo para el mensaje de error */
+.contenedor-form input#nombrePersona:focus {
+  border-bottom: 2px solid #007BFF; /* Cambia el color del borde inferior cuando está enfocado */
+}
+
+
+/* Estilo para el campo de entrada de teléfono */
+.contenedor-form input#telefonoPersona {
+  margin-left: 4%;
+  width: 90%;
+  padding: 10px;
+  font-size: 18px; /* Tamaño de fuente más grande */
+  border: none; /* Elimina el borde del input */
+  border-bottom: 2px solid #3498db; /* Borde inferior de 2px y color azul */
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+
+
+/* Estilo para el mensaje de error */
+.contenedor-form input#telefonoPersona:focus {
+  border-bottom: 2px solid #007BFF; /* Cambia el color del borde inferior cuando está enfocado */
+}
+
+/* Espacio entre elementos */
+.espacio {
+  margin-top: 20px;
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+  color: #e74c3c; /* Rojo */
+  margin-top: 5px;
+}
+
+/* Estilo para el botón */
+/*.contenedor-form button {
+  background-color: #3498db; 
+  color: #fff;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}*/
+
+/* Estilo para el botón al pasar el ratón por encima */
+.contenedor-form button:hover {
+  background-color: #2980b9; /* Azul más oscuro al pasar el ratón */
+}
+
+/* Estilo para el contenedor de la selección de género */
+.contenedor-form select#genero {
+  margin-left: 4%;
+  width: 90%;
+  padding: 10px;
+  font-size: 18px; /* Tamaño de fuente más grande */
+  border: none; /* Elimina el borde del input */
+  border-bottom: 2px solid #3498db; /* Borde inferior de 2px y color azul */
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Estilo cuando el foco está en la selección */
+.contenedor-form select#genero:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* Estilo para las opciones de género */
+.contenedor-form select#genero option {
+  border: none; /* Elimina el borde predeterminado de las opciones */
+  border-bottom: 1px solid #ccc; /* Agrega una línea inferior a las opciones */
+  padding: 10px;
+  font-size: larger;
+}
+
+/* Estilo específico para la opción "Masculino" */
+.contenedor-form select#genero option[value="Masculino"] {
+  background-color: #81b2d3; /* Cambia el fondo de "Masculino" a azul */
+  color: rgb(160, 234, 114); /* Cambia el color del texto de "Masculino" a blanco */
+}
+
+/* Estilo específico para la opción "Femenino" */
+.contenedor-form select#genero option[value="Femenino"] {
+  background-color: #e74c3c; /* Cambia el fondo de "Femenino" a rojo */
+  color: #fff; /* Cambia el color del texto de "Femenino" a blanco */
+}
+
+
+.button-container-RP {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.button-container-RP .blue-button-RP  {
+  background-color: rgb(74, 164, 237);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 40px;
+  margin-left: 90px;
+  margin-right: 110px;
+ width: 150px;
+}
+.contenedor-form p {
+  margin-left: 4%;
+  width: 90%;
+  margin-left: 32px;
+  font-size: 11px; /* Tamaño de fuente más grande */
+  border: none; /* Elimina el borde del input */
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+ 
+ 
+
+  box-sizing: border-box;
+}
+
+

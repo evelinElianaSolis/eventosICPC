@@ -1,0 +1,21 @@
+.titulo-1 {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, rgb(2, 110, 11), rgb(5, 93, 151)); /* Degradado de azul a rojo */
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background 0.3s ease; 
+  }
+
+  .subtitulo {
+    color: #2c3e50; /* Azul oscuro */
+    font-weight: bold;
+    font-size: 1.4em; /* Tamaño del texto del subtítulo */
+    margin-bottom: 12px; /* Espacio entre el subtítulo y los elementos siguientes */
+  }
+
+
+  

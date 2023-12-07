@@ -1,0 +1,278 @@
+
+/* Estilos para el cuerpo del formulario */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #D2ECFD;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Establece el mínimo de altura de la ventana gráfica */
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el encabezado (barra de navegación) */
+header {
+    background-color: #21679A;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+    
+
+}
+
+.header-logo {
+    font-weight: bold;
+    font-size: 24px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+/* Estilos para la barra de navegación */
+nav {
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+    position: fixed;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Estilos para el formulario */
+main {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 40rem;
+    margin: 20px auto;
+    flex: 1; /* Expande el contenido principal para ocupar el espacio restante */
+    padding: 20px; /* Ajusta el espaciado del contenido principal según sea necesario */
+}
+
+/* Estilos para los campos del formulario */
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0px 10px 0px;
+}
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px; /* Aumenta el espacio interno */
+    margin-bottom: 20px;
+    border: 1px solid #000000; /* Borde con color base */
+    border-radius: 3px;
+    font-size: 16px;
+    resize: none;
+    box-sizing: border-box;
+    
+}
+
+#icono-tipo {
+    padding-bottom: 10px;
+}
+
+/* Cambiar el color del borde del textarea y enfocar */
+textarea:focus {
+    border-color: #1da1f2; /* Cambiar a un color de borde agradable al enfocar */
+}
+
+
+/* Estilos para el campo de fecha y hora */
+input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Estilos para el campo de selección */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #e1e8ed;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+/* Estilos para el botón de enviar */
+button[type="submit"] {
+    background-color: #1da1f2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #1990d6;
+}
+
+/* Estilos para el encabezado (barra de navegación) */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative; /* Agrega posición relativa para el encabezado */
+    z-index: 2; /* Cambia el z-index para que el encabezado esté en la parte superior */
+}
+
+
+/* Estilos para el encabezado (barra de navegación) */
+.navbar .logo {
+    font-weight: bold;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.navbar .search {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.navbar .search input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e1e8ed;
+    border-radius: 999px;
+    font-size: 16px;
+    background-color: #f5f8fa;
+}
+
+.navbar .menu a {
+    text-decoration: none;
+    color: #ffffff;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.navbar .user {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Estilos para el compositor de eventos */
+.tweet-composer {
+    padding: 20px;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.tweet-composer img {
+    max-height: 20rem;
+    display: none;
+    
+    padding: 5px;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid black;
+}
+.tweet-composer p {
+    font-size: 16px;
+    color: #555;
+}
+
+
+
+
+
+.tweet-composer textarea {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    
+}
+
+.tweet-actions .tweet-button {
+    background-color: #1da1f2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tweet-actions .tweet-button:hover {
+    background-color: #1990d6;
+}
+
+/* Estilos para la lista de eventos (puedes personalizar esto según tus necesidades) */
+
+footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    z-index: 9999; /* Coloca el footer por encima de otros elementos */
+}
+/* Estilos para la sección de noticias */
+.news-section {
+    background-color: #ffffff;
+    border-left: 1px solid #e1e8ed;
+    padding: 1rem;
+    width: 19rem;
+    position:fixed;
+    right: 0;
+    bottom: 0;
+    max-height: calc(100vh - 130px);/* Ajusta la altura máxima según la altura del encabezado */
+    overflow-y: auto;/* Agrega una barra de desplazamiento vertical si es necesario */
+    z-index: 1; /* Cambia el z-index para que las noticias estén detrás del encabezado */
+    transition: transform 0.3s ease-in-out;
+    
+}
+
+
+.news-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.news-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.news-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.news-item p {
+    font-size: 16px;
+    color: #333;
+}

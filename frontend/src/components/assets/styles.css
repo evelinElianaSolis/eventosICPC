@@ -1,0 +1,135 @@
+/* Estilos generales */
+.el-body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background-color: #D2ECFD;
+    height: 100%;
+    margin: 0 ;
+    padding: 0;
+  }
+  
+  .el-main-container {
+    display: flex;
+    flex-wrap: wrap;
+
+   min-height: 85vh;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  .el-column {
+    width: 60%;
+  }
+  .el-column1 {
+    width: 18%;
+  }
+  .el-column2 {
+    width: 18%;
+  }
+  
+  
+  
+  
+  /* Estilos para pantallas grandes */
+  @media screen and (min-width: 768px) {
+    .el-column1 {
+      order: 1;
+    }
+    
+    .el-column {
+      order: 2;
+    }
+  
+    .el-column2 {
+      order: 3;
+    }
+  }
+  .el-news-section {
+    background-color: #ffffff;
+    border-left: 1px solid #e1e8ed;
+    height: 100%;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.3s ease-in-out;
+
+
+    
+    
+  }
+  /* Estilos para pantallas medianas */
+  @media screen and (max-width: 767px) {
+    .el-column1,
+    .el-column,
+    .el-column2 {
+      width: 100%;
+      order: 0;
+    }
+  }
+
+  
+
+  /*------------------------------*/
+  
+/* Estilos para el cuerpo del formulario */
+
+
+
+
+
+
+.el-tweet-composer  {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 1.3rem;
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    border-bottom: 1px solid #b3b3b3;
+    
+}
+
+.el-tweet-actions .tweet-button {
+    background-color: #1da1f2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+
+
+/* Estilos para la sección de noticias */
+
+  
+  .el-column1 .news-section1 {
+    background-color: #ffffff;
+    border-left: 1px solid #e1e8ed;
+    height: 100%;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.3s ease-in-out;
+    
+  }
+  
+  
+  .el-news-section h2 {
+    font-size: 20px;
+  }
+ 
+
+
+
+
+.el-composer-form{
+  width: 100%;
+  padding: 0px 10px 0px 0px;
+}
+
+

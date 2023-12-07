@@ -1,0 +1,41 @@
+.modal-calendario {
+    /*position: sticky;
+  /*top: 0;
+  left: 0;
+  width: 30%;
+  height: 10%;*/
+  background-color: #e0f7fa;
+  /*display: flex;*/
+  justify-content: center;
+  width: 40%;
+  left: 20%;
+  align-items: center;
+}
+  
+  .modal-content-calendario {
+    background-color: #f8f0f0; /* Color de fondo del modal */
+    padding: 20px;
+    border-radius: 10px;
+    /* Otros estilos según tus preferencias */
+  }
+  
+  .close-calendario {
+    font-size: x-large;
+    position: relative;
+    cursor: pointer;
+    top: 20%;
+    left: 85%;
+    /* Otros estilos según tus preferencias */
+  }
+  
+  .bohemian-style-calendario {
+    background-color: rgba(179, 237, 244, 0.55); /* Color de fondo estilo bohemio */
+    color: rgb(30, 110, 86) /* Color del texto estilo bohemio */
+    /* Otros estilos según tus preferencias */
+  }
+  .modal-content-calendario h2{
+color:crimson;
+  }
+.modal-content-calendario p {
+  color: black; 
+}

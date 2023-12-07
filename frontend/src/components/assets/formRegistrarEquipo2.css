@@ -1,0 +1,205 @@
+/* Estilos generales para contenedor y etiquetas */
+.contenedor-form-RPE {
+    flex-direction: column;
+    text-align: left;
+    max-width: 800px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contenedor-form-RPE label {
+    margin-left: 10%;
+    width: 100%;
+    display: block;
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Estilos específicos para pantallas más pequeñas */
+  @media only screen and (max-width: 600px) {
+    .contenedor-form-RPE label {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  
+    .contenedor-form-RPE input {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  
+  .contenedor-form-RPE p {
+    margin-top: 0;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    margin-left: 10%;
+    width: 80%;
+    line-height: 1.2;
+  }
+    
+  .contenedor-form-RPE input {
+    margin-left: 10%;
+    width: 78%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1.5px solid #3498db;
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+  }
+  
+  .contenedor-form-RPE input:focus {
+    border-bottom: 2px solid #2250c4;
+  }
+  
+  .obligatorio-RPE::after {
+    content: " * ";
+    color: red;
+    margin-right: 4px;
+  }
+  
+  .button-container-RPE {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .rojo {
+    color: red;
+  }
+  
+  .button-container-RPE .blue-button-RPE {
+    background-color: rgb(74, 164, 237);
+    color: white;
+    border: none;
+    padding: 2.8% 8%;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 40px;
+    margin-left: 10%;
+    margin-right: 13%;
+  }
+
+ 
+
+.blue-button-RPE:hover {
+    background-color: #2980b9;
+  }
+  /* Estilos específicos para pantallas más pequeñas */
+  @media only screen and (max-width: 600px) {
+    .button-container-RPE .blue-button-RPE {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  
+  .contenedor-form-RPE input [type="text"] {
+    width: 100%;
+    padding: 10px; /* Aumenta el espacio interno */
+    margin-bottom: 20px;
+    border-radius: 3px;
+    border: 1px solid #000000;
+    font-size: 16px;
+    resize: none;
+    box-sizing: border-box;
+    
+}
+
+
+
+
+ .ConfbuttonRequisitos-RPE{
+  display: flex;
+  justify-content: center;
+ }
+
+
+.upload-icon-RPE {
+  font-size: 48px;
+  margin-bottom: 10px;
+  height: 10rem;
+  border: none;
+  display: flex;
+}
+
+
+
+
+
+.BotRequisitos-RPE {
+  
+  border-radius: 5px;
+  background-color: #1da1f2; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  width: 40px; /* Ancho del botón */
+  height: 40px; /* Altura del botón */
+  font-size: 24px; /* Tamaño del texto */
+  cursor: pointer; /* Cursor al pasar el ratón sobre el botón */
+  justify-content: center; /* Centrar horizontalmente el contenido (ícono o texto) */
+  align-items: center; /* Centrar verticalmente el contenido */
+  transition: background-color 0.3s ease; /* Animación suave para el cambio de color de fondo */
+  margin-left: 1.5rem;
+}
+
+.button-container-RPE .blue-button-RPE button[type="button"] {
+    background-color: #1da1f2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.RPE-container{
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.RPE-distribution{
+  width: 100%;  
+}
+
+
+.iconoEliminar-RPE {
+  width: 20px;
+  height: 20px;
+}
+
+  
+  .button-container-RPE .buttonRequisitos1-RPE{
+  background-color: #1da1f2;
+  color: #ffffff;
+  border: none;
+   width:100% ;
+
+    margin-left: 10%;
+    margin-right: 13%;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 27px;
+  margin-bottom: 1rem;
+}
+.buttonRequisitos1-RPE:hover {
+    background-color: #2980b9;
+  }
+
+
+
+

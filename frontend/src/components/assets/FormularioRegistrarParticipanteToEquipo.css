@@ -1,0 +1,173 @@
+.estilo-titulo-ToE {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #3498db, #e74c3c); /* Degradado de azul a rojo */
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background 0.3s ease; 
+  }
+  
+  /* Estilo del subtítulo */
+  .marca-subtitulo-ToE {
+    color: #2c3e50; /* Azul oscuro */
+    font-weight: bold;
+    font-size: 1.4em; /* Tamaño del texto del subtítulo */
+    margin-bottom: 12px; /* Espacio entre el subtítulo y los elementos siguientes */
+  }
+  
+  /* Contenedor del formulario */
+  .contenedor-formulario-ToE {
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    max-width: 800px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #ecf0f1; /* Gris claro */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sutil sombra */
+  }
+  
+  /* Estilo de las etiquetas */
+  .contenedor-formulario-ToE label {
+    margin-bottom: 12px;
+    color: #2c3e50; /* Azul oscuro */
+  }
+  
+  /* Estilo de etiquetas requeridas */
+  .contenedor-formulario-ToE .campo-oblogatorio-ToE {
+    content: ' *';
+    color: #e74c3c; /* Rojo */
+  }
+  
+  
+  /* Estilo para el campo de entrada de teléfono */
+  .contenedor-formulario-ToE input{
+    margin-left: 4%;
+    width: 90%;
+    padding: 10px;
+    font-size: 18px; /* Tamaño de fuente más grande */
+    border: none; /* Elimina el borde del input */
+    border-bottom: 2px solid #3498db; /* Borde inferior de 2px y color azul */
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo para el mensaje de error */
+  .contenedor-formulario-ToE input:focus {
+    border-bottom: 2px solid #007BFF; /* Cambia el color del borde inferior cuando está enfocado */
+  }
+  
+ 
+  
+  .contenedor-formulario-ToE .pintar-Rojo {
+    color: #e74c3c; /* Rojo */
+    margin-top: 5px;
+  }
+  
+  .contenedor-formulario-ToE button:hover {
+    background-color: #2980b9; /* Azul más oscuro al pasar el ratón */
+  }
+  
+  /* Estilo para el contenedor de la selección de género */
+  .contenedor-formulario-ToE .seleccion-ToE {
+    margin-left: 4%;
+    width: 90%;
+    padding: 10px;
+    font-size: 18px; /* Tamaño de fuente más grande */
+    border: none; /* Elimina el borde del input */
+    border-bottom: 2px solid #3498db; /* Borde inferior de 2px y color azul */
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo cuando el foco está en la selección */
+  .contenedor-formulario-ToE select:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  
+  /* Estilo para las opciones de género */
+  .contenedor-formulario-ToE .select-option {
+    border: none; /* Elimina el borde predeterminado de las opciones */
+    border-bottom: 1px solid #ccc; /* Agrega una línea inferior a las opciones */
+    padding: 10px;
+    font-size: larger;
+  }
+ 
+  .button-container-ToE {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+  .button-container-ToE .blue-button-ToE  {
+    background-color: rgb(74, 164, 237);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 40px;
+    margin-left: 90px;
+    margin-right: 110px;
+   width: 150px;
+  }
+  .contenedor-formulario-ToE p {
+    margin-left: 4%;
+    width: 90%;
+    margin-left: 32px;
+    font-size: 11px; /* Tamaño de fuente más grande */
+    border: none; /* Elimina el borde del input */
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+   
+   
+  
+    box-sizing: border-box;
+  }
+  
+  
+  
+  .contenedor-form select#equipo {
+    margin-left: 4%;
+    width: 90%;
+    padding: 10px;
+    font-size: 18px; /* Tamaño de fuente más grande */
+    border: none; /* Elimina el borde del input */
+    border-bottom: 2px solid #3498db; /* Borde inferior de 2px y color azul */
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo cuando el foco está en la selección */
+  .contenedor-form select#equipo:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  
+  /* Estilo para las opciones de género */
+  .contenedor-form select#equipo option {
+    border: none; /* Elimina el borde predeterminado de las opciones */
+    border-bottom: 1px solid #ccc; /* Agrega una línea inferior a las opciones */
+    padding: 10px;
+    font-size: larger;
+  }
+  
