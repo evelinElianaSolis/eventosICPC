@@ -5,7 +5,7 @@ import '../components/assets/ModalCalendario.css'
           <div className="modal-calendario" >
             <div className="modal-content-calendario" style={{ backgroundColor: color }}> {/* Agrega una clase para el estilo bohemio */}
               <span className="close-calendario" onClick={onClose}>&times;</span>
-              <h1>{"Información de actividad:"}</h1> 
+              <h3>{"Información de actividad:"}</h3> 
               <h2>{evento.nombreActividad}</h2> 
               
               <p><strong>Fecha de inicio:</strong> {evento.fechaInicioActividad}</p>

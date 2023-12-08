@@ -42,10 +42,12 @@ class CorreoController extends Controller
         try{
             $correo = new correo;
             $correo->correoC=$request->input('correoC');
-            $correo->estadoNotificacion=$request->input('estadoNotificacion');            
-            if($request->has('idPersona')){
-                $correo->idPersona=$request->input('idPersona');
-            }
+            $correo->estadoNotificacion=$request->input('estadoNotificacion');    
+            $correo->idPersona=$request->input('idPersona');
+        
+           // if($request->has('idPersona')){
+           //     $correo->idPersona=$request->input('idPersona');
+           // }
             // Guardar el correo en la base de datos
             $correo->save();
         

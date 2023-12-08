@@ -208,5 +208,35 @@ class ParticipanteController extends Controller
 
        
 
+
+    public function getParticipantsInfoByEventId($idEvento)
+    {
+        try {
+            $participants = participante::where('idEvento', $idEvento)->get();
+    
+            $participantsInfo = [];
+    
+            foreach ($participants as $participant) {
+                $persona = persona::find($participant->idParticipante);
+    
+                if ($persona) {
+                    $correo =  correo::where('idPersona', $persona->idPersona)->first();
+    
+                    if ($correo) {
+                        $participantsInfo[] = [
+                            'nombrePersona' => $persona->nombrePersona,
+                            'correoC' => $correo->correoC,
+                        ];
+                    }
+                }
+            }
+            return response()->json(['nombreCorreo' => $participantsInfo], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error retrieving participants information', 'error' => $e->getMessage()], 500);
+        }
+    }
+    
+
+
  
 }

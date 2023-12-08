@@ -59,13 +59,7 @@ const Menu = () => {
     <div className="line"></div>
   </div>
 </NavLink>
-<NavLink to={"/EventosNotificaciones"} className="navbar-item" activeclassname="active">
-  <img src="https://cdn-icons-png.flaticon.com/512/9790/9790435.png" alt="Usuario" />
-  <div>
-    <p className='navbar-title'>Editar Evento</p>
-    <div className="line"></div>
-  </div>
-</NavLink>
+
 
 
 

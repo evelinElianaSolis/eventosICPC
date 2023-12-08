@@ -67,6 +67,7 @@ Route::GET('/obtenerUltimoIdEvento', [EventoController::class,'obtenerUltimoIdEv
 Route::GET('/obtenerParticipantesPorEquipo/{idEquipo}', [ParticipanteController::class,'obtenerParticipantesPorEquipo']);
 Route::GET('/obtenerParticipantesYPersonasPorEquipo/{idEquipo}', [ParticipanteController::class,'obtenerParticipantesYPersonasPorEquipo']);
 Route::DELETE('/eliminarParticipanteYPersona/{idEquipo}/{idParticipante}', [ParticipanteController::class,'eliminarParticipanteYPersona']);
+Route::GET('/getParticipantsInfoByEventId/{idEvento}', [ParticipanteController::class,'getParticipantsInfoByEventId']);
 
 Route::GET('/obtenerEntrenadoresPorEquipo/{idEquipo}', [EntrenadorController::class,'obtenerEntrenadoresPorEquipo']);
 Route::DELETE('/destroyEntrenador/{idEntrenador}', [EntrenadorController::class,'destroy']);
