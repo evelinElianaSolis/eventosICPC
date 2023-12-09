@@ -3,8 +3,6 @@ import axios from './api/conexionApi';
 import './assets/registroParticipantes.css';
 import SuccessMessage from './ModalRegistroExitoso';
 import ErrorMessage from './ModalErrorRegistro';
-import ErrorMessage2 from './ModalIngresarDatosCorrectos';
-
 import ModalSalir from './ModalParaSalir';
 import validate from './utils/Validaciones';
 
@@ -34,13 +32,6 @@ const FormularioRegistroParticipantes = (evento) => {
 
   const closeErrorModal = () => {
     setShowErrorModal(false);
-  };
-
-
-  const [showErrorModal2, setShowErrorModal2] = useState(false);
-
-  const closeErrorModal2 = () => {
-    setShowErrorModal2(false);
   };
   //modal error
 
@@ -80,17 +71,30 @@ const [registroExitoso, setRegistroExitoso] = useState(false);
   });
   const handleChangeCorreo = (e) => {
     const { name, value } = e.target;
-    const correo=validate.validarCorreo(value);
-    if(correo!==""){
-      const datoCorreo=validate.devolverCorreo(value);
-      setCorreoData((correoData) => ({ ...correoData, [name]: datoCorreo }));
-      setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: correo }));
-    }else{
-      setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: "" }));
+    setCorreoData({
+      ...correoData,
+      [name]: value
+    });
 
-        setCorreoData((correoData) => ({ ...correoData, [name]: value }));
+    //
+    const correoRegex = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+const cor=value.replace(/[^a-zA-Z0-9_.@-]/g, '');
+    if (value.length > 50) {
+      setCorreoError(errorCincuentaCaracteres);
+    } else if (!correoRegex.test(value)) {
+      setCorreoError(errorCorreo);
+    } else {
+      setCorreoError('');
     }
-}
+  
+    // Solo actualiza el valor si es válido
+ 
+      setCorreoData({
+        ...correoData,
+        [name]: cor,
+      });
+    
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
@@ -166,88 +170,93 @@ const [registroExitoso, setRegistroExitoso] = useState(false);
  
   const handleSubmit = (e) => {
     //ERRORES
+    if (formData.nombrePersona.length < 3 ) {
+      setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: "Este campo no puede estar vacío." }));
     
-    setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
-    setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona) }));
-    setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: validate.validarCampoVacio(formData.idPersona) }));
-    setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError: validate.validarCampoVacio(formData.genero) }));
-    setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: validate.validarCampoVacio(correoData.correoC) }));
-  
-const v1=validate.validarNombre(formData.nombrePersona);
-const v2=validate.validarNombre(formData.apellidoPersona);
-const v3=validate.validarCI(formData.idPersona);
-const v4=validate.validarTelefono(formData.telefonoPersona);
-const v5=validate.validarCorreo(correoData.correoC);
-const v6=validate.validarGenero(formData.genero);
-
-//ERRORES
-
-
-
-
-if (v1 !== "" || v2 !== "" || v3 !== "" || v4 !== "" || v5 !== "" || v6 !== "") {
-  e.preventDefault();
-  setShowErrorModal2(true);
-
-    }else{
-    
-
-      e.preventDefault();
-      axios.post('./storePersona', formData)
-        .then((a) => {
-          console.log("ellllll datooo essss", evento)
-         console.log('Datos guardados correctamente', formData.idPersona);
-         const formCorreo = {
-          correoC: correoData.correoC,   
-          estadoNotificacion: true,
-          idPersona: formData.idPersona
-         };
-         axios.post('./correos', formCorreo)
-            .then((c)=>{
-              console.log('correo guardado', correoData.correoC);
-              const formParticipante = {
-                idParticipante: formData.idPersona,   
-                idEvento: evento.evento,
-              
-              };
-  
-              console.log('Datos editados', formParticipante.idParticipante);
-  
-                axios.post('./storeParticipante', formParticipante)
-                .then((b)=>{
-                      console.log('Datos de participante guardados correctamente', formParticipante.idParticipante);
-                      
-                      setFormData({
-                        idPersona: '',
-                        nombrePersona: '',
-                        apellidoPersona: '',
-                        genero: '',
-                        telefonoPersona: ''
-                      });
-                      setCorreoData({
-                        correoC:''
-                      });
-                      
-                })
-                .catch((error) => {          
-                  console.error('Error al guardar participante ', error);
-                  
-                });         
-              })
-             .catch((error) => {       
-              console.error('Error al guardar los datos del correo', error);
-              });
-        //alert("Datos guardados exitosamente.");
-        setRegistroExitoso(true);
-        
-      })
-      .catch((error) => {       
-        console.error('Error al guardar los datos de persona', error);
-        setShowErrorModal(true);
-        });
-        
-  
+    } else {
+      setNombreError("");
     }
+
+    if (formData.apellidoPersona.length < 3 ) {
+      setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: "Este campo no puede estar vacío." }));
+      
+    } else {
+      setApellidoError("");
+    }
+    
+    if (formData.idPersona.length < 7 || formData.idPersona.length < 8) {
+      setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: "Este campo no puede estar vacío." }));
+      
+    } else {
+      setIdPersonaError("");
+    }
+    if (correoData.correoC.length < 1 ) {
+      setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: "Este campo no puede estar vacío." }));
+      
+    } else {
+      setCorreoError("");
+    }
+    if (formData.genero < 2 ) {
+      setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError: "Este campo no puede estar vacío." }));
+      
+    } else {
+      setGeneroError("");
+    }
+//ERRORES
+    e.preventDefault();
+    axios.post('./storePersona', formData)
+      .then((a) => {
+        console.log("ellllll datooo essss", evento)
+       console.log('Datos guardados correctamente', formData.idPersona);
+       const formCorreo = {
+        correoC: correoData.correoC,   
+        estadoNotificacion: true,
+        idPersona: formData.idPersona
+       };
+       axios.post('./correos', formCorreo)
+          .then((c)=>{
+            console.log('correo guardado', correoData.correoC);
+            const formParticipante = {
+              idParticipante: formData.idPersona,   
+              idEvento: evento.evento,
+            
+            };
+
+            console.log('Datos editados', formParticipante.idParticipante);
+
+              axios.post('./storeParticipante', formParticipante)
+              .then((b)=>{
+                    console.log('Datos de participante guardados correctamente', formParticipante.idParticipante);
+                    
+                    setFormData({
+                      idPersona: '',
+                      nombrePersona: '',
+                      apellidoPersona: '',
+                      genero: '',
+                      telefonoPersona: ''
+                    });
+                    setCorreoData({
+                      correoC:''
+                    });
+                    
+              })
+              .catch((error) => {          
+                console.error('Error al guardar participante ', error);
+                
+              });         
+            })
+           .catch((error) => {       
+            console.error('Error al guardar los datos del correo', error);
+            });
+      //alert("Datos guardados exitosamente.");
+      setRegistroExitoso(true);
+      
+    })
+    .catch((error) => {       
+      console.error('Error al guardar los datos de persona', error);
+      setShowErrorModal(true);
+      });
+      
   }
 
   return (
@@ -293,7 +302,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v4 !== "" || v5 !== "" || v6 !== "") 
           placeholder="Ingresa tu numero de identificacion"
           onChange={handleChange}          
         />
-         <p style={{ color: 'red' }}>{mensajeError.ciParticipanteError}</p>
+         <p style={{ color: 'red' }}>{idPersonaError}</p>
       </div>
       <br/>
       <div>
@@ -348,11 +357,8 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v4 !== "" || v5 !== "" || v6 !== "") 
       {showErrorModal && (
         <ErrorMessage message="Ha ocurrido un error al realizar el registro, intentelo nuevamente" onClose={closeErrorModal} />
       )}
-      {showErrorModal2 && (
-        <ErrorMessage2 message="Por favor revisa que los datos ingresados sean correctos" onClose={closeErrorModal2} />
-      )}
       {mostrarModalSalir && (
-        <ModalSalir message="¿Quiere abandonar el registro?" onClose={handleCloseModalSalir} salida={"EventosRegistroParticipantes"}/>
+        <ModalSalir message="¿Quiere abandonar el registro?" onClose={handleCloseModalSalir} />
       )}
     </div>
   );

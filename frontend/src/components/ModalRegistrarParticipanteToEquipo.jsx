@@ -3,8 +3,6 @@ import './assets/ModalRegistroParticipantes.css';
 import axios from './api/conexionApi';
 import ErrorMessage from './ModalErrorRegistro';
 import validate from './utils/Validaciones';
-import ErrorMessage2 from './ModalIngresarDatosCorrectos';
-
 
 const FormularioRegistroParticipantes = ({ evento,idEquipoE,equipo,  onCloseSelf, onOpenSecondaryModal, onCloseParent, onUpdateParent }) => {
 //----------------------------------------------------------------------------
@@ -41,12 +39,6 @@ const handleSecondaryModalCloseOk = () => {
 
   const closeErrorModal = () => {
     setShowErrorModal(false);
-  };
-
-  const [showErrorModal2, setShowErrorModal2] = useState(false);
-
-  const closeErrorModal2 = () => {
-    setShowErrorModal2(false);
   };
   //modal error
 
@@ -177,18 +169,6 @@ const [registroExitoso, setRegistroExitoso] = useState(false);
   setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: validate.validarCampoVacio(correoData.correoC) }));
 
 //ERRORES
-const v1=validate.validarNombre(formData.nombrePersona);
-const v2=validate.validarNombre(formData.apellidoPersona);
-const v3=validate.validarCI(formData.idPersona);
-const v4=validate.validarTelefono(formData.telefonoPersona);
-const v5=validate.validarCorreo(correoData.correoC);
-const v6=validate.validarGenero(formData.genero);
-
-if (v1 !== "" || v2 !== "" || v3 !== "" || v4 !== "" || v5 !== "" || v6 !== "") {
-  e.preventDefault();
-  setShowErrorModal2(true);
-
-    }else{
     e.preventDefault();
     axios.get(`buscarEquipo/${idEquipoE}`)
         .then(response => {
@@ -274,7 +254,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v4 !== "" || v5 !== "" || v6 !== "") 
               setShowErrorModal(true);
               });
               
-            }
+      
     };
 
 
@@ -369,7 +349,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v4 !== "" || v5 !== "" || v6 !== "") 
       </div>
       <br/>
        <div className='button-container-ToE-MRPE '>
-          <button className=".blue-button-ToE-MRPE" type="button" onClick={handleSecondaryModalOpen}>Cancelar</button>
+          <button className=".blue-button-ToE-MRPE" type="button" onClick={handleSecondaryModalOpen}>Salir</button>
           <button className=".blue-button-ToE-MRPE" type="button" onClick={handleSubmit}>Registrar</button>
        </div>
 
@@ -398,9 +378,6 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v4 !== "" || v5 !== "" || v6 !== "") 
 }
       {showErrorModal && (
         <ErrorMessage message="Ha ocurrido un error al realizar el registro, intentelo nuevamente" onClose={closeErrorModal} />
-      )}
-        {showErrorModal2 && (
-        <ErrorMessage2 message="Por favor revisa que los datos ingresados sean correctos" onClose={closeErrorModal2} />
       )}
        <br/>
        <br/>

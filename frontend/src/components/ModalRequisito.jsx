@@ -70,12 +70,12 @@ const ModalRequisito = ({ mostrar, cerrar, nombre, descripcion, setNombre, setDe
       
       <div className="ventana-emergente">
         {(mostrarModalSalir) && (
-        <ModalCreacionEvento message="Crear Requisito" onClose={handleButtonCancelarCE} />
+        <ModalCreacionEvento message="Requisito agregado" onClose={handleButtonCancelarCE} />
           
         )}
         {(mostrarModalSalir != true) && (
           <div>
-        <ModalCreacionEvento message="Crear Requisito" onClose={handleButtonCancelarCE} />
+        <ModalCreacionEvento message="Requisito agregado" onClose={handleButtonCancelarCE} />
         
       
         <div className="modalCrearEvento">

@@ -40,52 +40,39 @@ const [showSeleccionModal, setShowSeleccionModal] = useState(false);
     //tabla evento------------------------------------------------------------
    
     const [evento, setEvento] = useState(null);
-
     useEffect(() => {
-      const obtenerEvento = async () => {
-        try {
-          const response = await axios.get(`eventos/${EventoId.EventoId}`);
-          setEvento(response.data.evento);
-        } catch (error) {
-          console.error('Error al obtener el evento:', error);
-        }
-      };
-    
-      obtenerEvento();
-    }, [EventoId.EventoId]); // Agrega EventoId.EventoId como dependencia
-    
+        axios.get(`eventos/${EventoId.EventoId}`) 
+            .then(response => {
+                setEvento(response.data.evento);
+            })
+            .catch(error => {
+                console.error('Error al obtener el evento:', error);
+            });
+    }, );
 
     //tabla regla
             const [reglas, setReglas] = useState([]);
             useEffect(() => {
-              const obtenerReglas = async () => {
-                try {
-                  const response = await axios.get(`obtenerReglasDeEvento/${EventoId.EventoId}`);
-                  setReglas(response.data.reglas);
-                } catch (error) {
-                  console.error('Error al obtener las reglas:', error);
-                }
-              };
-            
-              obtenerReglas();
-            }, [EventoId.EventoId]);
-            
+            axios.get(`obtenerReglasDeEvento/${EventoId.EventoId}`)
+            .then(response => {
+                setReglas(response.data.reglas);
+            })
+            .catch(error => {
+                console.error('Error al obtener las reglas:', error);
+            });
+            });
 
         //tabla requisito
         const [requisitos, setRequisitos] = useState([]);
-          useEffect(() => {
-  const obtenerRequisitos = async () => {
-    try {
-      const response = await axios.get(`obtenerRequisitosDeEvento/${EventoId.EventoId}`);
-      setRequisitos(response.data.requisitos);
-    } catch (error) {
-      console.error('Error al obtener los requisitos:', error);
-    }
-  };
-
-  obtenerRequisitos();
-}, [EventoId.EventoId]); // Asegúrate de incluir todas las dependencias necesarias
-
+            useEffect(() => {
+            axios.get(`obtenerRequisitosDeEvento/${EventoId.EventoId}`)
+            .then(response => {
+                setRequisitos(response.data.requisitos);
+            })
+            .catch(error => {
+                console.error('Error al obtener los requisitos:', error);
+            });
+        });
 
            
 
@@ -100,10 +87,9 @@ const [showSeleccionModal, setShowSeleccionModal] = useState(false);
 
     return (
         <div className="all-info-container">
-                  <h3 className="titulo_home">Información del Evento:</h3>
-
+            
                 <h1 className='titulo-1'>{evento.tituloEvento}</h1>
-                <hr />
+          
             <br />
 
         
@@ -161,6 +147,9 @@ const [showSeleccionModal, setShowSeleccionModal] = useState(false);
                 )}
             </div>
 
+
+
+        <br />
         {reglas.length === 0 ? (
   <div className='info-box'>
     <strong>Sin reglas</strong>
@@ -173,18 +162,14 @@ const [showSeleccionModal, setShowSeleccionModal] = useState(false);
         <li key={index}>
           <strong>{regla.nombreRegla}</strong>
           <p></p>
-          {regla.descripcionRegla !== null && (
-          <div>
-            <strong>Descripción:</strong>
-            <p>{regla.descripcionRegla}</p>
-          </div>
-)}
+          <strong>Descripción:</strong>
+          <p>{regla.descripcionRegla}</p>
         </li>
       ))}
     </ol>
   </div>
 )}
-<br/>
+
 {requisitos.length === 0 ? (
   <div className='info-box'>
     <strong>Sin requisitos</strong>
@@ -197,12 +182,8 @@ const [showSeleccionModal, setShowSeleccionModal] = useState(false);
         <li key={index}>
           <strong>{requisito.nombreRequisito}</strong>
           <p></p>
-          {requisito.descripcionRequisito !== null && (
-  <div>
-    <strong>Descripción:</strong>
-    <p>{requisito.descripcionRequisito}</p>
-  </div>
-)}
+          <strong>Descripción:</strong>
+          <p>{requisito.descripcionRequisito}</p>
         </li>
       ))}
     </ol>
@@ -215,6 +196,7 @@ const [showSeleccionModal, setShowSeleccionModal] = useState(false);
             <div className="button-container-RI">  
 
             <button className="blue-button-RI" onClick={() => navigate('/Home')}>Volver Atrás</button>
+                <button className="blue-button-RI" onClick={() => handleModalSeleccion()}>Registrarse</button>
                 
             </div>
 

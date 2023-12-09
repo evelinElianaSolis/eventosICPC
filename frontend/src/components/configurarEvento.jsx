@@ -30,11 +30,52 @@ const EventForm = () => {
   const [mostrarModalSalir,   setMostrarModalSalir] =   useState(false);
   const [mostrarModalOps,   setMostrarModalOps] =   useState(false);
   const [mostrarModalOpss,   setMostrarModalOpss] =   useState(false);
-
+  const [Bandera,   setBandera] =   useState(false);
 
   const handleInicioClick       = () => {setMostrarModalSalir(true);};  
   const handleButtonCancelarCE  = () => {setMostrarModalSalir(false);};
   const handleOps               = () => {setMostrarModalOps(false);};
+
+
+
+
+
+  const obtenerEvento = async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/api/obtener-evento/4');
+    const responseActividad = await axios.get('http://localhost:8000/api/obtener-actividad/8'); 
+    const evento = response.data.evento;
+    const Actividad = responseActividad.data.actividad;
+    
+    
+    console.log(responseActividad);
+    setTituloEvento(evento.tituloEvento);
+    setDescripcion(evento.descripcionEvento);
+    setFechaInicio(Actividad.fechaInicioActividad);
+    setFechaFin(Actividad.fechaFinActividad);
+    setHoraEvento(Actividad.horaInicioActividad);
+    setModalidad(Actividad.modalidad);
+    setUbicacion(Actividad.ubicacionActividad);
+    
+    
+  
+   
+  } catch (error) {
+    console.error('Error al obtener el evento:', error);
+  }
+  };
+
+obtenerEvento();
+  
+
+
+
+
+
+
+
+
+
 
 
 
@@ -51,13 +92,6 @@ const EventForm = () => {
       setFechaInicio(nuevaFecha);
     }
   };
-  const handleFechaInicioBlur = () => {
-    // Validar nuevamente al perder el foco
-    setFechaInicioError(fechaInicio.trim() === '');
-  };
-
-  
-
 
 
 
@@ -167,8 +201,8 @@ const EventForm = () => {
           name="horaEvento"
           value={horaEvento}
           onChange={(e) => setHoraEvento(e.target.value)}
-          onBlur={() => (setHoraEventoError(horaEvento.trim() === "--:--"), setError(horaEvento.trim() === "--:--"))}
-          className={horaEventoError ? "campo-vacio" : "--:--"}
+          onBlur={() => (setHoraEventoError(horaEvento.trim() === "null"), setError(horaEvento.trim() === "null"))}
+          className={horaEventoError ? "campo-vacio" : "null"}
           required
         />
         
@@ -189,7 +223,7 @@ const EventForm = () => {
         name="fecha-inicio"
         value={fechaInicio}
         onChange={handleFechaInicioChange}
-        onBlur={handleFechaInicioBlur}
+        onBlur={() => (setFechaInicioError(fechaInicio.trim() === "null"), setError(fechaInicio.trim() === "null"))}
         required
       />
     </div>
@@ -313,7 +347,7 @@ const EventForm = () => {
         </div>
         
         {mostrarModalOps && 
-         <Ops message="Opss Ocurrio un Error" onClose={handleOps}/> 
+         <Ops message="Opss Ocurrio un Error " onClose={handleOps}/> 
         }
         {mostrarModalSalir && (
         <ModalSalir message="Cancelar creación" onClose={handleButtonCancelarCE} />

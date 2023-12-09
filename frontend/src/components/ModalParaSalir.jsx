@@ -1,12 +1,12 @@
 import React, {  } from 'react';
 import './assets/ModalParaSalir.css';
 import { useNavigate } from 'react-router-dom';
-const ModalSalir = ({ message, onClose ,salida}) => {
+const ModalSalir = ({ message, onClose }) => {
     const Navigate = useNavigate();
   const handleSiClick = () => {
     onClose();
     //window.location.href = '../pages/Home.jsx';
-    Navigate(`/${salida}`);
+    Navigate("/VerInformacionEvento");
     
   };
 

@@ -16,7 +16,6 @@ import EventosRegistrarEquipo from './pages/EventosParaRegistrarEquipo';
 import EditarEvento from './pages/EditarEvento';
 import EventosEditarEvento from './pages/EventosEditarEvento'
 import RegistrarEquipoOp2 from './pages/RegistrarEquipoOp2'
-import EventosNotificaciones from './pages/EventosNotificaciones'
 function App(){
   return(
     <BrowserRouter>
@@ -36,9 +35,6 @@ function App(){
         <Route path = "/EditarEvento/:id" element ={<EditarEvento/>} />
         <Route path = "/EventosEditarEvento" element ={<EventosEditarEvento/>} />
         <Route path = "/RegistrarEquipoOp2/:id/:id2/:numE/:numP" element={<RegistrarEquipoOp2/>}/>
-        <Route path = "/EventosNotificaciones" element={<EventosNotificaciones/>}/>
-
-
         <Route path = "*" element ={<Home />} />
       </Routes>
     

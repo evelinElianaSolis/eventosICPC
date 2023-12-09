@@ -69,7 +69,7 @@ const ModalRegla = ({ mostrar, cerrar, nombre, descripcion1 , setDescripcion1, s
     mostrar && (
       <div className="ventana-emergente">
         {(mostrarModalSalir) && (
-        <ModalCreacionEvento message="Crear Regla" onClose={handleButtonCancelarCE} />
+        <ModalCreacionEvento message="Regla agregada" onClose={handleButtonCancelarCE} />
           
         )}
         {(mostrarModalSalir != true) && (

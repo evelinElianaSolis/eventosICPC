@@ -17,8 +17,8 @@ const EventForm = (ultimoId) => {
   const [fechaInicio,                 setFechaInicio]           =    useState('null');
   const [fechaFin,                    setFechaFin]              =    useState('null');
   const [participacion,               setParticipacion]         =    useState('');
-  const [numEntrenadores,             setNumEntrenadores]       =    useState('0');
-  const [numParticipantes,            setNumParticipantes]      =    useState("0");
+  const [numEntrenadores,             setNumEntrenadores]       =    useState('');
+  const [numParticipantes,            setNumParticipantes]      =    useState("");
   const [imagen,                      setImagen]                =    useState("");
   const [file,                        setFile]                  =    useState(null)
   const [horaInicio,                  setHoraInicio]            =    useState(""); 
@@ -51,6 +51,8 @@ const [modalVisible,                      setModalVisible]             =  useSta
   const [numparticipacionError,       setnumParticipantesError] = useState(false);
   const [numEntrenadoresError,        setNumEntrenadoresError] = useState(false);
   const [actividadError,              setActividadError] = useState(false);
+  
+  const [errorActividades,              setActividadesError] = useState(false);
 
 
 
@@ -93,6 +95,10 @@ const [modalVisible,                      setModalVisible]             =  useSta
     nuevosRequisitos.splice(index, 1);
     setRequisitos(nuevosRequisitos);
   };
+
+
+
+  
 
 // Funciones Reglas
   const agregarRegla = () => {
@@ -148,14 +154,32 @@ const eliminarActividad = (index) => {
 
   // Funcion Principal
   const handleSubmit = async (e) => {
+    
+
+
+
     e.preventDefault();
     
+  
     try {
+      if (actividades.length === 0) {
+        setActividadesError(true);
+      }else{
+        if(numParticipantes == 0 || numEntrenadores == 0 || imagen == ""){
+
+        }else{
+
+          setActividadesError(false);
       const response = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
       const ultimoId = response.data.ultimoId;
       const eventId = ultimoId;
-      const imagenId = await uploadFile(file);
+      if(participacion == "Individual"){
+        setNumParticipantes("1");
+      }
 
+
+      const imagenId = await uploadFile(file);
+      
 
       const nuevoEvento={
         idEvento:eventId,
@@ -170,6 +194,9 @@ const eliminarActividad = (index) => {
       console.log('Evento creado con éxito');
       setModalVisible(true);
       setMostrarModalSalir(true);
+      }
+        }
+        
     } catch (error) {
       if (error.response) {
         console.error('Respuesta del servidor con error:', error.response);
@@ -192,9 +219,9 @@ const eliminarActividad = (index) => {
   
   return (
     <form onSubmit={handleSubmit} className="tweet-composer">
+      
       <h1 className="CrearEvento">Crear Evento</h1>
-
-      <div className="SubirImagen">
+        <div className="SubirImagen">
         <div className='Campovacio'>
           <label htmlFor="afiche">Afiche del evento:</label>
           <div className="ColorCampoVacio">*</div>
@@ -207,8 +234,9 @@ const eliminarActividad = (index) => {
           onChange={(e) => {
             handleImagenChange(e);
             setFile(e.target.files[0]);
+            
           }}
-          
+          required 
         />  
         <label htmlFor="image" className="upload-container">
         {imagen ? (
@@ -495,6 +523,17 @@ const eliminarActividad = (index) => {
           </button>
         </div>
       </div>
+
+      {errorActividades &&
+        <div className="ErrorForm">Debe ingresar al menos una actividad</div>
+      }
+      
+      
+      {imagen == "" &&
+        <div className="ErrorForm">Debe ingresar una Imagen</div>
+      }
+
+
       {(mostrarModalSalir) && (
         <ModalCreacionEvento message="Crear Evento" onClose={handleButtonCancelarCE} />
           
