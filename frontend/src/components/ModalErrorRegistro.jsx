@@ -1,5 +1,4 @@
 
-import React, { useState } from 'react';
 import './assets/ModalErrorRegistro.css';
 
 const ErrorMessage = ({ message, onClose }) => {

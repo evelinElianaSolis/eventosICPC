@@ -6,7 +6,6 @@ const HomeVistaEvento = () => {
   const [eventos, setEventos] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    let isMounted = true; // Flag to check if the component is mounted
   
     console.log('Component is mounting');
   

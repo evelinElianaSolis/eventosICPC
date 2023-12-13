@@ -309,17 +309,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         </button>
 )}
       </div>
-      {showEntrenadoresToEquipoModal && (
-        <ModalEntrenadores 
-        evento={numero} 
-        idEquipoE={varIdEquipo} 
-        equipo={equipoData}
-        onCloseSelf={closeEntrenadoresModal}
-        onOpenSecondaryModal={openEntrenadoresModal}
-        onCloseParent={closeEntrenadoresModal}
-        onUpdateParent={actualizarEntrenadores} 
-        />
-      )}
+   
 
 
 
@@ -352,17 +342,8 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         </button>
       )}
       </div>
-      {showPartcipantesToEquipoModal && (
-  <ModalParticipantes 
-    evento={numero}
-    idEquipoE={varIdEquipo}
-    equipo={equipoData}
-    onCloseSelf={closeParticipantesModal}
-    onOpenSecondaryModal={openParticipantesModal}
-    onCloseParent={closeParticipantesModal}
-    onUpdateParent={actualizarParticipantes} 
-  />
-)}
+      
+      
       
       <div className='button-container-RPE'>
           <button className="blue-button-RPE" type="button" onClick={() => handleInicioClick()}>Salir</button>
@@ -381,6 +362,28 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         <ModalSalir message="¿Quiere abandonar el registro?" onClose={handleCloseModalSalir} />
       )}
    </form> 
+   {showEntrenadoresToEquipoModal && (
+        <ModalEntrenadores 
+        evento={numero} 
+        idEquipoE={varIdEquipo} 
+        equipo={equipoData}
+        onCloseSelf={closeEntrenadoresModal}
+        onOpenSecondaryModal={openEntrenadoresModal}
+        onCloseParent={closeEntrenadoresModal}
+        onUpdateParent={actualizarEntrenadores} 
+        />
+      )}
+   {showPartcipantesToEquipoModal && (
+  <ModalParticipantes 
+    evento={numero}
+    idEquipoE={varIdEquipo}
+    equipo={equipoData}
+    onCloseSelf={closeParticipantesModal}
+    onOpenSecondaryModal={openParticipantesModal}
+    onCloseParent={closeParticipantesModal}
+    onUpdateParent={actualizarParticipantes} 
+  />
+)}    
     </div>
  
   );

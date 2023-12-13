@@ -13,11 +13,11 @@ const errorSeleccioneUnaOpcion='Seleccione al menos una opción';
 const errorCorreo='Ingrese un correo válido en el formato example@dominio.com';
 const errorCorreoCar='Los caracteres espeviales que intenta ingresar son invalidos';
 const errorMinOchoCaracteres = 'Este campo no puede ser menor a los 8 caracteres';
-
+const campoNovacio=`Este campo no puede estar vacío.`;
 const Validaciones = {
   validarCampoVacio: (valor) => {
     if (!valor.trim()) {
-      return `Este campo no puede estar vacío.`;
+      return campoNovacio;
     } else {
       return "";
     }
@@ -73,6 +73,9 @@ const Validaciones = {
     }
   },
     validarCI: (CI) => {
+      if (!CI) {
+return campoNovacio;
+      }      
       const newValueID = CI.replace(/[^\d]/g, '').substring(0, 8);
 
 
@@ -87,6 +90,9 @@ const Validaciones = {
     },
 
     devolverCI:(ciDev)=>{
+      if (!ciDev) {
+        return ;
+              }   
       const newValueID = ciDev.replace(/[^\d]/g, '').substring(0, 8);
       return newValueID;
     },

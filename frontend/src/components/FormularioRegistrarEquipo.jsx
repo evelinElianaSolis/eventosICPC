@@ -229,6 +229,7 @@ const handleSubmitEquipo = (e) => {
       <p>Es importante que llene los datos para su equipo correctamente, dado que una vez quede registrado no podra realizar modificaciones. Gracias y buena suerte.</p>
       <br/>
       
+      
       <label className='obligatorio' htmlFor="nombreEquipo">
         Nombre del Equipo:
         </label>

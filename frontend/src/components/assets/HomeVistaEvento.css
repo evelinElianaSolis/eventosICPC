@@ -40,12 +40,31 @@
     height: 3rem;
     color: #ffffff;
 }
+/* Estilos para el contenedor con barra de desplazamiento */
+.scroll-containerHM {
+
+    display: flex;
+    min-height: 85vh;
+    justify-content: space-between;
+    margin: 0 auto;
+  
+
+  width: 100%; /* Ajusta esto según el ancho deseado */
+  max-height: 200px; /* Ajusta esto según la altura máxima deseada */
+  overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+  overflow-y: auto; /* Muestra una barra de desplazamiento vertical si es necesario */
+  border: 1px solid #ccc; /* Opcional: añade un borde para el contenedor */
+  box-sizing: border-box; /* Asegúrate de que el padding y el borde estén incluidos en el ancho y la altura total */
+}
 
 
 .cuerpo {
+  max-height: 1000px;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+
   }
   
  .titulo_home {
@@ -67,6 +86,8 @@
 
     display: flex;
     flex-wrap: wrap;
+    overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+
     gap: 20px;
   }
   
@@ -117,6 +138,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    padding: 5px;
+    margin: 0 auto;
   }
   
   .evento-info {
