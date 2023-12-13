@@ -73,7 +73,10 @@ const [modalVisible,                      setModalVisible]             =  useSta
 
 // Funciones redirecciones
   const handleButtonGuardarCE = () => {    window.location.href = '/Home';};
-  const handleButtonCancelarCE = () => {    window.location.href = '/ConfigurarEvento';};
+  const handleButtonCancelarCE = () => {
+    const nuevaURL = '/ConfigurarEvento/?miBooleano=true';
+    window.location.href = nuevaURL;
+  };
 
 
 

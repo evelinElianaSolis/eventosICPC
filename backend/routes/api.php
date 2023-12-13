@@ -73,3 +73,5 @@ Route::GET('/obtenerEntrenadoresPorEquipo/{idEquipo}', [EntrenadorController::cl
 Route::DELETE('/destroyEntrenador/{idEntrenador}', [EntrenadorController::class,'destroy']);
 Route::GET('/obtener-evento/{id}', [EventoController::class,'obtenerEventoPorId']);
 Route::GET('/obtener-actividad/{id}', [ActividadController::class, 'obtenerActividadPorId']);
+
+Route::GET('/obtener-tipo-evento/{idTipoEvento}', [TipoEventoController::class, 'obtenerTipoEventoPorId']);
