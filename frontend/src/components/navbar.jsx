@@ -11,7 +11,7 @@ const Menu = () => {
       <NavLink to={'/Home'} className="navbar-item" activeclassname="active" >
         <img src="https://cdn-icons-png.flaticon.com/512/8280/8280362.png" alt="Usuario" />
         <div>
-          <p className='navbar-title'>Todos los eventos</p>
+          <p className='navbar-title'>Inicio</p>
           <div className="line"></div>
         </div>
       </NavLink>

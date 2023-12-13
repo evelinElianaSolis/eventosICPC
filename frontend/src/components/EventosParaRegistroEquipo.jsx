@@ -59,7 +59,6 @@ const HomeVistaEvento = () => {
       })
       .catch(error => {
         console.error('Error al recuperar id del último equipo:', error);
-        setVarIdEquipo(1);
       });
   };
   useEffect(() => {

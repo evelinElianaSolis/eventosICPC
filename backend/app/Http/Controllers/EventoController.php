@@ -401,6 +401,47 @@ public function obtenerUltimoIdEvento(Request $request)
 
 
 
+
+public function obtenerEventoPorId($idEvento)
+{
+    try {
+        // Obtener el evento de la base de datos por ID
+        $evento = Evento::find($idEvento);
+
+        // Verificar si se encontró el evento
+        if (!$evento) {
+            return response()->json(['message' => 'No se encontró el evento'], 404);
+        }
+
+        // Retornar los datos del evento
+        return response()->json(['message' => 'Evento recuperado con éxito', 'evento' => $evento], 200);
+    } catch (\Exception $e) {
+        // Manejar errores
+        return response()->json(['message' => 'Error al recuperar el evento', 'error' => $e->getMessage()], 500);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Eliminar un evento.
      *

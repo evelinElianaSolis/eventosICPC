@@ -106,4 +106,29 @@ class ActividadController extends Controller
     {
         //
     }
+
+
+    public function obtenerActividadPorId($idEvento)
+    {
+        try {
+            $actividad = Actividad::where('idEvento', $idEvento)->first();
+    
+            if (!$actividad) {
+                return response()->json(['message' => 'No se encontró la actividad para el evento especificado'], 404);
+            }
+    
+            return response()->json(['message' => 'Actividad recuperada con éxito', 'actividad' => $actividad], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al recuperar la actividad', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+
+
+
+
+
+
+
+
 }

@@ -70,4 +70,22 @@ class TipoEventoController extends Controller
     public function destroy($id)
     {
     }
+
+
+    public function obtenerTipoEventoPorId($idTipoEvento)
+    {
+        try {
+            $tipoEvento = TipoEvento::find($idTipoEvento);
+    
+            if (!$tipoEvento) {
+                return response()->json(['message' => 'No se encontró el tipo de evento'], 404);
+            }
+    
+            return response()->json(['message' => 'Tipo de evento recuperado con éxito', 'tipoEvento' => $tipoEvento], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al recuperar el tipo de evento', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+
 }

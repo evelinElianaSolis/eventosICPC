@@ -5,7 +5,8 @@ import Alert from'./Alert';
 import ModalSalir from './ModalCancelarCreacion';
 import Validaciones from './utils/Validaciones';
 import Ops from './modalOpss';
-const EventForm = () => {
+const EventForm =
+ () => {
 
    
   
@@ -14,7 +15,7 @@ const EventForm = () => {
   const [fechaInicio,   setFechaInicio]   = useState('null');
   const [fechaFin,      setFechaFin]      = useState('null');
   const [ubicacion,     setUbicacion]     = useState("");
-  const [idTipoEvento,  setIdTipoEvento]  = useState('-- seleccione --');
+  const [idTipoEvento,  setIdTipoEvento]  = useState('');
   const [modalidad,     setModalidad]     = useState('-- seleccione --');
   const [descripcion,   setDescripcion]    = useState('');
   const [tituloEventoError,   setTituloEventoError] =   useState(false);
@@ -30,11 +31,72 @@ const EventForm = () => {
   const [mostrarModalSalir,   setMostrarModalSalir] =   useState(false);
   const [mostrarModalOps,   setMostrarModalOps] =   useState(false);
   const [mostrarModalOpss,   setMostrarModalOpss] =   useState(false);
-
+  const [Bandera,   setBandera] =   useState(false);
 
   const handleInicioClick       = () => {setMostrarModalSalir(true);};  
   const handleButtonCancelarCE  = () => {setMostrarModalSalir(false);};
   const handleOps               = () => {setMostrarModalOps(false);};
+
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  const miBooleano = urlParams.get('miBooleano');
+
+
+
+
+  const obtenerEvento = async () => {
+  try {
+    
+  const response2 = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
+  const ultimoId2 = response2.data.ultimoId;
+  const response = await axios.get(`http://localhost:8000/api/obtener-evento/${ultimoId2}`);
+  
+  const responseActividad = await axios.get(`http://localhost:8000/api/obtener-actividad/${ultimoId2}`); 
+  const responseTipo = await axios.get(`http://localhost:8000/api/obtener-tipo-evento/${response.data.evento.idTipoEvento}`);
+  
+if (miBooleano == "true") {
+
+
+  const evento = response.data.evento;
+  const Actividad = responseActividad.data.actividad;
+  const Tipo = responseTipo.data.tipoEvento;
+  
+  setTituloEvento(evento.tituloEvento);
+  setDescripcion(evento.descripcionEvento);
+  setFechaInicio(Actividad.fechaInicioActividad);
+  setFechaFin(Actividad.fechaFinActividad);
+  setHoraEvento(Actividad.horaInicioActividad);
+  setModalidad(Actividad.modalidad);
+  setUbicacion(Actividad.ubicacionActividad);
+  setIdTipoEvento(Tipo.nombreTipoEvento);
+    
+  } else {
+  }
+   
+  } catch (error) {
+    console.error('Error al obtener el evento:', error);
+  }
+  };
+
+
+if ('' === tituloEvento){
+  obtenerEvento();
+  
+}else{
+
+} 
+ 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -51,13 +113,6 @@ const EventForm = () => {
       setFechaInicio(nuevaFecha);
     }
   };
-  const handleFechaInicioBlur = () => {
-    // Validar nuevamente al perder el foco
-    setFechaInicioError(fechaInicio.trim() === '');
-  };
-
-  
-
 
 
 
@@ -73,9 +128,10 @@ const EventForm = () => {
         setMostrarModalOps(true);
         setError(true);
       }else{
+      const response = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
+      
+      const ultimoId = response.data.ultimoId + 1;
         
-        const response = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
-        const ultimoId = response.data.ultimoId + 1;
 
       await axios.post('http://localhost:8000/api/evento', {
         idEvento: ultimoId,
@@ -120,6 +176,7 @@ const EventForm = () => {
       setModalVisible(false);
       
     }
+
   };
 
 
@@ -167,8 +224,8 @@ const EventForm = () => {
           name="horaEvento"
           value={horaEvento}
           onChange={(e) => setHoraEvento(e.target.value)}
-          onBlur={() => (setHoraEventoError(horaEvento.trim() === "--:--"), setError(horaEvento.trim() === "--:--"))}
-          className={horaEventoError ? "campo-vacio" : "--:--"}
+          onBlur={() => (setHoraEventoError(horaEvento.trim() === "null"), setError(horaEvento.trim() === "null"))}
+          className={horaEventoError ? "campo-vacio" : "null"}
           required
         />
         
@@ -189,7 +246,7 @@ const EventForm = () => {
         name="fecha-inicio"
         value={fechaInicio}
         onChange={handleFechaInicioChange}
-        onBlur={handleFechaInicioBlur}
+        onBlur={() => (setFechaInicioError(fechaInicio.trim() === "null"), setError(fechaInicio.trim() === "null"))}
         required
       />
     </div>
@@ -313,7 +370,7 @@ const EventForm = () => {
         </div>
         
         {mostrarModalOps && 
-         <Ops message="Opss Ocurrio un Error" onClose={handleOps}/> 
+         <Ops message="Opss Ocurrio un Error " onClose={handleOps}/> 
         }
         {mostrarModalSalir && (
         <ModalSalir message="Cancelar creación" onClose={handleButtonCancelarCE} />

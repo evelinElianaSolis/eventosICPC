@@ -73,8 +73,15 @@ Route::GET('/getParticipantsInfoByEventId/{idEvento}', [ParticipanteController::
 
 Route::GET('/obtenerEntrenadoresPorEquipo/{idEquipo}', [EntrenadorController::class,'obtenerEntrenadoresPorEquipo']);
 Route::DELETE('/destroyEntrenador/{idEntrenador}', [EntrenadorController::class,'destroy']);
+<<<<<<< HEAD
 
 Route::POST('/storeRepresentante', [RepresentanteController::class,'store']);
 Route::GET('/buscarPorId/{pais}/{idPersona}', [PersonaController::class,'buscarPorId']);
 Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo']);
 Route::GET('/buscarPorIdTF/{pais}/{idPersona}', [PersonaController::class,'buscarPorIdTF']);
+=======
+Route::GET('/obtener-evento/{id}', [EventoController::class,'obtenerEventoPorId']);
+Route::GET('/obtener-actividad/{id}', [ActividadController::class, 'obtenerActividadPorId']);
+
+Route::GET('/obtener-tipo-evento/{idTipoEvento}', [TipoEventoController::class, 'obtenerTipoEventoPorId']);
+>>>>>>> be419ebe5aeddb1ba9f350dfd93d831cb0164379

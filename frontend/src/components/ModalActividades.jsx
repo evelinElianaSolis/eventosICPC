@@ -112,7 +112,7 @@ const ModalActividad = ({
     mostrar && (
       <div className="ventana-emergente3">
         {(mostrarModalSalir) && (
-        <ModalCreacionEvento message="Crear Actividad" onClose={handleButtonCancelarCE} />
+        <ModalCreacionEvento message="Actividad Agregada" onClose={handleButtonCancelarCE} />
           
         )}
         {(mostrarModalSalir != true) && (

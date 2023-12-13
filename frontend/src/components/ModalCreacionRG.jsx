@@ -13,7 +13,7 @@ const ModalCreacionEvento = ({ message, onClose}) => {
           </div>
           <div className="FondoModal4">
             <div className='TextoModal'>
-                <h2 className="CrearEvento1">Regla creado con éxito</h2>
+                <h2 className="CrearEvento1">Regla agregada con éxito</h2>
             </div>
             
           <div className="ConfbuttonRequisitos">

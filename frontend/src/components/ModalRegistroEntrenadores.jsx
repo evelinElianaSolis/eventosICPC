@@ -3,10 +3,13 @@ import './assets/ModalRegistroParticipantes.css';
 import axios from './api/conexionApi';
 import ErrorMessage from './ModalErrorRegistro';
 import validate from './utils/Validaciones';
+<<<<<<< HEAD
 import ErrorMessage2 from './ModalIngresarDatosCorrectos';
 import ModalPersonaEncontrada from './ModalPersonaEncontrada'
 import iso3166 from 'iso-3166-1-alpha-2';
 const paises = iso3166.getCodes();
+=======
+>>>>>>> be419ebe5aeddb1ba9f350dfd93d831cb0164379
 
 
 //------------------------------------------------------------------------------------------------------
@@ -46,12 +49,6 @@ const FormularioRegistroEntrenador= ({ evento,idEquipoE,equipo,  onCloseSelf, on
 
   const closeErrorModal = () => {
     setShowErrorModal(false);
-  };
-
-  const [showErrorModal2, setShowErrorModal2] = useState(false);
-
-  const closeErrorModal2 = () => {
-    setShowErrorModal2(false);
   };
   //modal error
 
@@ -278,7 +275,7 @@ console.log("es aqui el problema");
   axios.get(`buscarEquipo/${idEquipoE}`)
       .then(response => {        
           guardarEntrenador();
-         
+    
         })
   .catch(error => {
      if (error.response.data.message === "Equipo no encontrado") {
@@ -305,7 +302,7 @@ console.log("es aqui el problema");
         }
         });           
     };
-  
+};
 
     const guardarEntrenador = () => {
       axios.post('./storePersona', formData)
@@ -346,8 +343,8 @@ console.log("es aqui el problema");
             setShowErrorModal(true);
             });
             
-          }
-  };
+          };
+     
 
 
 
@@ -470,7 +467,7 @@ console.log("es aqui el problema");
       </div>
       <br/>
        <div className='button-container-ToE-MRPE '>
-          <button className=".blue-button-ToE-MRPE" type="button" onClick={handleSecondaryModalOpen}>Cancelar</button>
+          <button className=".blue-button-ToE-MRPE" type="button" onClick={handleSecondaryModalOpen}>Salir</button>
           <button className=".blue-button-ToE-MRPE" type="button" onClick={handleSubmit}>Registrar </button>
        </div>     
        <br/>
@@ -502,10 +499,6 @@ console.log("es aqui el problema");
            {showErrorModal && (
              <ErrorMessage message="Ha ocurrido un error al realizar el registro, intentelo nuevamente" onClose={closeErrorModal} />
            )}
-
-{showErrorModal2 && (
-        <ErrorMessage2 message="Por favor revisa que los datos ingresados sean correctos" onClose={closeErrorModal2} />
-      )}
          
     </div>
       </div>
