@@ -11,10 +11,7 @@ class entrenador extends Model
     protected $table = 'entrenador';
     protected $primaryKey = 'idEntrenador';
     protected $fillable = [
-        'nombreEntrenador',
-        'apellidoEntrenador',
-        //'passwordEntrenador',
-        'correoEntrenador',
+      
         'idEquipo'
     ];
     public function equipo()

@@ -14,7 +14,8 @@ class persona extends Model
         'nombrePersona',
         'apellidoPersona',
         'genero',
-        'telefonoPersona',
+        'pais',
+        'correo',
        // 'correoPersona'
     ];
     public $timestamps = false;

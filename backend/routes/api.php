@@ -13,6 +13,8 @@ use App\Http\Controllers\ReglaController;
 use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\EntrenadorController;
+use App\Http\Controllers\RepresentanteController;
+
 /*namespace App\Http\Controllers\API;
 |--------------------------------------------------------------------------
 | API Routes
@@ -71,3 +73,8 @@ Route::GET('/getParticipantsInfoByEventId/{idEvento}', [ParticipanteController::
 
 Route::GET('/obtenerEntrenadoresPorEquipo/{idEquipo}', [EntrenadorController::class,'obtenerEntrenadoresPorEquipo']);
 Route::DELETE('/destroyEntrenador/{idEntrenador}', [EntrenadorController::class,'destroy']);
+
+Route::POST('/storeRepresentante', [RepresentanteController::class,'store']);
+Route::GET('/buscarPorId/{pais}/{idPersona}', [PersonaController::class,'buscarPorId']);
+Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo']);
+Route::GET('/buscarPorIdTF/{pais}/{idPersona}', [PersonaController::class,'buscarPorIdTF']);

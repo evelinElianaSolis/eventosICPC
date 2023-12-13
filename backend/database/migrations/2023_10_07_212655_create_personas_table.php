@@ -18,7 +18,8 @@ class CreatePersonasTable extends Migration
             $table->string('nombrePersona');
             $table->string('apellidoPersona');
             $table->string('genero',1);
-            $table->string('telefonoPersona')->nullable();
+            $table->string('pais');
+            $table->string('correo');
         //    $table->string('correoPersona');
             $table->timestamps();
         });

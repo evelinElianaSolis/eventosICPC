@@ -37,9 +37,6 @@ class EntrenadorController extends Controller
         try{
             $entrenador = new entrenador;
             $entrenador->   idEntrenador = $request->input('idEntrenador');
-            $entrenador->   nombreEntrenador = $request->input('nombreEntrenador');
-            $entrenador->   apellidoEntrenador= $request->input('apellidoEntrenador');             
-            $entrenador->   correoEntrenador = $request->input('correoEntrenador');
             $entrenador->   idEquipo = $request->input('idEquipo');
               //  'passwordEntrenador' => $request->input('idEvento'),
               $entrenador->save();  

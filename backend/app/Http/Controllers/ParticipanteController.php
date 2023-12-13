@@ -5,7 +5,6 @@ use App\Models\Equipo;
 use App\Models\Evento;
 use App\Models\Participante;
 use App\Models\Persona;
-use App\Models\Correo;
 
 use Illuminate\Http\Request;
 
@@ -169,10 +168,8 @@ class ParticipanteController extends Controller
                      $persona = persona::where('idPersona', $idParticipante)->first();
 
                      if ($persona) {
-                         $correo = correo::where('idPersona', $idParticipante)->first();
 
                          if ($persona) {
-                            $correo->delete();
                             $persona->delete();
                             $participante->delete();
                            
@@ -220,14 +217,12 @@ class ParticipanteController extends Controller
                 $persona = persona::find($participant->idParticipante);
     
                 if ($persona) {
-                    $correo =  correo::where('idPersona', $persona->idPersona)->first();
-    
-                    if ($correo) {
+                   
                         $participantsInfo[] = [
                             'nombrePersona' => $persona->nombrePersona,
-                            'correoC' => $correo->correoC,
+                            'correo' =>  $persona->correo,
                         ];
-                    }
+                    
                 }
             }
             return response()->json(['nombreCorreo' => $participantsInfo], 200);

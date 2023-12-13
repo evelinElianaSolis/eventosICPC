@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEntrenadoresTable extends Migration
+class CreateRepresentantesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateEntrenadoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('entrenador', function (Blueprint $table) {
-            $table->string('idEntrenador',36)->primary(); // Campo UUID y clave primaria
+        Schema::create('representante', function (Blueprint $table) {
+            $table->string('idRepresentante',36)->primary(); // Campo UUID y clave primaria
             $table->unsignedBigInteger('idEquipo')->nullable();
             $table->foreign('idEquipo')->references('idEquipo')->on('equipo')->nullable();
 
-
-///$table->string('passwordEntrenador');
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *
@@ -31,6 +29,6 @@ class CreateEntrenadoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entrenador');
+        Schema::dropIfExists('representantes');
     }
 }
