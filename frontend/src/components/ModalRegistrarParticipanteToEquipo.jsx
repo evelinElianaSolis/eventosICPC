@@ -3,15 +3,12 @@ import './assets/ModalRegistroParticipantes.css';
 import axios from './api/conexionApi';
 import ErrorMessage from './ModalErrorRegistro';
 import validate from './utils/Validaciones';
-<<<<<<< HEAD
 import ErrorMessage2 from './ModalIngresarDatosCorrectos';
 import ModalPersonaEncontrada from './ModalPersonaEncontrada'
 import iso3166 from 'iso-3166-1-alpha-2';
 const paises = iso3166.getCodes();
 
 //---------------------------------------------------------------formulario
-=======
->>>>>>> be419ebe5aeddb1ba9f350dfd93d831cb0164379
 
 const FormularioRegistroParticipantes = ({ evento,idEquipoE,equipo,  onCloseSelf, onOpenSecondaryModal, onCloseParent, onUpdateParent }) => {
 //----------------------------------------------------------------------------
@@ -51,7 +48,6 @@ const handleSecondaryModalCloseOk = () => {
     setShowErrorModal(false);
     console.log("se esta ejecutando el modal error 1");
   };
-<<<<<<< HEAD
 
   const [showErrorModal2, setShowErrorModal2] = useState(false);
 
@@ -61,8 +57,6 @@ const handleSecondaryModalCloseOk = () => {
 
   };
 
-=======
->>>>>>> be419ebe5aeddb1ba9f350dfd93d831cb0164379
   //modal error
 
 //mensajeModal exito
@@ -289,7 +283,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           console.error("Error al recuperar id del equipo:", error);
           }
           });           
-      };};
+      };
     
       const guardarParticipante = () => {
         axios.post('./storePersona', formData)
@@ -331,7 +325,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
               setShowErrorModal(true);
               });
               
-      
+            }
     };
 
 //==================persona modal
@@ -447,7 +441,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
       </div>
       <br/>
        <div className='button-container-ToE-MRPE '>
-          <button className=".blue-button-ToE-MRPE" type="button" onClick={handleSecondaryModalOpen}>Salir</button>
+          <button className=".blue-button-ToE-MRPE" type="button" onClick={handleSecondaryModalOpen}>Cancelar</button>
           <button className=".blue-button-ToE-MRPE" type="button" onClick={handleSubmit}>Registrar</button>
        </div>
 
@@ -478,6 +472,9 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
       {showErrorModal && (
         <ErrorMessage message="Ha ocurrido un error al realizar el registro, intentelo nuevamente" onClose={closeErrorModal} />
       )}
+        {showErrorModal2 && (
+        <ErrorMessage2 message="Por favor revisa que los datos ingresados sean correctos" onClose={closeErrorModal2} />
+      )}
        <br/>
        <br/>
 
@@ -490,4 +487,6 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
   );
 };
 export default FormularioRegistroParticipantes;
+
+///=============================
 
