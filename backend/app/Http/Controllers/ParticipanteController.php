@@ -85,7 +85,17 @@ class ParticipanteController extends Controller
     
 
 
-
+    public function obtenerIdsParticipantesPorEvento($idEvento)
+    {
+        try {
+            $idsParticipantes = Participante::where('idEvento', $idEvento)->pluck('idParticipante')->toArray();
+    
+            return response()->json(['idsParticipantes' => $idsParticipantes], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al obtener los IDs de participantes', 'error' => $e->getMessage()], 500);
+        }
+    }
+    
 
     public function obtenerParticipantesPorEquipo($idEquipo)
 {
@@ -99,6 +109,22 @@ class ParticipanteController extends Controller
         return response()->json(['participantes' => $participantes], 200);
     } catch (\Exception $e) {
         return response()->json(['message' => 'Error al recuperar participantes', 'error' => $e->getMessage()], 500);
+    }
+}
+
+public function encontrarIdPartcicipantesPorEquipos(Request $request)
+{
+    try {
+        $idsEquipos = $request->input('idsEquipos');
+        
+        $idParticipantes = participante::whereIn('idEquipo', $idsEquipos)->pluck('idParticipante');
+
+        return response()->json(['idParticipante' => $idParticipantes], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'Error al obtener los IDs de los entrenadores',
+            'detalle' => $e->getMessage()
+        ], 500);
     }
 }
 

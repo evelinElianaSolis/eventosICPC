@@ -52,7 +52,23 @@ class PersonaController extends Controller
             return response()->json(['message' => 'Error al registrar psrticipante', 'error' => $e->getMessage()], 500);
         }
     }
-
+    public function obtenerCorreosPorIds(Request $request)
+    {
+        try {
+            $idsPersonas = $request->input('idsPersonas');
+    
+            // Obtener correos de las personas cuyos IDs estén en el array
+            $correos = Persona::whereIn('idPersona', $idsPersonas)->pluck('correo');
+    
+            return response()->json(['correos' => $correos], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al obtener correos',
+                'detalle' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
 
 
     //---------------------------------------------------------------------------------

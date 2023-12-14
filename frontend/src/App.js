@@ -14,8 +14,11 @@ import RegistroParticipanteToEquipo from "./pages/RegistrarParticipanteToEquipo"
 import EventosRegistroParticipantes from './pages/EventosParaRegistrarParticipante';
 import EventosRegistrarEquipo from './pages/EventosParaRegistrarEquipo';
 import EditarEvento from './pages/EditarEvento';
-import EventosEditarEvento from './pages/EventosEditarEvento'
-import RegistrarEquipoOp2 from './pages/RegistrarEquipoOp2'
+import EventosEditarEvento from './pages/EventosEditarEvento';
+import RegistrarEquipoOp2 from './pages/RegistrarEquipoOp2';
+import EventosParaNotificar from './pages/EventosParaNotificarP';
+import EnviarNotificaciones from './pages/EnviarNotificacionesP';
+
 function App(){
   return(
     <BrowserRouter>
@@ -34,6 +37,9 @@ function App(){
         <Route path = "/EventosRegistrarEquipo" element ={<EventosRegistrarEquipo />} />
         <Route path = "/EditarEvento/:id" element ={<EditarEvento/>} />
         <Route path = "/EventosEditarEvento" element ={<EventosEditarEvento/>} />
+        <Route path = "/EventosParaNotificar/" element={<EventosParaNotificar/>}/>
+        <Route path = "/EnviarNotificaciones/:id/:id2" element={<EnviarNotificaciones/>}/>
+
         <Route path = "/RegistrarEquipoOp2/:id/:id2/:numE/:numP" element={<RegistrarEquipoOp2/>}/>
         <Route path = "*" element ={<Home />} />
       </Routes>

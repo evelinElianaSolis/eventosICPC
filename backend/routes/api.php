@@ -78,3 +78,8 @@ Route::POST('/storeRepresentante', [RepresentanteController::class,'store']);
 Route::GET('/buscarPorId/{pais}/{idPersona}', [PersonaController::class,'buscarPorId']);
 Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo']);
 Route::GET('/buscarPorIdTF/{pais}/{idPersona}', [PersonaController::class,'buscarPorIdTF']);
+Route::GET('/obtenerCorreosPorIds', [PersonaController::class,'obtenerCorreosPorIds']);
+Route::GET('/idEquiposPorEvento/{idEvento}', [EquipoController::class,'idEquiposPorEvento']);
+Route::GET('/encontrarIdEntrenadoresPorEquipos', [EntrenadorController::class,'encontrarIdEntrenadoresPorEquipos']);
+Route::GET('/encontrarIdPartcicipantesPorEquipos', [ParticipanteController::class,'encontrarIdPartcicipantesPorEquipos']);
+Route::GET('/obtenerIdsParticipantesPorEvento/{idEvento}', [ParticipanteController::class,'obtenerIdsParticipantesPorEvento']);

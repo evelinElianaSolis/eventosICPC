@@ -95,6 +95,20 @@ class EquipoController extends Controller
        return response()->json(['equipos' => $equipos], 200); 
     }
 
+    public function idEquiposPorEvento($idEvento)
+{
+    try {
+        $equipos = Equipo::where('idEvento', $idEvento)->pluck('idEquipo');
+        
+        return response()->json(['equipos' => $equipos], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'Error al obtener la lista de equipos',
+            'detalle' => $e->getMessage()
+        ], 500);
+    }
+}
+
     /**
      * Show the form for editing the specified resource.
      *

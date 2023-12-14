@@ -48,7 +48,22 @@ class EntrenadorController extends Controller
         }
     }
     
-   
+    public function encontrarIdEntrenadoresPorEquipos(Request $request)
+    {
+        try {
+            $idsEquipos = $request->input('idsEquipos');
+            
+            $idEntrenadores = Entrenador::whereIn('idEquipo', $idsEquipos)->pluck('idEntrenador');
+    
+            return response()->json(['idEntrenadores' => $idEntrenadores], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al obtener los IDs de los entrenadores',
+                'detalle' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
 
         public function obtenerEntrenadoresPorEquipo($idEquipo)
         {

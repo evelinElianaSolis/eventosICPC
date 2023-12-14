@@ -122,6 +122,13 @@ const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
         pais: personData.pais,
         correo: personData.correo,
       });
+
+      setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
+  setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona) }));
+  setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: validate.validarCampoVacio(formData.idPersona) }));
+  setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError: validate.validarCampoVacio(formData.genero) }));
+  setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: validate.validarCampoVacio(formData.correo) }));
+
           setIsModalOpenPersona(false);
         };
 //-----------------------Buscar person-----------------------------------------------------------
@@ -379,8 +386,8 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
   {  isModalOpenPersona && (
     <ModalPersonaEncontrada
     onClose={cerrarModalPersona}
-    onUpdate={cambiarDatoModalPersona}
-    datos={personData.correo}/>
+    handleYes={cambiarDatoModalPersona}
+    correo={personData.correo}/>
   )}   
       <div className='form-group3'>
         <label className="subtitulo required"  htmlFor="nombrePersona">Nombre:</label>

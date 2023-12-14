@@ -13,6 +13,11 @@ import ModalParticipantes from './ModalRegistrarParticipanteToEquipo'
 import ModalEntrenadores from './ModalRegistroEntrenadores'
 
 import './assets/formRegistrarEquipo2.css'
+
+import ModalPersonaEncontrada from './ModalPersonaEncontrada'
+import iso3166 from 'iso-3166-1-alpha-2';
+const paises = iso3166.getCodes();
+
 //const numero=2;
 
 const FormularioRegistrarEquipo = ({numero, varIdEquipo, numEntre, numParti}) => {
@@ -56,6 +61,31 @@ const [mostrarModalSalir, setMostrarModalSalir] = useState(false);
     setVacioEntrePartiError(false);
   };
 //------------------------------------------------------------------------------------------------
+
+const [formData, setFormData] = useState({
+  idPersona: '',
+  nombrePersona: '',
+  apellidoPersona: '',
+  genero: '',
+  pais: 'BO',
+  correo:'',
+});
+
+
+//para el error
+const [mensajeError, setMensajeError] = useState({
+  ciParticipanteError:'',
+  nombreParticipanteError:'',
+  ApellidoParticipanteError:'',
+  generoParticipanteError:'',
+  paisParticipanteError:'',
+  correoParticipanteError:'',
+  nombreEquipoError: '',
+    descripcionEquipoError: '',
+ 
+});
+
+
 const actualizarEntrenadores = () => {
   axios.get(`obtenerEntrenadoresPorEquipo/${varIdEquipo}`)
     .then(response => {
@@ -88,15 +118,6 @@ const [registroExitoso, setRegistroExitoso] = useState(false);
 //fin modal exito-----------------------------------------------------------
 
 //==================================================================================
-  const [mensajeError, setMensajeError] = useState({
-    nombreError: '',
-    apellidoError: '',
-    correoError: '',
-    nombreEquipoError: '',
-    descripcionEquipoError: '',
-    idEntrenadorError: '',
-    
-  });
 
 //participante------------------------------------------------------------
 const [participantes, setParticipantes] = useState([]);
@@ -169,6 +190,162 @@ const eliminarEntrenadoresBD = (id) => {
   });
   //------------------------------------------------------------------------------------------------------
 
+
+  //-==================================
+  const handleChangeCorreo = (e) => {
+    const { name, value } = e.target;
+    const mail=validate.validarCorreo(value);
+    if(mail!==""){
+      const datoCorreo=validate.devolverCorreo(value);
+      setFormData({
+        ...formData,
+        [name]: datoCorreo,
+    })
+      setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: mail }));
+    }else{
+      setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: "" }));
+
+      setFormData({
+        ...formData,
+        [name]: value,
+    })    }
+}
+//=================
+const handleChangePC = (e) => {
+  const pai = e.target.value;
+  if(!formData.idPersona){
+      setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: `Este campo no puede estar vacío.`}));
+        setFormData({
+        ...formData,
+        pais: pai || 'BO', 
+      });
+  }else{      
+      setFormData({
+        ...formData,
+        pais: pai || 'BO',
+      });
+      buscarPersona(pai, formData.idPersona);
+      console.log("el pais id es ",formData.idPersona)
+ 
+}
+};
+//--------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
+  const [personData, setPersonData] = useState(null);
+   
+    const cerrarModalPersona = () => {
+      setIsModalOpenPersona(false);
+    };
+   
+
+    const cambiarDatoModalPersona = () => {
+      setFormData({
+        idPersona: personData.idPersona,
+        nombrePersona: personData.nombrePersona,
+        apellidoPersona: personData.apellidoPersona,
+        genero: personData.genero,
+        pais: personData.pais,
+        correo: personData.correo,
+      });
+
+      setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: validate.validarCampoVacio(formData.idPersona) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError: validate.validarCampoVacio(formData.genero) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: validate.validarCampoVacio(formData.correo) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, nombreEquipoError: validate.validarCampoVacio(equipoData.nombreEquipo) }));
+
+          setIsModalOpenPersona(false);
+        };
+//----------------------------------------------------------------
+const buscarPersona = async (elpais,cipersonsa)=>{
+  try{     
+    const response = await axios.get(`./buscarPorId/${elpais}/${cipersonsa}`);
+     if(!response.data.persona){
+      console.log("no hay coincidencias",elpais)
+      
+     }else{
+      setPersonData(response.data.persona);
+      setIsModalOpenPersona(true);
+      console.log("si hay coincidencias",personData);
+      console.log("es truuue?", isModalOpenPersona);
+      console.log("Estados actualizados:", personData, isModalOpenPersona);
+
+     }
+     console.log("si hay coincidencias",personData);
+     console.log("es truuue?", isModalOpenPersona);
+} catch (error) { 
+  console.error("hubo un error al buscar persona",personData);
+
+}
+}
+useEffect(() => {
+  if (isModalOpenPersona && personData) {
+    console.log("Datos actualizados en el modal:", personData);
+    // Puedes realizar acciones adicionales aquí después de la actualización del estado.
+  }
+}, [isModalOpenPersona, personData]);
+//---------------------------------------
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  switch (name) {
+    case 'nombrePersona':
+      const nombreRes=validate.validarNombre(value);
+      setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: nombreRes }));
+      if(nombreRes===""){
+        setFormData({
+          ...formData,
+          [name]: value,
+      })
+    } else{
+      const nombreNew=validate.devolverNombre(value);
+      setFormData({
+        ...formData,
+        [name]: nombreNew,
+    })
+    }      
+      break;
+        case 'apellidoPersona':
+          const apellidoRes=validate.validarNombre(value);
+          setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: apellidoRes }));
+          if(apellidoRes===""){
+            const apellidoNew=validate.devolverNombre(value);
+            setFormData({
+              ...formData,
+              [name]: apellidoNew,
+          })
+        }
+          break;
+          case 'idPersona':
+            const ciRes=validate.validarCI(value);
+            setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: ciRes }));
+            if(ciRes===""){
+              setFormData({
+                ...formData,
+                [name]: value,
+            })
+            buscarPersona(formData.pais, value);
+
+          }else{
+            const ciNew=validate.devolverCI(value);
+              setFormData({
+                ...formData,
+                [name]: ciNew,})
+                buscarPersona(formData.pais, ciNew);
+
+          }
+          break;
+  
+
+    default:
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+  }
+};
+
   //handle equipo---------------------------------------------------------------
   const handleEquipoChange = (e) => {
     console.log("el id del equipo es",varIdEquipo);
@@ -200,6 +377,28 @@ const eliminarEntrenadoresBD = (id) => {
 //---------------------------------------------------
 //submit equipo 
 const handleSubmitEquipo = (e) => {
+  //ERRORES
+ console.log("en el submit");
+setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: validate.validarCampoVacio(formData.idPersona) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError: validate.validarCampoVacio(formData.genero) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: validate.validarCampoVacio(formData.correo) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, nombreEquipoError: validate.validarCampoVacio(equipoData.nombreEquipo) }));
+
+//ERRORES
+const v1=validate.validarNombre(formData.nombrePersona);
+const v2=validate.validarNombre(formData.apellidoPersona);
+const v3=validate.validarCI(formData.idPersona);
+const v5=validate.validarCorreo(formData.correo);
+const v6=validate.validarGenero(formData.genero);
+
+if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
+  e.preventDefault();
+console.log("es aqui el problema"); 
+setShowErrorModal(true);  
+  }else{
+ 
   if (Entrenadores.length === 0 || participantes.length === 0) {
     console.log('Error: Trainers or participants are empty');
     setVacioEntrePartiError(true);
@@ -220,7 +419,10 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
 
               axios.put(`./actualizarEquipo/${varIdEquipo}`, formEquipo)
             .then(response =>  {
-              console.log(response.data.message)  
+              console.log(response.data.message) 
+              
+              guardarResponsable();
+
               setRegistroExitoso(true)                 
                 setEquipoData({
                   nombreEquipo: '',
@@ -236,24 +438,183 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           })
           .catch((error) => {
               console.error('Error al buscar equipo ', error);
-              setVacioEntrePartiError(true);
+              if (error.response.data.message === "Equipo no encontrado") {
+                console.log("Equipo no encontrado. Ingresar un nuevo equipo...");
+                const NewEquipo = {
+                idEquipo: {varIdEquipo},
+                nombreEquipo: equipoData.nombreEquipo || "default",
+                descripcionEquipo: equipoData.descripcionEquipo,
+                idEvento: {numero},
+                };
+              axios.post('./storeEquipo', NewEquipo)
+              .then((resp) => {
+               console.log("equipo guardado");
+                          //----------------------------------------------------------------------------
+                          guardarResponsable();
+                          //------------------------------------------------------------------------------
+                })
+                .catch((error) => {
+                console.error('Error al guardar equipo ', error);
+                });
+          
+                } else {
+                console.error("Error al recuperar id del equipo:", error);
+                }
+           //   setVacioEntrePartiError(true);
           });
         }    
          
   };
+  
  //------------------------------------------------------------------------------------------------------
- 
+ const guardarResponsable = () => {
+        axios.post('./storePersona', formData)
+              .then((a) => {                
+               console.log('Datos guardados correctamente', formData.idPersona);
+              
+                    const formResponsable = {
+                      idResponsable: formData.idPersona,   
+                      idEvento: {numero},
+                      idEquipo:{varIdEquipo},
+                    };
+        
+                    console.log('Datos editados', formResponsable.idResponsable);
+        
+                      axios.post('./storeResponsable', formResponsable)
+                      .then((b)=>{
+                            console.log('Datos de participante guardados correctamente', formResponsable.idResponsable);
+                            
+                            setFormData({
+                              idPersona: '',
+                              nombrePersona: '',
+                              apellidoPersona: '',
+                              genero: '',
+                              pais: 'BO',
+                              correo: ''
+                            });
+                            setRegistroExitoso(true);       
+                            
+                      })
+                    
+                   .catch((error) => {       
+                    console.error('Error al guardar los datos del correo', error);
+                    });
+              //alert("Datos guardados exitosamente.");
+              
+            })
+            .catch((error) => {       
+              console.error('Error al guardar los datos de persona', error);
+              setShowErrorModal(true);
+              });
+              
+            }
+    };
 
   return (
     
-    <div className= 'contenedor-form-RPE '>
+    <div className= 'contenedor-formulario-form2 '>
     <form onSubmit={handleSubmitEquipo}>
       <h1 className='titulo-1'>Formulario para registrar equipo</h1>
       <br/>
-      <p>Es importante que llene los datos para su equipo correctamente, dado que una vez quede registrado no podra realizar modificaciones. Gracias y buena suerte.</p>
+      <p className="subtitle">Ingresar los datos del representante de su equipo.</p>
       <br/>
       
-      <label className='obligatorio-RPE' htmlFor="nombreEquipo">
+      <div className='form-row'>  
+  <div className='form-group'>
+  <label className="subtitulo required" htmlFor="pais"> País:</label>
+    <select
+        id="pais"
+        name="pais"
+        value={formData.pais}
+        onChange={handleChangePC}
+      >
+        {paises.map((codigo) => (
+          <option
+          key={codigo} 
+          value={codigo}>
+          {iso3166.getCountry(codigo)}
+          </option>
+        ))}
+      </select>
+  </div>
+  <div className='form-group2'>
+        <label className="subtitulo required" htmlFor="idPersona">CI: </label>
+        <input
+          type="text"
+          id="idPersona"
+          name="idPersona"
+          value={formData.idPersona}
+          placeholder="Ingresa tu numero de identificacion"
+          onChange={handleChange}          
+        />
+         <p style={{ color: 'red' }}>{mensajeError.ciParticipanteError}</p>
+      </div>
+      </div>
+
+   
+      <div className='form-group3'>
+        <label className="subtitulo required"  htmlFor="nombrePersona">Nombre:</label>
+        <input
+          type="text"
+          id="nombrePersona"
+          name="nombrePersona"
+          value={formData.nombrePersona}
+          placeholder="Ingresa tu nombre"
+          onChange={handleChange}
+        />
+         <p style={{ color: 'red' }}>{mensajeError.nombreParticipanteError}</p>
+      </div>
+      <br/>
+      <div className='form-group3'>
+        <label className="subtitulo required" htmlFor="apellidoPersona">Apellido:</label>
+        <input
+          type="text"
+          id="apellidoPersona"
+          name="apellidoPersona"
+          value={formData.apellidoPersona}
+          placeholder="Ingresa tus apellidos"
+          onChange={handleChange}          
+        />
+         <p style={{ color: 'red' }}>{mensajeError.ApellidoParticipanteError}</p>
+      </div>
+      <br/>
+   
+  
+      <br/>
+      <div className='form-group3'>
+        <label className="subtitulo required" htmlFor="genero">Género:</label>
+        <select
+          id="genero"
+          name="genero"
+          value={formData.genero}
+          onChange={handleChange}
+        >
+          <option value="">   </option>
+          <option value="F">Femenino</option>
+          <option value="M">Masculino</option>
+        </select>
+        <p style={{ color: 'red' }}>{mensajeError.generoParticipanteError}</p>
+      </div>
+      
+      <br/>
+      <div className='form-group3'>
+        <label className="subtitulo required" htmlFor="correo">Correo:</label>
+        <input
+          type="text"
+          id="correo"
+          name="correo"
+          value={formData.correo}
+          placeholder="example@gmail.com"
+          onChange={handleChangeCorreo}
+        />
+         <p style={{ color: 'red' }}>{mensajeError.correoParticipanteError}</p>
+      </div>
+<br/>
+<p>Ingresar los datos de su equipo.</p>
+
+<div className='form-group3'>
+
+      <label className="subtitulo required" htmlFor="nombreEquipo">
         Nombre del Equipo:
         </label>
         <input
@@ -263,8 +624,10 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           onChange={handleEquipoChange}
         />
         <p style={{ color: 'red' }}>{mensajeError.nombreEquipoError}</p>
-     
+        </div>
       <br />
+      <div className='form-group3'>
+
       <label>
         Descripción del Equipo:
         </label>
@@ -274,14 +637,16 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           onChange={handleEquipoChange}
         />
       <p style={{ color: 'red' }}>{mensajeError.descripcionEquipoError}</p>  
-      
+      </div>
       
       <br />
-      <p>Ingresar los datos del entrenador del equipo</p>
-     
-      <label>
+      <p className="subtitle">Ingresar los datos del entrenador del equipo</p>
+      <div className='form-group3'>
+      <div className='form-group3'>
+      <label  className="subtitulo required" >
        Añadir Entrenadores 
-        </label>
+        </label> </div>
+        </div>
         {/* Renderización de requisitos */}
         <div className="RPE-container">
         <div className="RPE-distribution">
@@ -312,10 +677,10 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
    
 
 
-
-      <label>
+      <div className='form-group3'>
+      <label  className="subtitulo required" >
        Añadir participantes
-        </label>
+        </label> </div>
         <div className="RPE-container">
         <div className="RPE-distribution">
           {participantes.length > 0 &&
@@ -350,6 +715,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           <button className="blue-button-RPE" type="submit">Registrar</button>
        </div>      
       
+      
    
     {registroExitoso && <SuccessMessage message="¡Registro exitoso!"/>}
       {showErrorModal && (
@@ -362,6 +728,16 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         <ModalSalir message="¿Quiere abandonar el registro?" onClose={handleCloseModalSalir} />
       )}
    </form> 
+   {isModalOpenPersona && (
+  <>
+    {console.log(personData)}
+    <ModalPersonaEncontrada
+      onClose={cerrarModalPersona}
+      handleYes={cambiarDatoModalPersona}
+      correo={personData.correo}
+    />
+  </>
+)}
    {showEntrenadoresToEquipoModal && (
         <ModalEntrenadores 
         evento={numero} 

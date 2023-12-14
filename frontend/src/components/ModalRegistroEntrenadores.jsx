@@ -125,6 +125,13 @@ const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
         pais: personData.pais,
         correo: personData.correo,
       });
+
+      setMensajeError((mensajeError) => ({ ...mensajeError, nombreEntrenadorError: validate.validarCampoVacio(formData.nombrePersona) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, apellidoEntrenadorError: validate.validarCampoVacio(formData.apellidoPersona) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, ciEntrenadorError: validate.validarCampoVacio(formData.idPersona) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, generoEntrenadorError: validate.validarCampoVacio(formData.genero) }));
+setMensajeError((mensajeError) => ({ ...mensajeError, correoEntrenadorError: validate.validarCampoVacio(formData.correo) }));
+
           setIsModalOpenPersona(false);
         };
 //-----------------------Buscar person-----------------------------------------------------------
@@ -396,11 +403,11 @@ console.log("es aqui el problema");
   {  isModalOpenPersona && (
     <ModalPersonaEncontrada
     onClose={cerrarModalPersona}
-    onUpdate={cambiarDatoModalPersona}
-    datos={personData.correo}/>
+    handleYes={cambiarDatoModalPersona}
+    correo={personData.correo}/>
   )}
           
-      <div>
+          <div className='form-group3'>
         <label className="subtitulo required"  htmlFor="nombrePersona">Nombre:</label>
         <input
           type="text"
@@ -413,7 +420,7 @@ console.log("es aqui el problema");
          <p style={{ color: 'red' }}>{mensajeError.nombreEntrenadorError}</p>
       </div>
       <br/>
-      <div>
+      <div className='form-group3'>
         <label className="subtitulo required" htmlFor="apellidoPersona">Apellido:</label>
         <input
           type="text"
@@ -426,19 +433,7 @@ console.log("es aqui el problema");
          <p style={{ color: 'red' }}>{mensajeError.apellidoEntrenadorError}</p>
       </div>
       <br/>
-      <div>
-        <label className="subtitulo required" htmlFor="idPersona">CI: </label>
-        <input
-          type="text"
-          id="idPersona"
-          name="idPersona"
-          value={formData.idPersona}
-          placeholder="Ingresa tu numero de identificacion"
-          onChange={handleChange}          
-        />
-         <p style={{ color: 'red' }}>{mensajeError.ciEntrenadorError}</p>
-      </div>
-      <br/>
+      
   
       <div className='form-group3'>
         <label className="subtitulo required" htmlFor="genero">Género:</label>
@@ -452,11 +447,11 @@ console.log("es aqui el problema");
           <option value="F">Femenino</option>
           <option value="M">Masculino</option>
         </select>
-        <p style={{ color: 'red' }}>{mensajeError.generoParticipanteError}</p>
+        <p style={{ color: 'red' }}>{mensajeError.generoEntrenadorError}</p>
       </div>
       
 
-      <div>
+      <div className='form-group3'>
         <label className="subtitulo required" htmlFor="correo">Correo:</label>
         <input
           type="text"

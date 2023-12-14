@@ -11,7 +11,7 @@ const Menu = () => {
       <NavLink to={'/Home'} className="navbar-item" activeclassname="active" >
         <img src="https://cdn-icons-png.flaticon.com/512/8280/8280362.png" alt="Usuario" />
         <div>
-          <p className='navbar-title'>Inicio</p>
+          <p className='navbar-title'>Visualizar eventos creados</p>
           <div className="line"></div>
         </div>
       </NavLink>
@@ -60,10 +60,10 @@ const Menu = () => {
   </div>
 </NavLink>
 
-<NavLink to={"/EventosNotificaciones"} className="navbar-item" activeclassname="active">
+<NavLink to={"/EventosParaNotificar"} className="navbar-item" activeclassname="active">
   <img src="https://cdn-icons-png.flaticon.com/512/9790/9790435.png" alt="Usuario" />
   <div>
-    <p className='navbar-title'>Editar Evento</p>
+    <p className='navbar-title'>Enviar notificación</p>
     <div className="line"></div>
   </div>
 </NavLink>
