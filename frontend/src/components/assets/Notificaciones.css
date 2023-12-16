@@ -1,0 +1,75 @@
+
+  
+  .formulario-notificaciones {
+    display: flex;
+    margin: 0 auto;
+    min-width: 300px;;
+    align-items: center;
+    max-width: 90%; /* Ajusta este valor según lo ancho que quieras que sea el formulario */
+    justify-content: center;
+
+  }
+  
+  .subtitulo {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #3498db;
+  }
+  
+  .required::after {
+    content: '*';
+    color: #e74c3c;
+    margin-left: 5px;
+  }
+  
+ 
+  
+  .label {
+    display: block;
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+  }
+  .formulario-notificaciones .cont-input{
+    width: 100%;
+ 
+  }
+  .formulario-notificaciones .cont-input input[type="text"] {
+    width: 80%; /* Porcentaje del ancho del contenedor */
+    min-width: 500px; /* Ancho mínimo del input */
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #bdc3c7;
+    margin-bottom: 10px;
+    }
+  
+  .formulario-notificaciones   .boton-cont-NT{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+     }
+     .formulario-notificaciones  .boton-cont-NT .blue-button-NT button[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+  
+  .formulario-notificaciones .boton-cont-NT .blue-button-NT:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Estilos para el mensaje de error */
+  .p {
+    margin: 0;
+    font-size: 14px;
+    color: #e74c3c;
+  }
+  
+ 
+  
+ 
