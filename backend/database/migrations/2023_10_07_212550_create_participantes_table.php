@@ -14,12 +14,15 @@ class CreateParticipantesTable extends Migration
     public function up()
     {
         Schema::create('participante', function (Blueprint $table) {
-            $table->string('idParticipante', 36)->primary();
+            $table->id('idParticipante')->primary();
+            $table->string('idPersona',36); // Campo UUID y clave primaria
+
             $table->unsignedBigInteger('idEvento');
             $table->unsignedBigInteger('idEquipo')->nullable();
             $table->foreign('idEvento')->references('idEvento')->on('evento');
             $table->foreign('idEquipo')->references('idEquipo')->on('equipo')->nullable();
-            
+            $table->foreign('idPersona')->references('idPersona')->on('idPersona')->nullable();
+
             //$table->foreign('idPersona')->references('idPersona')->on('persona');
             $table->timestamps();
         });

@@ -19,6 +19,18 @@ class persona extends Model
        // 'correoPersona'
     ];
     public $timestamps = false;
+    public function participantes()
+    {
+        return $this->hasMany(Participante::class, 'idPersona', 'idPersona');
+    }
+    public function representante()
+    {
+        return $this->hasMany(representante::class, 'idPersona', 'idPersona');
+    }
+    public function entrenador()
+    {
+        return $this->hasMany(entrenador::class, 'idPersona', 'idPersona');
+    }
 
     /*public function correo()
     {

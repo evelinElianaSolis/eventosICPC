@@ -14,9 +14,12 @@ class CreateRepresentantesTable extends Migration
     public function up()
     {
         Schema::create('representante', function (Blueprint $table) {
-            $table->string('idRepresentante',36)->primary(); // Campo UUID y clave primaria
+            $table->id('idRepresentante')->primary(); // Campo UUID y clave primaria
+
+            $table->string('idPersona',36); // Campo UUID y clave primaria
             $table->unsignedBigInteger('idEquipo')->nullable();
             $table->foreign('idEquipo')->references('idEquipo')->on('equipo')->nullable();
+            $table->foreign('idPersona')->references('idPersona')->on('idPersona');
 
             $table->timestamps();
         });

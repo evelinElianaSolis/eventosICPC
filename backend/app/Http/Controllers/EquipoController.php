@@ -37,6 +37,14 @@ class EquipoController extends Controller
     public function store(Request $request)
     {
         try {
+            $existingEquipo = equipo::where('idEvento', $request->input('idEvento'))
+            ->where('nombreEquipo', $request->input('nombreEquipo'))
+            ->first();
+
+        if ($existingEquipo) {
+            // Si ya existe, devolver un mensaje de error
+            return response()->json(['message' => 'En equipo ya está registrado en este evento.'], 400);
+        }
             $equipo = new Equipo;
             $equipo->idEquipo = $request -> input('idEquipo');
             $equipo->nombreEquipo = $request->input('nombreEquipo');

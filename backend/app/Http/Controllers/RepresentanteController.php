@@ -13,8 +13,17 @@ class RepresentanteController extends Controller
     {
        
        try{
+
+        $existingResponsable = responsable::where('idPersona', $request->input('idPersona'))
+        ->where('idEquipo', $request->input('idEquipo'))
+        ->first();
+
+    if ($existingResponsable) {
+        // Si ya existe, devolver un mensaje de error
+        return response()->json(['message' => 'La persona ya está registrada en ese equipo.'], 400);
+    }
         $representante = new representante;
-            $representante->idRepresentante = $request->input('idRepresentante');
+            $representante->idPersona = $request->input('idPersona');
             $representante->idEquipo = $request->input('idEquipo');
             $representante->save();
             return response()->json(['message' => 'representante creado con éxito', 'representante' => $representante], 201);

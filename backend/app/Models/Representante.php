@@ -11,6 +11,7 @@ class Representante extends Model
     protected $table = 'participante';
     protected $primaryKey = 'idParticipante';
     protected $fillable = [
+        'idPersona',
         'idEquipo'
     ];
     public $timestamps = false;
@@ -19,4 +20,8 @@ public function equipo()
 {
     return $this->belongsTo(equipo::class, 'idEquipo')->optional();
 }
+public function persona()
+    {
+        return $this->belongsTo(Persona::class, 'idPersona', 'idPersona');
+    }
 }

@@ -11,6 +11,7 @@ class participante extends Model
     protected $table = 'participante';
     protected $primaryKey = 'idParticipante';
     protected $fillable = [
+        'idPersona',
         'idEvento',
         'idEquipo'
     ];
@@ -24,5 +25,9 @@ class participante extends Model
     public function equipo()
     {
         return $this->belongsTo(equipo::class, 'idEquipo')->optional();
+    }
+    public function persona()
+    {
+        return $this->belongsTo(Persona::class, 'idPersona', 'idPersona');
     }
 }

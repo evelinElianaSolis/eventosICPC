@@ -55,7 +55,7 @@ class PersonaController extends Controller
     public function obtenerCorreosPorIds(Request $request)
     {
         try {
-            $idsPersonas = $request->input('idsPersonas');
+            $idsPersonas = $request->input('personas');
     
             // Obtener correos de las personas cuyos IDs estén en el array
             $correos = Persona::whereIn('idPersona', $idsPersonas)->pluck('correo');

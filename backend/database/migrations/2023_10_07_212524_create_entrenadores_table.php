@@ -14,9 +14,13 @@ class CreateEntrenadoresTable extends Migration
     public function up()
     {
         Schema::create('entrenador', function (Blueprint $table) {
-            $table->string('idEntrenador',36)->primary(); // Campo UUID y clave primaria
+            $table->id('idEntrenador')->primary(); // Campo UUID y clave primaria            $table->string('idPersona',36); // Campo UUID y clave primaria
+
+            $table->string('idPersona',36); 
+
             $table->unsignedBigInteger('idEquipo')->nullable();
             $table->foreign('idEquipo')->references('idEquipo')->on('equipo')->nullable();
+            $table->foreign('idPersona')->references('idPersona')->on('idPersona');
 
 
 ///$table->string('passwordEntrenador');

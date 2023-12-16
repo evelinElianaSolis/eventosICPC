@@ -11,7 +11,7 @@ class entrenador extends Model
     protected $table = 'entrenador';
     protected $primaryKey = 'idEntrenador';
     protected $fillable = [
-      
+      'idPersona',
         'idEquipo'
     ];
     public function equipo()
@@ -19,7 +19,10 @@ class entrenador extends Model
         return $this->belongsTo(equipo::class, 'idEquipo')->optional();
     }
     public $timestamps = false;
-
+    public function persona()
+    {
+        return $this->belongsTo(Persona::class, 'idPersona', 'idPersona');
+    }
         //public function categoria(){
         //    return $this->belongsTo(categoria::class,'codcat');
         //}

@@ -39,8 +39,17 @@ class ParticipanteController extends Controller
     public function store(Request $request)
     {
     try{
+        $existingParticipante = Participante::where('idPersona', $request->input('idPersona'))
+        ->where('idEquipo', $request->input('idEquipo'))
+        ->first();
+
+    if ($existingParticipante) {
+        // Si ya existe, devolver un mensaje de error
+        return response()->json(['message' => 'La persona ya está registrada en ese equipo.'], 400);
+    }
+
         $participante = new participante;
-        $participante->idParticipante = $request->input('idParticipante');
+        $participante->idPersona = $request->input('idPersona');
         $participante->idEvento = $request->input('idEvento');
         $participante->idEquipo = $request->input('idEquipo');
         $participante->save();
@@ -63,7 +72,7 @@ class ParticipanteController extends Controller
             // Iterar sobre cada participante para obtener personas asociadas
             foreach ($participantes as $participante) {
                 // Buscar la persona asociada al participante por su idPersona
-                $persona = persona::where('idPersona', $participante->idParticipante)->first();
+                $persona = persona::where('idPersona', $participante->idPersona)->first();
     
                 // Verificar si se encontró la persona
                 if ($persona) {
@@ -88,9 +97,9 @@ class ParticipanteController extends Controller
     public function obtenerIdsParticipantesPorEvento($idEvento)
     {
         try {
-            $idsParticipantes = Participante::where('idEvento', $idEvento)->pluck('idParticipante')->toArray();
+            $idsParticipantes = Participante::where('idEvento', $idEvento)->pluck('idPersona')->toArray();
     
-            return response()->json(['idsParticipantes' => $idsParticipantes], 200);
+            return response()->json(['participantes' => $idsParticipantes], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al obtener los IDs de participantes', 'error' => $e->getMessage()], 500);
         }
@@ -115,11 +124,11 @@ class ParticipanteController extends Controller
 public function encontrarIdPartcicipantesPorEquipos(Request $request)
 {
     try {
-        $idsEquipos = $request->input('idsEquipos');
+        $idsEquipos = $request->input('equipos');
         
-        $idParticipantes = participante::whereIn('idEquipo', $idsEquipos)->pluck('idParticipante');
+        $idParticipantes = participante::whereIn('idEquipo', $idsEquipos)->pluck('idPersona');
 
-        return response()->json(['idParticipante' => $idParticipantes], 200);
+        return response()->json(['participantes' => $idParticipantes], 200);
     } catch (\Exception $e) {
         return response()->json([
             'error' => 'Error al obtener los IDs de los entrenadores',
@@ -182,16 +191,15 @@ public function encontrarIdPartcicipantesPorEquipos(Request $request)
         }
    
 
-         public function eliminarParticipanteYPersona($idEquipo, $idParticipante)
+         public function eliminarParticipanteYPersona($idEquipo, $idPersona)
          {
              try {
-                 // Buscar el participante por idEquipo e idParticipante
-                 $participante = participante::where('idParticipante', $idParticipante)
+                 $participante = participante::where('idPersona', $idPersona)
                      ->where('idEquipo', $idEquipo)
                      ->first();
          
                  if ($participante) {
-                     $persona = persona::where('idPersona', $idParticipante)->first();
+                     $persona = persona::where('idPersona', $idPersona)->first();
 
                      if ($persona) {
 
@@ -240,7 +248,7 @@ public function encontrarIdPartcicipantesPorEquipos(Request $request)
             $participantsInfo = [];
     
             foreach ($participants as $participant) {
-                $persona = persona::find($participant->idParticipante);
+                $persona = persona::find($participant->idPersona);
     
                 if ($persona) {
                    
