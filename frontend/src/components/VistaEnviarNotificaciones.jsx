@@ -5,6 +5,8 @@ import axios from './api/conexionApi';
 import ModalError from './ModalErrorRegistro';
 import validate from './utils/Validaciones';
 import './assets/Notificaciones.css'
+import SuccessMessage from './ModalRegistroExitosoEquipo';
+
 const Enviarmensaje = (evento, equipo) => {
     const [destinatario, setDestinatario] = useState(null);
     const [asunto, setAsunto] = useState('');
@@ -13,7 +15,7 @@ const Enviarmensaje = (evento, equipo) => {
     const [personas, setPersonas] = useState(null);
     const [participantes, setParticipantes] = useState(null);
     const [entrenadores, setEntrenadores] = useState(null);
-    const [mensajes, setmensajes] = useState(null);
+    const [mensajes, setmensajes] = useState('');
     const [equipos, setEquipos] = useState(null);
     const [ModalSinRegistrosDeParticipantes, setModalSNRegistroParticipantes] = useState(false);
     const [errorAsunto, setErrorAsunto] = useState('');
@@ -22,7 +24,11 @@ asuntoError:'',
 mensajeError:''
     });
     
-
+    const [registroExitoso, setRegistroExitoso] = useState(false);
+    const closeExitorModal = () => {
+      setRegistroExitoso(false);
+    };
+    //f
 
 const cerrarModalError=()=>{
 setModalSNRegistroParticipantes(false);
@@ -32,9 +38,14 @@ setModalSNRegistroParticipantes(false);
     const obtenerCorreosPorIds = async () => {
       console.log("el equipo es jcnkjdfnkr",evento.equipo)
       console.log("el equipo es jcnkjdfnkr",evento.evento)
+      console.log("el equipo es jcnkjdfnkr",participantes)
+      console.log("el equipo es jcnkjdfnkr",entrenadores)
+console.log(",snsins",{idPersona:participantes});
         if(evento.equipo==='Grupal'){
+          
             idEquiposPorEvento();
             if(!equipos || equipos.length===0){
+              setmensajes('no hay equipos');
              //mostrar modal no existen equipos registrados
              setModalSNRegistroParticipantes(true);
 
@@ -44,7 +55,7 @@ setModalSNRegistroParticipantes(false);
               const todosLosUsuarios = [...entrenadores, ...participantes];
               console.log("estos son todos los ids", todosLosUsuarios)
               try {                
-                const response = await axios.get(`/obtenerCorreosPorIds`,todosLosUsuarios);
+                const response = await axios.get(`/obtenerCorreosPorIds`,{idPersona:todosLosUsuarios});
                 setDestinatario(response.data.correos);
                 console.log(response.data.correos); // Aquí puedes manejar la respuesta según tus necesidades
                 console.log(destinatario); // Aquí puedes manejar la respuesta según tus necesidades
@@ -54,20 +65,34 @@ setModalSNRegistroParticipantes(false);
               }
             }            
         }else{
-            obtenerIdsParticipantesPorEvento();
-             if(!participantes || participantes.length===0){
+          try{
+          const varAux=await  obtenerIdsParticipantesPorEvento();
+          setParticipantes(varAux);
+             if(!varAux || varAux.length===0){
               //mostrar modal no existen equipos registrados
+              setmensajes('no hay particip');
+              console.log("el equipo es jcnkjdfnkr",participantes)
+              console.log({idPersona:participantes});
+
               setModalSNRegistroParticipantes(true);
 
              }else{
             try {
-                const response = await axios.get(`/obtenerCorreosPorIds`,participantes);
+              console.log('participante es',participantes);
+              console.log('participante es idpersona',{idPersona:participantes});
+
+                const response = await axios.post(`./obtenerCorreosPorIds`,{idPersona:varAux});
                 setDestinatario(response.data.correos);
+
                 console.log(response.data.correos); // Aquí puedes manejar la respuesta según tus necesidades
               } catch (error) {
                 console.error('Error al obtener mensajes por IDs:', error);
               }
             }
+          }catch(error){
+            console.error("error al obtner partiii",error);
+
+          }
         }
        
       };
@@ -106,9 +131,9 @@ const idEquiposPorEvento = async () => {
   // Obtener IDs de participantes por equipos
   const encontrarIdParticipantesPorEquipos = async () => {
     try {
-      const response = await axios.get(`./encontrarIdPartcicipantesPorEquipos`,equipos);
-      setParticipantes(response.data.idParticipantes)
-      console.log(response.data.idParticipantes); // Aquí puedes manejar la respuesta según tus necesidades
+      const response = await axios.get(`./encontrarIdParticipantesPorEquipos`,equipos);
+      setParticipantes(response.data.participantes)
+      console.log(response.data.participantes); // Aquí puedes manejar la respuesta según tus necesidades
     } catch (error) {
       console.error('Error al encontrar IDs de participantes por equipos:', error);
     }
@@ -118,25 +143,29 @@ const idEquiposPorEvento = async () => {
   const obtenerIdsParticipantesPorEvento = async () => {
     try {
       const response = await axios.get(`./obtenerIdsParticipantesPorEvento/${evento.evento}`);
-      setParticipantes(response.data.idParticipantes);
-      console.log(response.data.idParticipantes); // Aquí puedes manejar la respuesta según tus necesidades
+     // setParticipantes(response.data.participantes);
+     console.log('sale aqui primero',response.data); // Aquí puedes manejar la respuesta según tus necesidades
+
+     return response.data.participantes;
     } catch (error) {
+      
       console.error('Error al obtener IDs de participantes por evento:', error);
+      return null;
     }
   };
 
 
   const handleChangeAsunto = (e) => {
     const { name, value } = e.target;
-            setErrorMensaje((error) => ({ ...error, asuntoError: validate.validarCampoVacio(asunto) }));
+            setErrorMensaje((error) => ({ ...error, asuntoError: validate.validarCampoVacio(value) }));
         setAsunto(value); 
   };
   const handleChangeMensaje = (e) => {
     const { name, value } = e.target;
-    setErrorMensaje((error) => ({ ...error, mensajeError: validate.validarCampoVacio(mensaje) }));
+    setErrorMensaje((error) => ({ ...error, mensajeError: validate.validarCampoVacio(value) }));
     setMensaje(value);
   };
-    const handleSubmit = async (e) => {
+    const handleSubmit = async(e) => {
       if (!asunto.trim() || !mensaje.trim()) {
         setErrorMensaje((error) => ({ ...error, mensajeError: validate.validarCampoVacio(mensaje) }));
         setErrorMensaje((error) => ({ ...error, asuntoError: validate.validarCampoVacio(asunto) }));
@@ -146,21 +175,35 @@ const idEquiposPorEvento = async () => {
         e.preventDefault();
         setErrorMensaje((error) => ({ ...error, mensajeError: ''}));
         setErrorMensaje((error) => ({ ...error, asuntoError: ''}));
-        obtenerCorreosPorIds();
-        try {
-            const response = await axios.post('./enviar-correo', {
-                destinatario,
+        try{
+        await obtenerCorreosPorIds();
+        
+        
+           axios.post('./enviar-correo', {
+
+                destinatario:destinatario,
                 mensaje,
                 asunto
+            })
+            .then((response) => {
+              setmensajes('esta en envio de correo');
+
+
+              setRegistroExitoso(true);
+              console.log(response.data.mensaje);
+            })
+            .catch((error) => {
+              setmensajes('no se pudo enviarr correo');
+
+              setModalSNRegistroParticipantes(true);
+              console.error('Error al enviar el mensaje', error);
             });
-
-            console.log(response.data.mensaje);
-        } catch (error) {
-          setModalSNRegistroParticipantes(true);
-
-            console.error('Error al enviar el mensaje', error);
-        }
+          }catch(error){
+            console.error("error al enviar correo",error);
+        
+          }
       }
+
     };
 
     return (
@@ -200,9 +243,14 @@ const idEquiposPorEvento = async () => {
       <button className="blue-button-NT" type="submit">Enviar correo</button>
       </div>
             </form>
-            {ModalSinRegistrosDeParticipantes && (
+            {registroExitoso && (<SuccessMessage
+     message="¡Registro exitoso!"
+     onClose={closeExitorModal}/>)
+    }
+  {ModalSinRegistrosDeParticipantes && (
   <ModalError 
-  message={'El registro esta vacio, aun no se ha registrado nadie al evento'}
+  //message={'El registro esta vacio, aun no se ha registrado nadie al evento'}
+  message={mensajes}
   onClose={cerrarModalError}/>
 )
 

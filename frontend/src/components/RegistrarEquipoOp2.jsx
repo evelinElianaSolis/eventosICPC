@@ -84,7 +84,16 @@ const [mensajeError, setMensajeError] = useState({
     descripcionEquipoError: '',
  
 });
+//---------------------------------------------------------------------------
+const [inputDisabled, setInputDisabled] = useState(false);
 
+const bloquearInput = () => {
+  setInputDisabled(true);
+};
+
+const [mensajeErrorModal, setMensajeErrorModal] = useState("");
+
+//-------------------------------------------------------
 
 const actualizarEntrenadores = () => {
   axios.get(`obtenerEntrenadoresPorEquipo/${varIdEquipo}`)
@@ -115,6 +124,9 @@ const actualizarParticipantes = () => {
 
 //mensajeModal exito
 const [registroExitoso, setRegistroExitoso] = useState(false);
+const closeExitorModal = () => {
+  setRegistroExitoso(false);
+};
 //fin modal exito-----------------------------------------------------------
 
 //==================================================================================
@@ -249,15 +261,16 @@ const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
         correo: personData.correo,
       });
 
-      setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
-setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona) }));
-setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: validate.validarCampoVacio(formData.idPersona) }));
-setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError: validate.validarCampoVacio(formData.genero) }));
-setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: validate.validarCampoVacio(formData.correo) }));
-setMensajeError((mensajeError) => ({ ...mensajeError, nombreEquipoError: validate.validarCampoVacio(equipoData.nombreEquipo) }));
+      setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError:'' }));
+setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: ''}));
+setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: ''}));
+setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError:''}));
+setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: '' }));
+setMensajeError((mensajeError) => ({ ...mensajeError, nombreEquipoError: '' }));
+setIsModalOpenPersona(false);
+bloquearInput();
 
-          setIsModalOpenPersona(false);
-        };
+};
 //----------------------------------------------------------------
 const buscarPersona = async (elpais,cipersonsa)=>{
   try{     
@@ -396,6 +409,8 @@ const v6=validate.validarGenero(formData.genero);
 if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
   e.preventDefault();
 console.log("es aqui el problema"); 
+setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
+
 setShowErrorModal(true);  
   }else{
  
@@ -406,6 +421,7 @@ setShowErrorModal(true);
     e.preventDefault();
   }else{
   //-----------------------------------------------
+  setInputDisabled(false);
   setMensajeError((mensajeError) => ({ ...mensajeError, nombreEquipoError: validate.validarCampoVacio(equipoData.nombreEquipo) }));
   e.preventDefault();
   const formEquipo={
@@ -466,43 +482,77 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
          
   };
   
- //------------------------------------------------------------------------------------------------------
+  
+  const guardarRepresentante = () => {
+ 
+    const formResponsable = {
+      idPersona: formData.idPersona,   
+      idEquipo:{varIdEquipo},
+    };
+
+    console.log('Datos editados', formResponsable.idPersona);
+
+      axios.post('./storeResponsable', formResponsable)
+      .then((b)=>{
+            console.log('Datos de participante guardados correctamente', formResponsable.idPersona);
+            
+            setFormData({
+              idPersona: '',
+              nombrePersona: '',
+              apellidoPersona: '',
+              genero: '',
+              pais: 'BO',
+              correo: ''
+            });
+            setPersonData(null);
+            setInputDisabled(false);
+
+            setRegistroExitoso(true);       
+            
+      })
+    
+   .catch((error) => {       
+    console.error('Error al guardar los datos del correo', error);
+    console.error('Error al guardar participante ', error);
+    setMensajeErrorModal("Este participante ya esta registrado en este evento")
+    setInputDisabled(false);
+    setFormData({
+      idPersona: '',
+      nombrePersona: '',
+      apellidoPersona: '',
+      genero: '',
+      pais: 'BO',
+      correo:''
+    });
+    setPersonData(null);
+
+    setShowErrorModal(true);
+    });
+  }
+
+  //------------------------------------------------------------------------------------------------------
  const guardarResponsable = () => {
         axios.post('./storePersona', formData)
               .then((a) => {                
                console.log('Datos guardados correctamente', formData.idPersona);
-              
-                    const formResponsable = {
-                      idResponsable: formData.idPersona,   
-                      idEvento: {numero},
-                      idEquipo:{varIdEquipo},
-                    };
-        
-                    console.log('Datos editados', formResponsable.idResponsable);
-        
-                      axios.post('./storeResponsable', formResponsable)
-                      .then((b)=>{
-                            console.log('Datos de participante guardados correctamente', formResponsable.idResponsable);
-                            
-                            setFormData({
-                              idPersona: '',
-                              nombrePersona: '',
-                              apellidoPersona: '',
-                              genero: '',
-                              pais: 'BO',
-                              correo: ''
-                            });
-                            setRegistroExitoso(true);       
-                            
-                      })
-                    
-                   .catch((error) => {       
-                    console.error('Error al guardar los datos del correo', error);
-                    });
+             guardarRepresentante();
               //alert("Datos guardados exitosamente.");
               
             })
-            .catch((error) => {       
+            .catch((error) => {
+              if (error.response && error.response.status === 400) {
+                console.error(error.response.data.message);
+             //  guardarParticipante();
+             guardarRepresentante();
+            } else {
+                // Maneja otros errores
+                setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
+      
+                console.error('Error en la solicitud:', error.message);
+                console.error('Error al guardar los datos de persona', error);
+                setShowErrorModal(true);
+      
+            }        
               console.error('Error al guardar los datos de persona', error);
               setShowErrorModal(true);
               });
@@ -527,6 +577,8 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         name="pais"
         value={formData.pais}
         onChange={handleChangePC}
+        disabled={inputDisabled}
+
       >
         {paises.map((codigo) => (
           <option
@@ -545,7 +597,9 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           name="idPersona"
           value={formData.idPersona}
           placeholder="Ingresa tu numero de identificacion"
-          onChange={handleChange}          
+          onChange={handleChange}    
+          disabled={inputDisabled}
+      
         />
          <p style={{ color: 'red' }}>{mensajeError.ciParticipanteError}</p>
       </div>
@@ -561,6 +615,8 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           value={formData.nombrePersona}
           placeholder="Ingresa tu nombre"
           onChange={handleChange}
+          disabled={inputDisabled}
+
         />
          <p style={{ color: 'red' }}>{mensajeError.nombreParticipanteError}</p>
       </div>
@@ -573,7 +629,9 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           name="apellidoPersona"
           value={formData.apellidoPersona}
           placeholder="Ingresa tus apellidos"
-          onChange={handleChange}          
+          onChange={handleChange} 
+          disabled={inputDisabled}
+         
         />
          <p style={{ color: 'red' }}>{mensajeError.ApellidoParticipanteError}</p>
       </div>
@@ -588,6 +646,8 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           name="genero"
           value={formData.genero}
           onChange={handleChange}
+          disabled={inputDisabled}
+
         >
           <option value="">   </option>
           <option value="F">Femenino</option>
@@ -606,6 +666,8 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           value={formData.correo}
           placeholder="example@gmail.com"
           onChange={handleChangeCorreo}
+          disabled={inputDisabled}
+
         />
          <p style={{ color: 'red' }}>{mensajeError.correoParticipanteError}</p>
       </div>
@@ -717,9 +779,12 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
       
       
    
-    {registroExitoso && <SuccessMessage message="¡Registro exitoso!"/>}
+    {registroExitoso && <SuccessMessage
+     message="¡Registro exitoso!"
+     onClose={closeExitorModal}/>
+    }
       {showErrorModal && (
-        <ErrorMessage message="Ha ocurrido un error al realizar el registro, intentelo nuevamente" idEquipo={varIdEquipo} onClose={closeErrorModal} />
+        <ErrorMessage message={mensajeErrorModal} idEquipo={varIdEquipo} onClose={closeErrorModal} />
       )}
         {showVacioEntrePartiError && (
         <VacioEntrePartiError message={`Por favor Registra a los miembros de su equipo, con ${numEntre} entrenadores y ${numParti} participantes`}  onClose={closeVacioEntrePartiError} />
