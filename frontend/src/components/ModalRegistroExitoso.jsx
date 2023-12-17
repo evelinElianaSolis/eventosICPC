@@ -17,13 +17,13 @@ export default Modal;
 */
 import React, {  } from 'react';
 import './assets/ModalRegistroExitoso.css'
-const SuccessMessage = ({ message }) => {
+const SuccessMessage = ({ message , onClose}) => {
   return (
   <div className='modal-container'>
     <div className='modal-content exito' >     
       <div className='message'>{message}</div>      
       <div className='btn-ok'>
-        <button onClick={() =>onclose()}>OK</button>
+        <button onClick={() =>onClose()}>OK</button>
       </div>
     </div>
   </div>

@@ -26,6 +26,31 @@ const options = paises.map((codigo) => {
 });
 //---------------------------------------------------------------formulario
 const FormularioRegistroParticipantes = (evento) => {
+
+//====================================
+
+const [formData, setFormData] = useState({
+  idPersona: '',
+  nombrePersona: '',
+  apellidoPersona: '',
+  genero: '',
+  pais:'BO',
+  correo: ''
+
+});
+//------------------------------
+
+const [mensajeError, setMensajeError] = useState({
+  ciParticipanteError:'',
+  nombreParticipanteError:'',
+  ApellidoParticipanteError:'',
+  generoParticipanteError:'',
+  correoParticipanteError:'',
+ 
+});
+
+
+
   const [mostrarModalSalir, setMostrarModalSalir] = useState(false);
   const handleInicioClick = () => {
     setMostrarModalSalir(true);
@@ -46,10 +71,16 @@ const FormularioRegistroParticipantes = (evento) => {
   const closeErrorModal2 = () => {
     setShowErrorModal2(false);
   };
+
+  const [mensajeErrorModal, setMensajeErrorModal] = useState("");
+
   //modal error
 
 //mensajeModal exito
 const [registroExitoso, setRegistroExitoso] = useState(false);
+const closeExitorModal = () => {
+  setRegistroExitoso(false);
+};
 //fin modal exito
 
 //---------------------------modal persona
@@ -59,26 +90,70 @@ const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
     const cerrarModalPersona = () => {
       setIsModalOpenPersona(false);
     };
-    const abrirModalPersona = () => {
-      setIsModalOpenPersona(true);
+    const guardarParticipante = () => {
+      const formParticipante = {
+        idPersona: formData.idPersona,   
+        idEvento: evento.evento,
+      
+      };
+      axios.post('./storeParticipante', formParticipante)
+      .then((b)=>{
+            console.log('Datos de participante guardados correctamente', formParticipante.idParticipante);
+            
+            setFormData({
+              idPersona: '',
+              nombrePersona: '',
+              apellidoPersona: '',
+              genero: '',
+              pais: 'BO',
+              correo:''
+            });
+            setPersonData(null);
+            setInputDisabled(false);
+
+            setRegistroExitoso(true);
+      })
+      .catch((error) => {          
+        console.error('Error al guardar participante ', error);
+        setMensajeErrorModal("Este participante ya esta registrado en este evento")
+        setInputDisabled(false);
+        setFormData({
+          idPersona: '',
+          nombrePersona: '',
+          apellidoPersona: '',
+          genero: '',
+          pais: 'BO',
+          correo:''
+        });
+        setPersonData(null);
+
+        setShowErrorModal(true);
+
+        
+      });   
     };
 
     const cambiarDatoModalPersona = () => {
-      setFormData({
-        idPersona: personData.idPersona,
-        nombrePersona: personData.nombrePersona,
-        apellidoPersona: personData.apellidoPersona,
-        genero: personData.genero,
-        pais: personData.pais,
-        correo: personData.correo,
+      if (personData) {
+        setFormData({
+          idPersona:personData.idPersona || '',
+          nombrePersona: personData.nombrePersona || '',
+          apellidoPersona: personData.apellidoPersona || '',
+          genero: personData.genero || '',
+          pais:personData.pais || '',
+          correo: personData.correo || '',
+        });
+      }
+      setMensajeError({
+        nombreParticipanteError: '',
+        ApellidoParticipanteError:'',
+        ciParticipanteError: '',
+        generoParticipanteError: '',
+        correoParticipanteError: '',
       });
-      setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
-      setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona) }));
-      setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: validate.validarCampoVacio(formData.idPersona) }));
-      setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError: validate.validarCampoVacio(formData.genero) }));
-      setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: validate.validarCampoVacio(formData.correo) }));
-    
+     
           setIsModalOpenPersona(false);
+            bloquearInput();
         };
 
 //-----------------------Buscar person-----------------------------------------------------------
@@ -106,28 +181,11 @@ const buscarPersona = async (elpais,cipersonsa)=>{
 }
 
 ///--------------------------------------------------
+const [inputDisabled, setInputDisabled] = useState(false);
 
-//====================================
-
-  const [formData, setFormData] = useState({
-    idPersona: '',
-    nombrePersona: '',
-    apellidoPersona: '',
-    genero: '',
-    pais:'BO',
-    correo: ''
-
-  });
-//------------------------------
- 
-  const [mensajeError, setMensajeError] = useState({
-    ciParticipanteError:'',
-    nombreParticipanteError:'',
-    ApellidoParticipanteError:'',
-    generoParticipanteError:'',
-    correoParticipanteError:'',
-   
-  });
+const bloquearInput = () => {
+  setInputDisabled(true);
+};
 
   //para el pais
 const handleChangePC = (e) => {
@@ -143,7 +201,7 @@ const handleChangePC = (e) => {
         ...formData,
         pais: pai || 'BO',
       });
-      buscarPersona(pai, formData.idPersona);
+    //  buscarPersona(pai, formData.idPersona);
       console.log("el pais id es ",formData.idPersona)
  
 }
@@ -239,14 +297,23 @@ const handleChangePC = (e) => {
  
   const handleSubmit = (e) => {
     //ERRORES
-    
-    setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
-    setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona) }));
-    setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: validate.validarCampoVacio(formData.idPersona) }));
-    setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError: validate.validarCampoVacio(formData.genero) }));
-    setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: validate.validarCampoVacio(formData.correo) }));
-  
-const v1=validate.validarNombre(formData.nombrePersona);
+    e.preventDefault();
+    if(personData) {
+      guardarParticipante()
+    }else{
+    setMensajeError({
+      nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona),
+      ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona),
+      ciParticipanteError: validate.validarCampoVacio(formData.idPersona),
+      generoParticipanteError: validate.validarCampoVacio(formData.genero),
+      correoParticipanteError: validate.validarCampoVacio(formData.correo),
+    });
+      console.log(formData);
+      console.log(formData.apellidoPersona);
+      console.log(formData.correo);
+
+
+      const v1=validate.validarNombre(formData.nombrePersona);
 const v2=validate.validarNombre(formData.apellidoPersona);
 const v3=validate.validarCI(formData.idPersona);
 const v5=validate.validarCorreo(formData.correo);
@@ -255,51 +322,47 @@ const v6=validate.validarGenero(formData.genero);
 //ERRORES
 
 if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
-  e.preventDefault();
+ 
   setShowErrorModal2(true);
 
     }else{
-      e.preventDefault();
+     
+      setInputDisabled(false);
+
       axios.post('./storePersona', formData)
         .then((a) => {
+          console.log(a.data.message);
+
           console.log("ellllll datooo essss", evento)
          console.log('Datos guardados correctamente', formData.idPersona);
-         const formParticipante = {
-          idParticipante: formData.idPersona,   
-          idEvento: evento.evento,
-        
-        };
-         
-  
-                axios.post('./storeParticipante', formParticipante)
-                .then((b)=>{
-                      console.log('Datos de participante guardados correctamente', formParticipante.idParticipante);
-                      
-                      setFormData({
-                        idPersona: '',
-                        nombrePersona: '',
-                        apellidoPersona: '',
-                        genero: '',
-                        pais: 'BO',
-                        correo:''
-                      });
-                      setRegistroExitoso(true);
-                })
-                .catch((error) => {          
-                  console.error('Error al guardar participante ', error);
-                  
-                });           
+        guardarParticipante();
         
       })
-      .catch((error) => {       
-        console.error('Error al guardar los datos de persona', error);
-        setShowErrorModal(true);
+      .catch((error) => {     
+        if (error.response && error.response.status === 400) {
+          console.error(error.response.data.message);
+         guardarParticipante();
+      } else {
+          // Maneja otros errores
+          setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
+
+          console.error('Error en la solicitud:', error.message);
+          console.error('Error al guardar los datos de persona', error);
+          setShowErrorModal(true);
+
+      }  
+
       });
         
   
     }
   }
-
+  }
+  const opcionesGenero = [
+    { value: '', label: '' },
+    { value: 'F', label: 'Femenino' },
+    { value: 'M', label: 'Masculino' },
+  ];
   return (
     <div className='contenedor-form '>
     <br/>
@@ -334,7 +397,9 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           name="idPersona"
           value={formData.idPersona}
           placeholder="Ingresa tu numero de identificacion"
-          onChange={handleChange}          
+          onChange={handleChange}
+          disabled={inputDisabled}
+          
         />
          <p style={{ color: 'red' }}>{mensajeError.ciParticipanteError}</p>
         
@@ -353,6 +418,8 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           value={formData.nombrePersona}
           placeholder="Ingresa tu nombre"
           onChange={handleChange}
+          disabled={inputDisabled}
+
         />
          <p style={{ color: 'red' }}>{mensajeError.nombreParticipanteError}</p>
       </div>
@@ -365,7 +432,9 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           name="apellidoPersona"
           value={formData.apellidoPersona}
           placeholder="Ingresa tus apellidos"
-          onChange={handleChange}          
+          onChange={handleChange}    
+          disabled={inputDisabled}
+      
         />
          <p style={{ color: 'red' }}>{mensajeError.ApellidoParticipanteError}</p>
       </div>
@@ -381,10 +450,14 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           value={formData.genero}
           placeholder="Selecciona una opcion"
           onChange={handleChange}
+          disabled={inputDisabled}
+
         >
-          <option value="">   </option>
-          <option value="F">Femenino</option>
-          <option value="M">Masculino</option>
+          {opcionesGenero.map((opcion) => (
+      <option key={opcion.value} value={opcion.value}>
+        {opcion.label}
+      </option>
+    ))}
         </select>
         <p style={{ color: 'red' }}>{mensajeError.generoParticipanteError}</p>
       </div>
@@ -399,6 +472,8 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           value={formData.correo}
           placeholder="example@gmail.com"
           onChange={handleChange}
+          disabled={inputDisabled}
+
         />
          <p style={{ color: 'red' }}>{mensajeError.correoParticipanteError}</p>
       </div>
@@ -415,9 +490,12 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           correo={personData.correo}
         />
       )}
-      {registroExitoso && <SuccessMessage message="¡Registro exitoso!" />}
+      {registroExitoso && <SuccessMessage 
+      message="¡Registro exitoso!"
+      onClose={closeExitorModal}
+       />}
       {showErrorModal && (
-        <ErrorMessage message="Ha ocurrido un error al realizar el registro, intentelo nuevamente" 
+        <ErrorMessage message={mensajeErrorModal} 
         onClose={closeErrorModal} />
       )}
       {showErrorModal2 && (
@@ -430,3 +508,4 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
   );
 }
 export default FormularioRegistroParticipantes;
+          // Muestra el mensaje de error en tu aplicación

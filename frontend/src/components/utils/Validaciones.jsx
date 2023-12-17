@@ -16,7 +16,7 @@ const errorMinOchoCaracteres = 'Este campo no puede ser menor a los 8 caracteres
 const campoNovacio=`Este campo no puede estar vacío.`;
 const Validaciones = {
   validarCampoVacio: (valor) => {
-    if (!valor.trim()) {
+    if (!valor) {
       return campoNovacio;
     } else {
       return "";
@@ -65,7 +65,7 @@ const Validaciones = {
 
   validarApellido: (apellido) => {
     const apellidoRegex = /^[A-Za-z]{3,30}$/;
-
+console.log("este es mi apellido ", apellido)
     if (!apellidoRegex.test(apellido)) {
       return "Por favor, ingrese un apellido válido (entre 3 y 30 caracteres alfabéticos, sin espacios).";
     } else {
@@ -73,11 +73,10 @@ const Validaciones = {
     }
   },
     validarCI: (CI) => {
-      if (!CI) {
-return campoNovacio;
-      }      
+      if (!CI || typeof CI !== 'string') {
+        return campoNovacio;
+    }      
       const newValueID = CI.replace(/[^\d]/g, '').substring(0, 8);
-
 
       if (CI.length > 8) {
         return errorOchoCaracteres;
