@@ -35,6 +35,15 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
         try {
+
+            $existingPersona = persona::where('idPersona', $request->input('idPersona'))
+         //   ->where('correo', $request->input('correo'))
+            ->first();
+
+        if ($existingPersona) {
+            // Si ya existe, devolver un mensaje de error
+            return response()->json(['message' => 'La persona ya está registrada.'], 400);
+        }
             $persona = new persona;
             $persona->idPersona = $request->input('idPersona');
             $persona->nombrePersona = $request->input('nombrePersona');
@@ -55,10 +64,10 @@ class PersonaController extends Controller
     public function obtenerCorreosPorIds(Request $request)
     {
         try {
-            $idsPersonas = $request->input('personas');
+            $idsPersonas = $request->input('idPersona');
     
             // Obtener correos de las personas cuyos IDs estén en el array
-            $correos = Persona::whereIn('idPersona', $idsPersonas)->pluck('correo');
+            $correos = persona::whereIn('idPersona', $idsPersonas)->pluck('correo');
     
             return response()->json(['correos' => $correos], 200);
         } catch (\Exception $e) {
