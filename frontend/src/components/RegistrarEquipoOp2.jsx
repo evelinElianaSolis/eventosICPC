@@ -164,7 +164,7 @@ useEffect(() => {
 //Entrendores-----------------------------------------------------------------------------
   const [Entrenadores, setEntrenadores] = useState([]);
   useEffect(() => {
-    axios.get(`obtenerEntrenadoresPorEquipo/${varIdEquipo}`)
+    axios.get(`encontrarIdEntrenadoresPorEquipos/${varIdEquipo}`)
       .then(response => {
         setEntrenadores(response.data.entrenadores);
       })
@@ -174,17 +174,17 @@ useEffect(() => {
   }, [varIdEquipo]); 
 
 //Eliminar Entrenadores----------------------------------------------------------------------------------
-const eliminarEntrenadores = (index, id) => {
+const eliminarEntrenadores = (index, id,eq) => {
   console.log("index es  ",index)
   const nuevosEntrenadores = [...Entrenadores];
   nuevosEntrenadores.splice(index, 1);
   setEntrenadores(nuevosEntrenadores);
-  eliminarEntrenadoresBD(id);
+  eliminarEntrenadoresBD(id,eq);
 
 };
 
-const eliminarEntrenadoresBD = (id) => {
-  axios.delete(`./destroyEntrenador/${id}`)
+const eliminarEntrenadoresBD = (id,eq) => {
+  axios.delete(`./destroyEntrenador/${id}/${eq}`)
   .then(response => {
   console.log(response.data.message);
   })
@@ -390,6 +390,11 @@ const handleChange = (e) => {
 //---------------------------------------------------
 //submit equipo 
 const handleSubmitEquipo = (e) => {
+  e.preventDefault();
+    if(personData) {
+      //procesoSubm();
+      verifyNameGroup();
+    }else{
   //ERRORES
  console.log("en el submit");
 setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
@@ -407,23 +412,29 @@ const v5=validate.validarCorreo(formData.correo);
 const v6=validate.validarGenero(formData.genero);
 
 if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
-  e.preventDefault();
+  
 console.log("es aqui el problema"); 
 setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
 
 setShowErrorModal(true);  
   }else{
- 
+ //procesoSubm();
+ verifyNameGroup();   
+         
+  };
+    }
+  };
+  ///
+  const procesoSubm = () => {
   if (Entrenadores.length === 0 || participantes.length === 0) {
     console.log('Error: Trainers or participants are empty');
     setVacioEntrePartiError(true);
     setMensajeError((mensajeError) => ({ ...mensajeError, nombreEquipoError: validate.validarCampoVacio(equipoData.nombreEquipo) }));
-    e.preventDefault();
+    
   }else{
   //-----------------------------------------------
   setInputDisabled(false);
   setMensajeError((mensajeError) => ({ ...mensajeError, nombreEquipoError: validate.validarCampoVacio(equipoData.nombreEquipo) }));
-  e.preventDefault();
   const formEquipo={
     nombreEquipo: equipoData.nombreEquipo,
     descripcionEquipo: equipoData.descripcionEquipo,
@@ -478,11 +489,29 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
                 }
            //   setVacioEntrePartiError(true);
           });
-        }    
-         
-  };
+        } 
+      }
+  ////
   
-  
+  const verifyNameGroup = () => {
+    const NewEquipo = {
+      idEquipo: {varIdEquipo},
+      nombreEquipo: equipoData.nombreEquipo,
+      idEvento: {numero},
+      };
+    axios.post('./checkEquipoExists', NewEquipo)
+    .then((resp) => {
+     console.log("equipo guardado");
+                //----------------------------------------------------------------------------
+                setMensajeErrorModal("Ya existe un equipo con este nombre");
+                showErrorModal(true);
+                //------------------------------------------------------------------------------
+      })
+      .catch((error) => {
+        procesoSubm();
+      console.error('Error al guardar equipo ', error);
+      });
+  }
   const guardarRepresentante = () => {
  
     const formResponsable = {
@@ -492,7 +521,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
 
     console.log('Datos editados', formResponsable.idPersona);
 
-      axios.post('./storeResponsable', formResponsable)
+      axios.post('./storeRepresentante', formResponsable)
       .then((b)=>{
             console.log('Datos de participante guardados correctamente', formResponsable.idPersona);
             
@@ -514,7 +543,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
    .catch((error) => {       
     console.error('Error al guardar los datos del correo', error);
     console.error('Error al guardar participante ', error);
-    setMensajeErrorModal("Este participante ya esta registrado en este evento")
+    setMensajeErrorModal("Este responsable ya esta registrado en este grupo")
     setInputDisabled(false);
     setFormData({
       idPersona: '',
@@ -556,8 +585,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
               console.error('Error al guardar los datos de persona', error);
               setShowErrorModal(true);
               });
-              
-            }
+           
     };
 
   return (
@@ -717,9 +745,9 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
               <div key={index} className="RPE-container">
                 <input  type="text" 
                 placeholder="Entrenadores del evento"
-                 value={entrenador.nombreEntrenador} 
+                 value={entrenador.persona.nombrePersona} 
                  readOnly />
-                <button type="button" onClick={() => eliminarEntrenadores(index, entrenador.idEntrenador)} className="BotRequisitos-RPE">
+                <button type="button" onClick={() => eliminarEntrenadores(index, entrenador.persona.idPersona,entrenador.idEquipo)} className="BotRequisitos-RPE">
                   <img src="https://cdn-icons-png.flaticon.com/512/6722/6722986.png" alt="" className="iconoEliminar-RPE"/>
                 </button>
               </div>

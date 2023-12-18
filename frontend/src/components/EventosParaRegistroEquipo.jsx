@@ -59,11 +59,12 @@ const HomeVistaEvento = () => {
       })
       .catch(error => {
         console.error('Error al recuperar id del último equipo:', error);
+        setVarIdEquipo(1);
       });
   };
   useEffect(() => {
     ultimoEquipo();
-  }, []); 
+  }); 
 
   const handleRegistrarseClick =  (idEvento, numEntre, numParti) => {
     console.log("el id evento", idEvento);

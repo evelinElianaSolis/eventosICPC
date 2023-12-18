@@ -5,7 +5,7 @@ import axios from './api/conexionApi';
 import ModalError from './ModalErrorRegistro';
 import validate from './utils/Validaciones';
 import './assets/Notificaciones.css'
-import SuccessMessage from './ModalRegistroExitosoEquipo';
+import SuccessMessage from './ModalRegistroExitoso';
 
 const Enviarmensaje = (evento, equipo) => {
     const [destinatario, setDestinatario] = useState(null);
@@ -26,6 +26,7 @@ mensajeError:''
     
     const [registroExitoso, setRegistroExitoso] = useState(false);
     const closeExitorModal = () => {
+
       setRegistroExitoso(false);
     };
     //f
@@ -43,19 +44,22 @@ setModalSNRegistroParticipantes(false);
 console.log(",snsins",{idPersona:participantes});
         if(evento.equipo==='Grupal'){
           
-            idEquiposPorEvento();
-            if(!equipos || equipos.length===0){
+            const NewEqui= await idEquiposPorEvento();
+            setEquipos(NewEqui);
+            if(!NewEqui || NewEqui.length===0){
               setmensajes('no hay equipos');
              //mostrar modal no existen equipos registrados
              setModalSNRegistroParticipantes(true);
 
             }else{
-              encontrarIdEntrenadoresPorEquipos();
-              encontrarIdParticipantesPorEquipos();
-              const todosLosUsuarios = [...entrenadores, ...participantes];
+              const newEntren= await encontrarIdEntrenadoresPorEquipos();
+             const newPartic= await encontrarIdParticipantesPorEquipos();
+             setEntrenadores(newEntren);
+             setParticipantes(newPartic);
+              const todosLosUsuarios = [...newEntren, ...newPartic];
               console.log("estos son todos los ids", todosLosUsuarios)
               try {                
-                const response = await axios.get(`/obtenerCorreosPorIds`,{idPersona:todosLosUsuarios});
+                const response = await axios.post(`/obtenerCorreosPorIds`,{idPersona:todosLosUsuarios});
                 setDestinatario(response.data.correos);
                 console.log(response.data.correos); // Aquí puedes manejar la respuesta según tus necesidades
                 console.log(destinatario); // Aquí puedes manejar la respuesta según tus necesidades
@@ -103,12 +107,14 @@ const idEquiposPorEvento = async () => {
     try {
       console.log(evento.evento);
       const response = await axios.get(`./idEquiposPorEvento/${evento.evento}`);
-      setEquipos(response.data.equipos);
+      
       console.log(response.data.equipos);
       console.log(equipos); // Aquí puedes manejar la respuesta según tus necesidades
       // Aquí puedes manejar la respuesta según tus necesidades
+      return response.data.equipos;
     } catch (error) {
       console.error('Error al obtener IDs de equipos por evento:', error);
+      return null;
     }
   };
   
@@ -117,25 +123,28 @@ const idEquiposPorEvento = async () => {
     console.log(equipos); // Aquí puedes manejar la respuesta según tus necesidades
 
     try {
-      const response = await axios.get(`./encontrarIdEntrenadoresPorEquipos`,equipos);
+      const response = await axios.post(`./encontrarIdEntrenadoresPorEquipos`,{equipos:equipos});
       const newEntre=response.data.entrenadores;
-      setEntrenadores(newEntre)
+      //setEntrenadores(newEntre)
       console.log(response.data.entrenadores); // Aquí puedes manejar la respuesta según tus necesidades
       console.log(entrenadores); // Aquí puedes manejar la respuesta según tus necesidades
-
+return response.data.entrenadores;
     } catch (error) {
       console.error('Error al encontrar IDs de entrenadores por equipos:', error);
+      return null;
     }
   };
   
   // Obtener IDs de participantes por equipos
   const encontrarIdParticipantesPorEquipos = async () => {
     try {
-      const response = await axios.get(`./encontrarIdParticipantesPorEquipos`,equipos);
+      const response = await axios.post(`./encontrarIdParticipantesPorEquipos`,{equipos:equipos});
       setParticipantes(response.data.participantes)
       console.log(response.data.participantes); // Aquí puedes manejar la respuesta según tus necesidades
+   return response.data.participantes;
     } catch (error) {
       console.error('Error al encontrar IDs de participantes por equipos:', error);
+      return null;
     }
   };
   
