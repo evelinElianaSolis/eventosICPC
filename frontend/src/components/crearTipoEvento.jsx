@@ -100,7 +100,7 @@ const EventForm = () => {
         
 <br></br>
 
-        <label htmlFor="Descripcion">Descripción <span style={{ color: 'red' }}>*</span> </label>
+        <label htmlFor="Descripcion">Descripción</label>
         <textarea
           id="descripcion"
           name="descripcion"
@@ -108,8 +108,6 @@ const EventForm = () => {
           rows="4"
           value={descripcion}
           onChange={handleDescripcionChange}
-          onBlur={() => (setDescripcionError(descripcion.trim() === ""), setError(descripcion.trim() === ""))}
-          className={descripcionError ? "campo-vacio" : ""}
         ></textarea>
 
         <p className="error-message">{descripcionError}</p> {/* Nuevo */}
