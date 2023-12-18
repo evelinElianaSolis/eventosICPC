@@ -40,7 +40,7 @@ class ParticipanteController extends Controller
     {
     try{
         $existingParticipante = Participante::where('idPersona', $request->input('idPersona'))
-        ->where('idEquipo', $request->input('idEquipo'))
+        ->where('idEvento', $request->input('idEvento'))
         ->first();
 
     if ($existingParticipante) {
@@ -121,7 +121,7 @@ class ParticipanteController extends Controller
     }
 }
 
-public function encontrarIdPartcicipantesPorEquipos(Request $request)
+public function encontrarIdParticipantesPorEquipos(Request $request)
 {
     try {
         $idsEquipos = $request->input('equipos');

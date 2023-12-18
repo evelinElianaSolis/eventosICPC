@@ -4,7 +4,7 @@ import axios from './api/conexionApi';
 import ErrorMessage from './ModalErrorRegistro';
 import validate from './utils/Validaciones';
 import ErrorMessage2 from './ModalIngresarDatosCorrectos';
-import ModalPersonaEncontrada from './ModalPersonaEncontrada'
+import ModalAutocompletar from './ModalAutocompletar';
 import iso3166 from 'iso-3166-1-alpha-2';
 const paises = iso3166.getCodes();
 
@@ -58,7 +58,16 @@ const handleSecondaryModalCloseOk = () => {
   };
 
   //modal error
+  const [showModalAutocompletar, setShowModalAutocompletar] = useState(false);
 
+  const closeShowModalAutocompletar = () => {
+    setShowModalAutocompletar(false);
+  };
+  const [inputDisabled, setInputDisabled] = useState(false);
+
+const bloquearInput = () => {
+  setInputDisabled(true);
+};
 //mensajeModal exito
 const [registroExitoso, setRegistroExitoso] = useState(false);
 //fin modal exito
@@ -105,13 +114,10 @@ const [registroExitoso, setRegistroExitoso] = useState(false);
 }
  
 //-----------------------------------------------------------------------------------------------
-const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
   const [personData, setPersonData] = useState(null);
    
-    const cerrarModalPersona = () => {
-      setIsModalOpenPersona(false);
-    };
-   
+  const [mensajeErrorModal, setMensajeErrorModal] = useState("");
+
 
     const cambiarDatoModalPersona = () => {
       setFormData({
@@ -123,13 +129,15 @@ const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
         correo: personData.correo,
       });
 
-      setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
-  setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona) }));
-  setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: validate.validarCampoVacio(formData.idPersona) }));
-  setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError: validate.validarCampoVacio(formData.genero) }));
-  setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError: validate.validarCampoVacio(formData.correo) }));
+      setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: ''}));
+  setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: ''}));
+  setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError:'' }));
+  setMensajeError((mensajeError) => ({ ...mensajeError, generoParticipanteError:'' }));
+  setMensajeError((mensajeError) => ({ ...mensajeError, correoParticipanteError:''}));
 
-          setIsModalOpenPersona(false);
+          setShowModalAutocompletar(false);
+          bloquearInput();
+
         };
 //-----------------------Buscar person-----------------------------------------------------------
 
@@ -141,14 +149,14 @@ const buscarPersona = async (elpais,cipersonsa)=>{
       
      }else{
       setPersonData(response.data.persona);
-      setIsModalOpenPersona(true);
+      setShowModalAutocompletar(true);
       console.log("si hay coincidencias",personData);
-      console.log("es truuue?", isModalOpenPersona);
-      console.log("Estados actualizados:", personData, isModalOpenPersona);
+      console.log("es truuue?", showModalAutocompletar);
+      console.log("Estados actualizados:", personData, showModalAutocompletar);
 
      }
      console.log("si hay coincidencias",personData);
-     console.log("es truuue?", isModalOpenPersona);
+     console.log("es truuue?", showModalAutocompletar);
 } catch (error) { 
   console.error("hubo un error al buscar persona",personData);
 
@@ -237,6 +245,40 @@ const handleChangePC = (e) => {
 };
  
   const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if(personData) {
+      axios.get(`buscarEquipo/${idEquipoE}`)
+      .then(response => {        
+          guardarParticipante();
+          console.log("Equipo  encontrado.");
+
+        })
+  .catch(error => {
+     if (error.response.data.message === "Equipo no encontrado") {
+        console.log("Equipo no encontrado. Ingresar un nuevo equipo...");
+        const NewEquipo = {
+        idEquipo: idEquipoE,
+        nombreEquipo: nombreEquipo || "default",
+        descripcionEquipo: descripcionEquipo,
+        idEvento: idEvento,
+        };
+        console.log(NewEquipo);
+      axios.post('./storeEquipo', NewEquipo)
+      .then((resp) => {
+       console.log("equipo guardado");
+                  //----------------------------------------------------------------------------
+                  guardarParticipante();
+                  //------------------------------------------------------------------------------
+        })
+        .catch((error) => {
+        console.error('Error al guardar equipo ', error);
+        });
+      } else {
+        console.error("Error al recuperar id del equipo:", error);
+        }
+      });
+    }else{
     //ERRORES
    console.log("en el submit");
   setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
@@ -259,6 +301,8 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
 
     }else{
     e.preventDefault();
+    setInputDisabled(false);
+
     axios.get(`buscarEquipo/${idEquipoE}`)
         .then(response => {
 
@@ -288,51 +332,84 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
     
           } else {
           console.error("Error al recuperar id del equipo:", error);
-          }
-          });           
+          };
+          });  
+        } ;
+      }  ;      
       };
-    
+      const postParticipante = () => {
+        const formParticipante = {
+          idPersona: formData.idPersona,   
+          idEvento: evento,
+          idEquipo:idEquipoE,
+        };
+
+        console.log('Datos editados', formParticipante.idPersona);
+
+          axios.post('./storeParticipante', formParticipante)
+          .then((b)=>{
+                console.log('Datos de participante guardados correctamente', formParticipante.idPersona);
+                
+                setFormData({
+                  idPersona: '',
+                  nombrePersona: '',
+                  apellidoPersona: '',
+                  genero: '',
+                  pais: 'BO',
+                  correo: ''
+                });
+                   
+                setInputDisabled(false);   
+                setPersonData(null);
+          setRegistroExitoso(true);
+          })
+        
+       .catch((error) => {       
+        console.error('Error al guardar los datos del parti', error);
+        setMensajeErrorModal("Este participante ya esta registrado en este evento")
+      setInputDisabled(false);
+      setFormData({
+      idPersona: '',
+      nombrePersona: '',
+      apellidoPersona: '',
+      genero: '',
+      pais: 'BO',
+      correo:''
+      });
+      setPersonData(null);
+
+      setShowErrorModal(true);
+        });
+      };
       const guardarParticipante = () => {
         axios.post('./storePersona', formData)
               .then((a) => {                
                console.log('Datos guardados correctamente', formData.idPersona);
-              
-                    const formParticipante = {
-                      idParticipante: formData.idPersona,   
-                      idEvento: evento,
-                      idEquipo:idEquipoE,
-                    };
-        
-                    console.log('Datos editados', formParticipante.idParticipante);
-        
-                      axios.post('./storeParticipante', formParticipante)
-                      .then((b)=>{
-                            console.log('Datos de participante guardados correctamente', formParticipante.idParticipante);
-                            
-                            setFormData({
-                              idPersona: '',
-                              nombrePersona: '',
-                              apellidoPersona: '',
-                              genero: '',
-                              pais: 'BO',
-                              correo: ''
-                            });
-                            setRegistroExitoso(true);       
-                            
-                      })
+              postParticipante();
                     
-                   .catch((error) => {       
-                    console.error('Error al guardar los datos del correo', error);
-                    });
               //alert("Datos guardados exitosamente.");
               
             })
-            .catch((error) => {       
-              console.error('Error al guardar los datos de persona', error);
-              setShowErrorModal(true);
+            .catch((error) => { 
+              
+              if (error.response && error.response.status === 400) {
+                console.error(error.response.data.message);
+               postParticipante();
+            } else {
+                // Maneja otros errores
+                setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
+      
+                console.error('Error en la solicitud:', error.message);
+                console.error('Error al guardar los datos de persona', error);
+                setShowErrorModal(true);
+                setInputDisabled(false);
+  
+      
+            }  
+              
               });
               
-            }
+            
     };
 
 //==================persona modal
@@ -359,6 +436,8 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
         name="pais"
         value={formData.pais}
         onChange={handleChangePC}
+        disabled={inputDisabled}
+
       >
         {paises.map((codigo) => (
           <option
@@ -377,17 +456,22 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           name="idPersona"
           value={formData.idPersona}
           placeholder="Ingresa tu numero de identificacion"
-          onChange={handleChange}          
+          onChange={handleChange}   
+          disabled={inputDisabled}
+       
         />
          <p style={{ color: 'red' }}>{mensajeError.ciParticipanteError}</p>
       </div>
       </div>
 
-  {  isModalOpenPersona && (
-    <ModalPersonaEncontrada
-    onClose={cerrarModalPersona}
+      {  showModalAutocompletar && (
+    <ModalAutocompletar
+    onClose={closeShowModalAutocompletar}
     handleYes={cambiarDatoModalPersona}
-    correo={personData.correo}/>
+    nombre={personData.nombrePersona}
+    apellido={personData.apellidoPersona}
+    correo={personData.correo}
+    />
   )}   
       <div className='form-group3'>
         <label className="subtitulo required"  htmlFor="nombrePersona">Nombre:</label>
@@ -398,6 +482,8 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           value={formData.nombrePersona}
           placeholder="Ingresa tu nombre"
           onChange={handleChange}
+          disabled={inputDisabled}
+
         />
          <p style={{ color: 'red' }}>{mensajeError.nombreParticipanteError}</p>
       </div>
@@ -410,7 +496,9 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           name="apellidoPersona"
           value={formData.apellidoPersona}
           placeholder="Ingresa tus apellidos"
-          onChange={handleChange}          
+          onChange={handleChange}  
+          disabled={inputDisabled}
+        
         />
          <p style={{ color: 'red' }}>{mensajeError.ApellidoParticipanteError}</p>
       </div>
@@ -425,6 +513,8 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           name="genero"
           value={formData.genero}
           onChange={handleChange}
+          disabled={inputDisabled}
+
         >
           <option value="">   </option>
           <option value="F">Femenino</option>
@@ -443,6 +533,8 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           value={formData.correo}
           placeholder="example@gmail.com"
           onChange={handleChangeCorreo}
+          disabled={inputDisabled}
+
         />
          <p style={{ color: 'red' }}>{mensajeError.correoParticipanteError}</p>
       </div>
@@ -476,9 +568,10 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
            </div>
          </div>)
 }
-      {showErrorModal && (
-        <ErrorMessage message="Ha ocurrido un error al realizar el registro, intentelo nuevamente" onClose={closeErrorModal} />
-      )}
+{showErrorModal && (
+        <ErrorMessage message={mensajeErrorModal} 
+        onClose={closeErrorModal} />
+           )}
         {showErrorModal2 && (
         <ErrorMessage2 message="Por favor revisa que los datos ingresados sean correctos" onClose={closeErrorModal2} />
       )}

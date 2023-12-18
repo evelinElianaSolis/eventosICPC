@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Entrenador;
+
+use App\Models\Persona;
 class EntrenadorController extends Controller
 {
     /**
@@ -78,11 +80,25 @@ class EntrenadorController extends Controller
             try {
                 $entrenadores = entrenador::where('idEquipo', $idEquipo)->get();
                 
-                if ($entrenadores->isEmpty()) {
-                    return response()->json(['entrenadores' => $entrenadores], 404);
+                // Inicializar array para almacenar resultados
+            $listEntrenadores = [];
+    
+            // Iterar sobre cada participante para obtener personas asociadas
+            foreach ($entrenadores as $entrenado) {
+                // Buscar la persona asociada al participante por su idPersona
+                $persona = persona::where('idPersona', $entrenado->idPersona)->first();
+    
+                // Verificar si se encontró la persona
+                if ($persona) {
+                    // Agregar datos al array de resultados
+                    $listEntrenadores[] = [
+                        'entrenador' => $entrenado,
+                        'persona' => $persona,
+                    ];
                 }
+            }
         
-                return response()->json(['entrenadores' => $entrenadores], 200);
+                return response()->json(['entrenadores' => $listEntrenadores], 200);
             } catch (\Exception $e) {
                 return response()->json(['message' => 'Error al recuperar entrenadores', 'error' => $e->getMessage()], 500);
             }
@@ -127,10 +143,12 @@ class EntrenadorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($idPersona)
+    public function destroy($idPersona, $idEquipo)
 {
     try {
-        $entrenador = Entrenador::find($idPersona);
+        $entrenador = entrenador::where('idPersona', $idPersona)
+        ->where('idEquipo', $idEquipo)
+        ->first();
         $entrenador->delete();
 
         return response()->json(['message' => 'Entrenador eliminado con éxito'], 200);

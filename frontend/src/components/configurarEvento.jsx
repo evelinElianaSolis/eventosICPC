@@ -207,7 +207,8 @@ if ('' === tituloEvento){
 
   return (
     <form onSubmit={handleSubmit} className="tweet-composer">
-      <h1 className="CrearEvento">Crear evento 1/2</h1>
+      <h4>Evento 1/2</h4>
+      <h1 className="CrearEvento">Crear Evento</h1>
     <div className="PrimeraFila">
 
     <div className="TituloEvento">

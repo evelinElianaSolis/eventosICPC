@@ -14,16 +14,7 @@ import iso3166 from 'iso-3166-1-alpha-2';
 
 const paises = iso3166.getCodes();
 
-const options = paises.map((codigo) => {
-  //datos para pais-------------------------------------------------------------------
-  const countryData = iso3166.getCountry(codigo);
-  console.log(`Country Data for ${codigo}:`, countryData);
-  
-  return {
-    value: codigo,
-    label: countryData ? countryData : `Nombre no disponible (${codigo})`,
-  };
-});
+
 //---------------------------------------------------------------formulario
 const FormularioRegistroParticipantes = (evento) => {
 

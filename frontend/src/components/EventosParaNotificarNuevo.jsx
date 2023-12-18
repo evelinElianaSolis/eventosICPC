@@ -44,25 +44,7 @@ const EventosNotificar = () => {
   //====================================================================
   const [varIdEquipo, setVarIdEquipo] = useState(null);
 
-  const ultimoEquipo = () => {
-    axios.get(`obtenerUltimoIdEquipo`)
-      .then(response => {
-        if (response.data.idEquipo) {
-          const newIdEquipo = response.data.idEquipo + 1;
-          console.log("new id equipo", newIdEquipo);
-          setVarIdEquipo(newIdEquipo);
-          console.log("el id equipo", varIdEquipo);
-        } else {
-          setVarIdEquipo(1);
-        }
-      })
-      .catch(error => {
-        console.error('Error al recuperar id del último equipo:', error);
-      });
-  };
-  useEffect(() => {
-    ultimoEquipo();
-  }, []); 
+ 
 
   const handleRegistrarseClick =  (idEvento,equipo) => {
     console.log("el id evento", idEvento);
