@@ -37,14 +37,13 @@ class EquipoController extends Controller
     public function store(Request $request)
     {
         try {
-            $existingEquipo = equipo::where('idEvento', $request->input('idEvento'))
+          /*  $existingEquipo = equipo::where('idEvento', $request->input('idEvento'))
             ->where('nombreEquipo', $request->input('nombreEquipo'))
             ->first();
 
         if ($existingEquipo) {
-            // Si ya existe, devolver un mensaje de error
             return response()->json(['message' => 'En equipo ya está registrado en este evento.'], 400);
-        }
+        }*/
             $equipo = new Equipo;
             $equipo->idEquipo = $request -> input('idEquipo');
             $equipo->nombreEquipo = $request->input('nombreEquipo');
@@ -60,7 +59,24 @@ class EquipoController extends Controller
             return response()->json(['message' => 'Error al crear el Equipo', 'error' => $e->getMessage()], 500);
         }
     }
-   
+    public function checkEquipoExists(Request $request)
+    {
+        try {
+            $nombreEquipo = $request->input('nombreEquipo');
+            $idEvento = $request->input('idEvento');
+            $idEquipo = $request->input('idEquipo');
+    
+            $equipoExistente = equipo::where('nombreEquipo', $nombreEquipo)
+                ->where('idEvento', $idEvento)
+                ->where('idEquipo', '!=', $idEquipo)
+                ->exists();
+    
+            return response()->json(['exists' => $equipoExistente], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al verificar el equipo', 'error' => $e->getMessage()], 500);
+        }
+    }
+    
     public function buscarEquipo($idEquipo){
         try {
             $equipo = equipo::where('idEquipo', $idEquipo)->first();
@@ -78,9 +94,7 @@ class EquipoController extends Controller
     try {
         $ultimoId = equipo::orderBy('idEquipo', 'desc')->value('idEquipo');
 
-        if (!$ultimoId) {
-            return response()->json(['message' => 'No hay equipos registrados'], 404);
-        }
+        
 
         return response()->json(['idEquipo' => $ultimoId], 200);
     } catch (\Exception $e) {
