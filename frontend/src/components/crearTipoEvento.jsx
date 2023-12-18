@@ -19,7 +19,7 @@ const EventForm = () => {
 
   const [mostrarModalTipo, setMostrarModalTipo] = useState(false);
   const handleInicioTipo = () => {
-    setMostrarModalSalir(true);
+    setMostrarModalTipo(true);
   };  
 
 

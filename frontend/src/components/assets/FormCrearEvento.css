@@ -580,7 +580,7 @@ text-align: center;
 .modalCrearEvento4 {
   position: fixed;
   width: 20%;
-  height: 32%;
+/*  height: 32%;*/
   top: 30%;
   left: 38%;
   padding: 20px;

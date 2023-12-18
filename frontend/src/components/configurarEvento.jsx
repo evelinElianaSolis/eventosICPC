@@ -183,8 +183,8 @@ if ('' === tituloEvento){
 
   return (
     <form onSubmit={handleSubmit} className="tweet-composer">
-      <h4>Evento 1/2</h4>
-      <h1 className="CrearEvento">Crear Evento</h1>
+      
+      <h1 className="CrearEvento">Crear Evento 1/2</h1>
     <div className="PrimeraFila">
 
     <div className="TituloEvento">

@@ -4,7 +4,6 @@ import axios from './api/conexionApi';
 import ErrorMessage from './ModalErrorRegistro';
 import validate from './utils/Validaciones';
 import ErrorMessage2 from './ModalIngresarDatosCorrectos';
-import ModalPersonaEncontrada from './ModalPersonaEncontrada'
 import iso3166 from 'iso-3166-1-alpha-2';
 import ModalAutocompletar from './ModalAutocompletar';
 const paises = iso3166.getCodes();
