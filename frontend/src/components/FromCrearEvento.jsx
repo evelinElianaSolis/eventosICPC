@@ -16,8 +16,8 @@ const EventForm = (ultimoId) => {
   // Formuraio
   const [fechaInicio,                 setFechaInicio]           =    useState('null');
   const [fechaFin,                    setFechaFin]              =    useState('null');
-  const [participacion,               setParticipacion]         =    useState('');
-  const [numEntrenadores,             setNumEntrenadores]       =    useState('');
+  const [participacion,               setParticipacion]         =    useState('0');
+  const [numEntrenadores,             setNumEntrenadores]       =    useState('0');
   const [numParticipantes,            setNumParticipantes]      =    useState("");
   const [imagen,                      setImagen]                =    useState("");
   const [file,                        setFile]                  =    useState(null)
@@ -168,17 +168,19 @@ const eliminarActividad = (index) => {
       if (actividades.length === 0) {
         setActividadesError(true);
       }else{
-        if(numParticipantes == 0 || numEntrenadores == 0 || imagen == ""){
+        if(participacion == "Individual"){
+          setNumParticipantes("1");
+        }
+
+        if(numParticipantes == 0 || imagen == ""){
 
         }else{
-
+          
           setActividadesError(false);
       const response = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
       const ultimoId = response.data.ultimoId;
       const eventId = ultimoId;
-      if(participacion == "Individual"){
-        setNumParticipantes("1");
-      }
+     
 
 
       const imagenId = await uploadFile(file);
