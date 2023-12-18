@@ -83,3 +83,8 @@ Route::GET('/idEquiposPorEvento/{idEvento}', [EquipoController::class,'idEquipos
 Route::GET('/encontrarIdEntrenadoresPorEquipos', [EntrenadorController::class,'encontrarIdEntrenadoresPorEquipos']);
 Route::GET('/encontrarIdPartcicipantesPorEquipos', [ParticipanteController::class,'encontrarIdPartcicipantesPorEquipos']);
 Route::GET('/obtenerIdsParticipantesPorEvento/{idEvento}', [ParticipanteController::class,'obtenerIdsParticipantesPorEvento']);
+Route::GET('/verificar-nombre-existente/{nombre}',[EventoController::class,'nameequals']);
+Route::GET('/obtener-evento/{id}',[EventoController::class,'obtenerEventoPorId']);
+Route::GET('/obtener-actividad/{id}', [ActividadController::class,'obtenerActividadPorId']);
+Route::GET('/obtener-tipo-evento/{id}', [TipoEventoController::class,'obtenerTipoEventoPorId']);
+

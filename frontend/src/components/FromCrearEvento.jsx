@@ -223,7 +223,7 @@ const eliminarActividad = (index) => {
   return (
     <form onSubmit={handleSubmit} className="tweet-composer">
       
-      <h1 className="CrearEvento">Crear Evento</h1>
+      <h1 className="CrearEvento">Crear evento 2/2</h1>
         <div className="SubirImagen">
         <div className='Campovacio'>
           <label htmlFor="afiche">Afiche del evento:</label>

@@ -427,9 +427,12 @@ public function obtenerEventoPorId($idEvento)
 
 
 
-
-
-
+// En tu controlador al manejar la creación del evento
+public function nameequals($nombre)
+{
+    $existeNombre = Evento::where('tituloEvento', $nombre)->exists();
+    return response()->json(['existeNombre' => $existeNombre]);
+}
 
 
 

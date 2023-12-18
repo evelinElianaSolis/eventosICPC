@@ -30,12 +30,13 @@ const EventForm =
   const [Error,               setError] =               useState(false);
   const [mostrarModalSalir,   setMostrarModalSalir] =   useState(false);
   const [mostrarModalOps,   setMostrarModalOps] =   useState(false);
-  const [mostrarModalOpss,   setMostrarModalOpss] =   useState(false);
+  const [mostrarModalOpsEvento,   setMostrarModalOpsEvento] =   useState(false);
   const [Bandera,   setBandera] =   useState(false);
 
   const handleInicioClick       = () => {setMostrarModalSalir(true);};  
   const handleButtonCancelarCE  = () => {setMostrarModalSalir(false);};
   const handleOps               = () => {setMostrarModalOps(false);};
+  const handleOpsEvento               = () => {setMostrarModalOpsEvento(false);};
 
   const urlParams = new URLSearchParams(window.location.search);
   
@@ -119,14 +120,37 @@ if ('' === tituloEvento){
 
   const handleSubmit = async (e) => {e.preventDefault();
 
+
     try {
+
+      
+     
+        
+      
+
+      const nombExist = await axios.get(`http://localhost:8000/api/verificar-nombre-existente/${tituloEvento}`);
+      console.log(nombExist.data.existeNombre);
       if( tituloEvento ==""     || 
           horaEvento == "00:00" || 
           fechaInicio == "null" || 
           fechaFin == "null"    || 
-          fechaFin < fechaInicio){
-        setMostrarModalOps(true);
-        setError(true);
+          fechaFin < fechaInicio ||
+          nombExist.data.existeNombre){
+            
+
+            if(nombExist.data.existeNombre){
+              setMostrarModalOpsEvento(true)
+            }
+
+            if(tituloEvento ==""     || 
+            horaEvento == "00:00" || 
+            fechaInicio == "null" || 
+            fechaFin == "null"    || 
+            fechaFin < fechaInicio){
+              setMostrarModalOps(true);
+              setError(true);
+            }
+        
       }else{
       const response = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
       
@@ -183,8 +207,7 @@ if ('' === tituloEvento){
 
   return (
     <form onSubmit={handleSubmit} className="tweet-composer">
-      <h4>Evento 1/2</h4>
-      <h1 className="CrearEvento">Crear Evento</h1>
+      <h1 className="CrearEvento">Crear evento 1/2</h1>
     <div className="PrimeraFila">
 
     <div className="TituloEvento">
@@ -370,6 +393,12 @@ if ('' === tituloEvento){
           </button>
         </div>
         
+
+        {mostrarModalOpsEvento && 
+         <Ops message="Opss el evento ya existe " onClose={handleOpsEvento}/>
+        }
+
+
         {mostrarModalOps && 
          <Ops message="Opss Ocurrio un Error " onClose={handleOps}/> 
         }
