@@ -24,7 +24,7 @@ const [showSeleccionModal, setShowSeleccionModal] = useState(false);
 
   const handleModalSeleccion = () => {
     if(evento.participacion==="Grupal"){
-        setShowSeleccionModal(true);
+      <NavLink to={`/RegistroParticipantes/${EventoId.EventoId}`}></NavLink>
     }else{
 
        // window.location.href = `./RegistroParticipantes?${EventoId}`;
@@ -196,7 +196,7 @@ const [showSeleccionModal, setShowSeleccionModal] = useState(false);
             <div className="button-container-RI">  
 
             <button className="blue-button-RI" onClick={() => navigate('/Home')}>Volver Atrás</button>
-                <button className="blue-button-RI" onClick={() => handleModalSeleccion()}>Registrarse</button>
+               
                 
             </div>
 

@@ -175,7 +175,7 @@ useEffect(() => {
 
 //Eliminar Entrenadores----------------------------------------------------------------------------------
 const eliminarEntrenadores = (index, id,eq) => {
-  console.log("index es  ",index)
+ // console.log("index es  ",index)
   const nuevosEntrenadores = [...Entrenadores];
   nuevosEntrenadores.splice(index, 1);
   setEntrenadores(nuevosEntrenadores);
@@ -186,7 +186,7 @@ const eliminarEntrenadores = (index, id,eq) => {
 const eliminarEntrenadoresBD = (id,eq) => {
   axios.delete(`./destroyEntrenador/${id}/${eq}`)
   .then(response => {
-  console.log(response.data.message);
+  //console.log(response.data.message);
   })
   .catch(error => {
   console.error('Error al eliminar el Entrenador:', error);
@@ -361,8 +361,7 @@ const handleChange = (e) => {
 
   //handle equipo---------------------------------------------------------------
   const handleEquipoChange = (e) => {
-    console.log("el id del equipo es",varIdEquipo);
-    console.log("el id del evento es",numero);
+    
     const { name, value } = e.target;
     switch(name){
       case 'nombreEquipo':
@@ -396,7 +395,7 @@ const handleSubmitEquipo = (e) => {
       verifyNameGroup();
     }else{
   //ERRORES
- console.log("en el submit");
+ //console.log("en el submit");
 setMensajeError((mensajeError) => ({ ...mensajeError, nombreParticipanteError: validate.validarCampoVacio(formData.nombrePersona) }));
 setMensajeError((mensajeError) => ({ ...mensajeError, ApellidoParticipanteError: validate.validarCampoVacio(formData.apellidoPersona) }));
 setMensajeError((mensajeError) => ({ ...mensajeError, ciParticipanteError: validate.validarCampoVacio(formData.idPersona) }));
@@ -413,7 +412,7 @@ const v6=validate.validarGenero(formData.genero);
 
 if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
   
-console.log("es aqui el problema"); 
+//console.log("es aqui el problema"); 
 setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
 
 setShowErrorModal(true);  
@@ -427,7 +426,7 @@ setShowErrorModal(true);
   ///
   const procesoSubm = () => {
   if (Entrenadores.length === 0 || participantes.length === 0) {
-    console.log('Error: Trainers or participants are empty');
+//    console.log('Error: Trainers or participants are empty');
     setVacioEntrePartiError(true);
     setMensajeError((mensajeError) => ({ ...mensajeError, nombreEquipoError: validate.validarCampoVacio(equipoData.nombreEquipo) }));
     
@@ -440,13 +439,13 @@ setShowErrorModal(true);
     descripcionEquipo: equipoData.descripcionEquipo,
     idEvento:numero,
   }
-console.log("el equipo a actualizar es", formEquipo)
+//console.log("el equipo a actualizar es", formEquipo)
 axios.get(`buscarEquipo/${varIdEquipo}`)
     .then(response => {
 
               axios.put(`./actualizarEquipo/${varIdEquipo}`, formEquipo)
             .then(response =>  {
-              console.log(response.data.message) 
+             // console.log(response.data.message) 
               
               guardarResponsable();
 
@@ -466,7 +465,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           .catch((error) => {
               console.error('Error al buscar equipo ', error);
               if (error.response.data.message === "Equipo no encontrado") {
-                console.log("Equipo no encontrado. Ingresar un nuevo equipo...");
+             //   console.log("Equipo no encontrado. Ingresar un nuevo equipo...");
                 const NewEquipo = {
                 idEquipo: {varIdEquipo},
                 nombreEquipo: equipoData.nombreEquipo || "default",
@@ -475,7 +474,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
                 };
               axios.post('./storeEquipo', NewEquipo)
               .then((resp) => {
-               console.log("equipo guardado");
+             //  console.log("equipo guardado");
                           //----------------------------------------------------------------------------
                           guardarResponsable();
                           //------------------------------------------------------------------------------
@@ -501,7 +500,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
       };
     axios.post('./checkEquipoExists', NewEquipo)
     .then((resp) => {
-     console.log("equipo guardado");
+   //  console.log("equipo guardado");
                 //----------------------------------------------------------------------------
                 setMensajeErrorModal("Ya existe un equipo con este nombre");
                 showErrorModal(true);
@@ -519,11 +518,11 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
       idEquipo:{varIdEquipo},
     };
 
-    console.log('Datos editados', formResponsable.idPersona);
+   // console.log('Datos editados', formResponsable.idPersona);
 
       axios.post('./storeRepresentante', formResponsable)
       .then((b)=>{
-            console.log('Datos de participante guardados correctamente', formResponsable.idPersona);
+           // console.log('Datos de participante guardados correctamente', formResponsable.idPersona);
             
             setFormData({
               idPersona: '',
@@ -563,7 +562,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
  const guardarResponsable = () => {
         axios.post('./storePersona', formData)
               .then((a) => {                
-               console.log('Datos guardados correctamente', formData.idPersona);
+            //   console.log('Datos guardados correctamente', formData.idPersona);
              guardarRepresentante();
               //alert("Datos guardados exitosamente.");
               
