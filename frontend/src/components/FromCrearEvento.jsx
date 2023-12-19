@@ -177,7 +177,7 @@ const eliminarActividad = (index) => {
         }else{
           
           setActividadesError(false);
-      const response = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
+      const response = await axios.get('./obtenerUltimoIdEvento');
       const ultimoId = response.data.ultimoId;
       const eventId = ultimoId;
      

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from './api/conexionApi';
 import Alert from'./Alert';
 import '../components/assets/FormCrearEvento.css';
 import ModalCreacionEvento from './ModalCreacionAT.jsx';
@@ -70,14 +70,14 @@ const ModalActividad = ({
 
     
     try {
-      const response = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
+      const response = await axios.get('./obtenerUltimoIdEvento');
       const ultimoId = response.data.ultimoId;
       const eventId = ultimoId;
 
       if(actividad == ""){
         setError(false);
       }else{
-      await axios.post('http://localhost:8000/api/postActividad', {
+      await axios.post('./postActividad', {
         nombreActividad:actividad,
         descripcionActividad:descripcionActividadError,
         modalidad:modalidad,
