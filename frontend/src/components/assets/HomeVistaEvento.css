@@ -87,7 +87,8 @@
     display: flex;
     flex-wrap: wrap;
     overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
-
+    max-height: 700px;  /* Altura máxima del contenedor */
+    overflow-y: auto; 
     gap: 20px;
   }
   

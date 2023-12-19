@@ -157,17 +157,10 @@ const eliminarActividad = (index) => {
 
   // Funcion Principal
   const handleSubmit = async (e) => {
-    
-
-
-
-    e.preventDefault();
-    
-  
+        e.preventDefault();
+     
     try {
-      if (actividades.length === 0) {
-        setActividadesError(true);
-      }else{
+    
         if(participacion == "Individual"){
           setNumParticipantes("1");
         }
@@ -200,7 +193,7 @@ const eliminarActividad = (index) => {
       setModalVisible(true);
       setMostrarModalSalir(true);
       }
-        }
+        
         
     } catch (error) {
       if (error.response) {
