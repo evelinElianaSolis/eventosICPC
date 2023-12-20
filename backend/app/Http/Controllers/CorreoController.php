@@ -10,15 +10,25 @@ class CorreoController extends Controller
 {
     public function enviarCorreo(Request $request)
     {
-        try {
-            // Lógica para enviar el correo
-            $correo = new NotificacionesICPC(
-                $request->saludo,
-                $request->mensaje,
-                $request->asunto,
-            );
 
-            Mail::to($request->destinatario)->send($correo);
+
+        $destinatarios = $request->destinatario;
+        $correo = new NotificacionesICPC(
+            $request->mensaje,
+            $request->asunto,
+        );
+
+        // Comprobar si es un arreglo de destinatarios o un único destinatario
+       
+        try {
+            if (!is_array($destinatarios)) {
+                $destinatarios = [$destinatarios]; // Convertir en arreglo
+            }
+    
+            foreach ($destinatarios as $destinatario) {
+                // Enviar correo a cada destinatario
+                Mail::to($destinatario)->send($correo);
+            }            
 
             return response()->json(['mensaje' => 'Correo enviado con éxito']);
         } catch (\Exception $e) {
