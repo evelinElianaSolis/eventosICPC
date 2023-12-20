@@ -2,11 +2,10 @@
 
 import axios from '../api/conexionApi';
 
-const enviarCorreo = async (destinatario, asunto, mensaje, saludo) => {
+const enviarCorreo = async (destinatario, asunto, mensaje) => {
     try {
         const response = await axios.post('/enviar-correo', {
             destinatario,
-            saludo,
             mensaje,
             asunto
         });

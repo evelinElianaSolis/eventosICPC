@@ -29,7 +29,7 @@ mensajeError:''
 
       setRegistroExitoso(false);
     };
-    //f
+    
 
 const cerrarModalError=()=>{
 setModalSNRegistroParticipantes(false);
@@ -53,12 +53,12 @@ setModalSNRegistroParticipantes(false);
              setEntrenadores(newEntren);
              setParticipantes(newPartic);
               const todosLosUsuarios = [...newEntren, ...newPartic];
-              //console.log("estos son todos los ids", todosLosUsuarios)
+              console.log("estos son todos los ids", todosLosUsuarios)
               try {                
                 const response = await axios.post(`/obtenerCorreosPorIds`,{idPersona:todosLosUsuarios});
                 setDestinatario(response.data.correos);
-              //  console.log(response.data.correos); // Aquí puedes manejar la respuesta según tus necesidades
-              //  console.log(destinatario); // Aquí puedes manejar la respuesta según tus necesidades
+                console.log(response.data.correos); // Aquí puedes manejar la respuesta según tus necesidades
+                console.log(destinatario); // Aquí puedes manejar la respuesta según tus necesidades
 
               } catch (error) {
                 console.error('Error al obtener mensajes por IDs:', error);
@@ -71,19 +71,19 @@ setModalSNRegistroParticipantes(false);
              if(!varAux || varAux.length===0){
               //mostrar modal no existen equipos registrados
               setmensajes('no hay particip');
-              //console.log({idPersona:participantes});
+              console.log({idPersona:participantes});
 
               setModalSNRegistroParticipantes(true);
 
              }else{
             try {
-//console.log('participante es',participantes);
-              //console.log('participante es idpersona',{idPersona:participantes});
+console.log('participante es',participantes);
+              console.log('participante es idpersona',{idPersona:participantes});
 
                 const response = await axios.post(`./obtenerCorreosPorIds`,{idPersona:varAux});
                 setDestinatario(response.data.correos);
 
-                //console.log(response.data.correos); // Aquí puedes manejar la respuesta según tus necesidades
+                console.log(response.data.correos); // Aquí puedes manejar la respuesta según tus necesidades
               } catch (error) {
                 console.error('Error al obtener mensajes por IDs:', error);
               }
@@ -103,9 +103,9 @@ const idEquiposPorEvento = async () => {
       //console.log(evento.evento);
       const response = await axios.get(`./idEquiposPorEvento/${evento.evento}`);
       
-      //console.log(response.data.equipos);
-      //console.log(equipos); // Aquí puedes manejar la respuesta según tus necesidades
-      // Aquí puedes manejar la respuesta según tus necesidades
+      console.log(response.data.equipos);
+      console.log(equipos); // Aquí puedes manejar la respuesta según tus necesidades
+      //Aquí puedes manejar la respuesta según tus necesidades
       return response.data.equipos;
     } catch (error) {
       console.error('Error al obtener IDs de equipos por evento:', error);
@@ -115,7 +115,7 @@ const idEquiposPorEvento = async () => {
   
   // Obtener IDs de entrenadores por equipos
   const encontrarIdEntrenadoresPorEquipos = async () => {
-   // console.log(equipos); // Aquí puedes manejar la respuesta según tus necesidades
+    console.log(equipos); // Aquí puedes manejar la respuesta según tus necesidades
 
     try {
       const response = await axios.post(`./encontrarIdEntrenadoresPorEquipos`,{equipos:equipos});
@@ -135,7 +135,7 @@ return response.data.entrenadores;
     try {
       const response = await axios.post(`./encontrarIdParticipantesPorEquipos`,{equipos:equipos});
       setParticipantes(response.data.participantes)
-    //  console.log(response.data.participantes); // Aquí puedes manejar la respuesta según tus necesidades
+      console.log(response.data.participantes); // Aquí puedes manejar la respuesta según tus necesidades
    return response.data.participantes;
     } catch (error) {
       console.error('Error al encontrar IDs de participantes por equipos:', error);
@@ -148,7 +148,7 @@ return response.data.entrenadores;
     try {
       const response = await axios.get(`./obtenerIdsParticipantesPorEvento/${evento.evento}`);
      // setParticipantes(response.data.participantes);
-   //  console.log('sale aqui primero',response.data); // Aquí puedes manejar la respuesta según tus necesidades
+     console.log('sale aqui primero',response.data); // Aquí puedes manejar la respuesta según tus necesidades
 
      return response.data.participantes;
     } catch (error) {
@@ -175,16 +175,14 @@ return response.data.entrenadores;
         setErrorMensaje((error) => ({ ...error, asuntoError: validate.validarCampoVacio(asunto) }));
         e.preventDefault();
       }else{    
-       // console.log('esta obteniendo mensajes por id');
+        console.log('esta obteniendo mensajes por id');
         e.preventDefault();
         setErrorMensaje((error) => ({ ...error, mensajeError: ''}));
         setErrorMensaje((error) => ({ ...error, asuntoError: ''}));
         try{
         await obtenerCorreosPorIds();
-        
-        
+        console.log(destinatario);
            axios.post('./enviar-correo', {
-
                 destinatario:destinatario,
                 mensaje,
                 asunto
@@ -199,10 +197,10 @@ return response.data.entrenadores;
               console.log(response.data.mensaje);
             })
             .catch((error) => {
-              setmensajes('no se pudo enviarr correo');
+              setmensajes('no se pudo enviar correo');
+              console.error('Error al enviar el mensaje', error);
 
               setModalSNRegistroParticipantes(true);
-              console.error('Error al enviar el mensaje', error);
             });
           }catch(error){
             console.error("error al enviar correo",error);

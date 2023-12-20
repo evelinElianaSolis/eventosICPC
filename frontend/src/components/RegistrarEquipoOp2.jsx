@@ -425,7 +425,7 @@ setShowErrorModal(true);
   };
   ///
   const procesoSubm = () => {
-  if (Entrenadores.length === 0 || participantes.length === 0) {
+  if (!Entrenadores || !participantes || Entrenadores.length === 0 || participantes.length === 0) {
 //    console.log('Error: Trainers or participants are empty');
     setVacioEntrePartiError(true);
     setMensajeError((mensajeError) => ({ ...mensajeError, nombreEquipoError: validate.validarCampoVacio(equipoData.nombreEquipo) }));
