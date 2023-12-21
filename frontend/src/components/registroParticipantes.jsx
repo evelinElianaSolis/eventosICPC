@@ -106,7 +106,7 @@ const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
       })
       .catch((error) => {          
         console.error('Error al guardar participante ', error);
-        setMensajeErrorModal("Este participante ya esta registrado en este evento")
+        setMensajeErrorModal("Este participante ya está registrado en este evento")
         setInputDisabled(false);
         setFormData({
           idPersona: '',
@@ -333,7 +333,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
          guardarParticipante();
       } else {
           // Maneja otros errores
-          setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
+          setMensajeErrorModal("Ha ocurrido un error al realizar el registro. Inténtelo nuevamente.")
 
           console.error('Error en la solicitud:', error.message);
           console.error('Error al guardar los datos de persona', error);
@@ -385,7 +385,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           id="idPersona"
           name="idPersona"
           value={formData.idPersona}
-          placeholder="Ingresa tu numero de identificacion"
+          placeholder="Ingrese su número de identificación"
           onChange={handleChange}
           disabled={inputDisabled}
           
@@ -405,7 +405,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           id="nombrePersona"
           name="nombrePersona"
           value={formData.nombrePersona}
-          placeholder="Ingresa tu nombre"
+          placeholder="Ingrese su nombre"
           onChange={handleChange}
           disabled={inputDisabled}
 
@@ -420,7 +420,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           id="apellidoPersona"
           name="apellidoPersona"
           value={formData.apellidoPersona}
-          placeholder="Ingresa tus apellidos"
+          placeholder="Ingrese sus apellidos"
           onChange={handleChange}    
           disabled={inputDisabled}
       

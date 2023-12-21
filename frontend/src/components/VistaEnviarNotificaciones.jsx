@@ -148,7 +148,7 @@ return response.data.entrenadores;
     try {
       const response = await axios.get(`./obtenerIdsParticipantesPorEvento/${evento.evento}`);
      // setParticipantes(response.data.participantes);
-     console.log('sale aqui primero',response.data); // Aquí puedes manejar la respuesta según tus necesidades
+     //console.log('sale aqui primero',response.data); // Aquí puedes manejar la respuesta según tus necesidades
 
      return response.data.participantes;
     } catch (error) {
@@ -238,7 +238,7 @@ return response.data.entrenadores;
           id="mensaje"
           name="mensaje"
           value={mensaje}
-          placeholder="Escribe el mensaje aqui"
+          placeholder="Escribe el mensaje aquí"
           onChange={handleChangeMensaje}
         />
          <p style={{ color: 'red' }}>{error.mensajeError}</p>

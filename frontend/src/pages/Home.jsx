@@ -16,7 +16,7 @@ const CrearEvento = () => {
         </div>
       </div>
       <div className="column" >
-        <div>
+      <div className="tweet-composer">
           <HomeVistaEvento />
         </div>
       </div>

@@ -164,7 +164,7 @@ useEffect(() => {
 //Entrendores-----------------------------------------------------------------------------
   const [Entrenadores, setEntrenadores] = useState([]);
   useEffect(() => {
-    axios.get(`encontrarIdEntrenadoresPorEquipos/${varIdEquipo}`)
+    axios.get(`obtenerEntrenadoresPorEquipo/${varIdEquipo}`)
       .then(response => {
         setEntrenadores(response.data.entrenadores);
       })
@@ -374,7 +374,7 @@ const handleChange = (e) => {
       break;
       case 'descripcionEquipo':
       if(value.length >50){
-        setMensajeError((mensajeError)=>({...mensajeError, descripcionEquipoError:"Ud. ha excedido el numero de caracteres"}));
+        setMensajeError((mensajeError)=>({...mensajeError, descripcionEquipoError:"Ha excedido el número de caracteres permitidos."}));
       }else{
         setEquipoData((equipoData) => ({ ...equipoData, [name]: value }));
       }
@@ -413,7 +413,7 @@ const v6=validate.validarGenero(formData.genero);
 if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
   
 //console.log("es aqui el problema"); 
-setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
+setMensajeErrorModal("Ha ocurrido un error al realizar el registro. Inténtelo nuevamente.")
 
 setShowErrorModal(true);  
   }else{
@@ -542,7 +542,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
    .catch((error) => {       
     console.error('Error al guardar los datos del correo', error);
     console.error('Error al guardar participante ', error);
-    setMensajeErrorModal("Este responsable ya esta registrado en este grupo")
+    setMensajeErrorModal("Este responsable ya está registrado en este grupo.")
     setInputDisabled(false);
     setFormData({
       idPersona: '',
@@ -574,7 +574,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
              guardarRepresentante();
             } else {
                 // Maneja otros errores
-                setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
+                setMensajeErrorModal("Ha ocurrido un error al realizar el registro. Inténtelo nuevamente.")
       
                 console.error('Error en la solicitud:', error.message);
                 console.error('Error al guardar los datos de persona', error);
@@ -623,7 +623,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           id="idPersona"
           name="idPersona"
           value={formData.idPersona}
-          placeholder="Ingresa tu numero de identificacion"
+          placeholder="Ingrese su número de identificación"
           onChange={handleChange}    
           disabled={inputDisabled}
       
@@ -640,7 +640,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           id="nombrePersona"
           name="nombrePersona"
           value={formData.nombrePersona}
-          placeholder="Ingresa tu nombre"
+          placeholder="Ingrese su nombre"
           onChange={handleChange}
           disabled={inputDisabled}
 
@@ -655,7 +655,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
           id="apellidoPersona"
           name="apellidoPersona"
           value={formData.apellidoPersona}
-          placeholder="Ingresa tus apellidos"
+          placeholder="Ingrese sus apellidos"
           onChange={handleChange} 
           disabled={inputDisabled}
          
@@ -709,7 +709,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         <input
           name="nombreEquipo"
           value={equipoData.nombreEquipo}
-          placeholder="Ingresa el nombre de tu equipo"
+          placeholder="Ingrese el nombre de su equipo."
           onChange={handleEquipoChange}
         />
         <p style={{ color: 'red' }}>{mensajeError.nombreEquipoError}</p>
@@ -733,13 +733,13 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
       <div className='form-group3'>
       <div className='form-group3'>
       <label  className="subtitulo required" >
-       Añadir Entrenadores 
+       Añadir entrenadores 
         </label> </div>
         </div>
         {/* Renderización de requisitos */}
         <div className="RPE-container">
         <div className="RPE-distribution">
-          {Entrenadores.length > 0 &&
+          {Entrenadores && Entrenadores.length > 0 &&
             Entrenadores.map((entrenador, index) => (
               <div key={index} className="RPE-container">
                 <input  type="text" 
@@ -757,7 +757,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         </div>
       </div>
       <div className='button-container-RPE'>
-      {Entrenadores.length < numEntre && (
+      {Entrenadores && Entrenadores.length < numEntre && (
         <button className="buttonRequisitos1-RPE" type="button" onClick={() => openEntrenadoresModal()}>
           + 
         </button>
@@ -765,6 +765,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
       </div>
    
 
+      <p className="subtitle">Ingresar los datos de los participantes del equipo</p>
 
       <div className='form-group3'>
       <label  className="subtitulo required" >
@@ -772,7 +773,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         </label> </div>
         <div className="RPE-container">
         <div className="RPE-distribution">
-          {participantes.length > 0 &&
+          {participantes && participantes.length > 0 &&
             participantes.map((participante, index) => (
               <div key={index} className="RPE-container">
                 <input  type="text" 
@@ -790,7 +791,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         </div>
       </div>
       <div className='button-container-RPE'>
-      {participantes.length < numParti && (
+      {participantes && participantes.length < numParti && (
         <button className="buttonRequisitos1-RPE" type="button" onClick={() => openParticipantesModal()}>
           + 
         </button>
@@ -814,7 +815,7 @@ axios.get(`buscarEquipo/${varIdEquipo}`)
         <ErrorMessage message={mensajeErrorModal} idEquipo={varIdEquipo} onClose={closeErrorModal} />
       )}
         {showVacioEntrePartiError && (
-        <VacioEntrePartiError message={`Por favor Registra a los miembros de su equipo, con ${numEntre} entrenadores y ${numParti} participantes`}  onClose={closeVacioEntrePartiError} />
+        <VacioEntrePartiError message={`Por favor registre a los miembros de su equipo, con ${numEntre} entrenadores y ${numParti} participantes`}  onClose={closeVacioEntrePartiError} />
       )}
       {mostrarModalSalir && (
         <ModalSalir message="¿Quiere abandonar el registro?" onClose={handleCloseModalSalir} />

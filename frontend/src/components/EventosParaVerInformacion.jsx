@@ -48,7 +48,8 @@ const HomeVistaEvento = () => {
 
   return (
     <div className="cuerpo">
-      <h3 className="titulo_home">Visualizar eventos creados</h3>
+      <h3 className="titulo_home">Ver Información detallada de un eventos</h3>
+
       <hr />
 
       <div className="eventos-container">

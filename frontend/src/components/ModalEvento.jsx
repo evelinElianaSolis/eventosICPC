@@ -11,10 +11,10 @@ import '../components/assets/ModalCalendario.css'
               <p><strong>Fecha fin:</strong> {evento.fechaFinActividad}</p>
               <p><strong>Hora de inicio:</strong> {evento.horaInicioActividad}</p>
               <p><strong>Modalidad:</strong> {evento.modalidad}</p>
-              <p><strong>Ubicacion:</strong> {evento.ubicacionActividad}</p>
+              <p><strong>Ubicación:</strong> {evento.ubicacionActividad}</p>
               {evento.descripcionActividad !== null && (
   <p>
-    <strong>Descripcion:</strong> {evento.descripcionActividad}
+    <strong>Descripción:</strong> {evento.descripcionActividad}
   </p>
 )}
             </div>

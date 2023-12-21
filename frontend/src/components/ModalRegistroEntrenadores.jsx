@@ -479,12 +479,12 @@ const postEntrenador = () => {
           id="idPersona"
           name="idPersona"
           value={formData.idPersona}
-          placeholder="Ingresa tu numero de identificacion"
+          placeholder="Ingrese su número de identificación"
           onChange={handleChange}  
           disabled={inputDisabled}
         
         />
-         <p style={{ color: 'red' }}>{mensajeError.ciParticipanteError}</p>
+         <p style={{ color: 'red' }}>{mensajeError.ciEntrenadorError}</p>
       </div>
       </div>
 
@@ -505,7 +505,7 @@ const postEntrenador = () => {
           id="nombrePersona"
           name="nombrePersona"
           value={formData.nombrePersona}
-          placeholder="Ingresa tu nombre"
+          placeholder="Ingrese su nombre"
           onChange={handleChange}
           disabled={inputDisabled}
 
@@ -520,7 +520,7 @@ const postEntrenador = () => {
           id="apellidoPersona"
           name="apellidoPersona"
           value={formData.apellidoPersona}
-          placeholder="Ingresa tus apellidos"
+          placeholder="Ingrese sus apellidos"
           onChange={handleChange}  
           disabled={inputDisabled}
         

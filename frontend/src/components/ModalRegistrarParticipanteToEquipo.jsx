@@ -453,7 +453,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           id="idPersona"
           name="idPersona"
           value={formData.idPersona}
-          placeholder="Ingresa tu numero de identificacion"
+          placeholder="Ingrese su número de identificación"
           onChange={handleChange}   
           disabled={inputDisabled}
        
@@ -478,7 +478,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           id="nombrePersona"
           name="nombrePersona"
           value={formData.nombrePersona}
-          placeholder="Ingresa tu nombre"
+          placeholder="Ingrese su nombre"
           onChange={handleChange}
           disabled={inputDisabled}
 
@@ -493,7 +493,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           id="apellidoPersona"
           name="apellidoPersona"
           value={formData.apellidoPersona}
-          placeholder="Ingresa tus apellidos"
+          placeholder="Ingrese sus apellidos"
           onChange={handleChange}  
           disabled={inputDisabled}
         
