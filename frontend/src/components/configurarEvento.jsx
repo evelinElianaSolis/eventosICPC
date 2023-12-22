@@ -248,8 +248,8 @@ if ('' === tituloEvento){
           name="horaEvento"
           value={horaEvento}
           onChange={(e) => setHoraEvento(e.target.value)}
-          onBlur={() => (setHoraEventoError(horaEvento.trim() === "null"), setError(horaEvento.trim() === "null"))}
-          className={horaEventoError ? "campo-vacio" : "null"}
+          onBlur={() => (setHoraEventoError(horaEvento.trim() === "--:--"), setError(horaEvento.trim() === "--:--"))}
+          className={horaEventoError ? "campo-vacio" : "--:--"}
           required
         />
         
