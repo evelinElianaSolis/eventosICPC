@@ -7,16 +7,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
+
+
 class NotificacionesICPC extends Mailable
 {
     //public $destinatario;
-    public $saludo;
     public $mensaje;
     public $asunto;
 
-    public function __construct($saludo, $mensaje, $asunto)
+    public function __construct($mensaje, $asunto)
     {
-        $this->saludo = $saludo;
         $this->mensaje = $mensaje;
         $this->asunto = $asunto;
     }
@@ -34,7 +34,6 @@ class NotificacionesICPC extends Mailable
     ->from(config('mail.from.address'), 'Avisos de Eventos ICPC' )
 
     ->view('mails.correo', [
-        'saludo' => $this->saludo,
         'mensaje' => $this->mensaje
     ]);
 }

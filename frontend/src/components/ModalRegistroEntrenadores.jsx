@@ -157,13 +157,12 @@ const buscarPersona = async (elpais,cipersonsa)=>{
      }else{
       setPersonData(response.data.persona);
       setShowModalAutocompletar(true);
-      console.log("si hay coincidencias",personData);
-      console.log("es truuue?", showModalAutocompletar);
-      console.log("Estados actualizados:", personData, showModalAutocompletar);
+     // console.log("si hay coincidencias",personData);
+     // console.log("es truuue?", showModalAutocompletar);
+      //console.log("Estados actualizados:", personData, showModalAutocompletar);
 
      }
-     console.log("si hay coincidencias",personData);
-     console.log("es truuue?", showModalAutocompletar);
+    
 } catch (error) { 
   console.error("hubo un error al buscar persona",personData);
 
@@ -185,7 +184,7 @@ const handleChangePC = (e) => {
         pais: pai || 'BO',
       });
       buscarPersona(pai, formData.idPersona);
-      console.log("el pais id es ",formData.idPersona)
+//console.log("el pais id es ",formData.idPersona)
  
 }
 };
@@ -277,22 +276,22 @@ const handleSubmit = (e) => {
       axios.get(`buscarEquipo/${idEquipoE}`)
       .then(response => {        
           guardarEntrenador();
-          console.log("Equipo  encontrado.");
+          //console.log("Equipo  encontrado.");
 
         })
   .catch(error => {
      if (error.response.data.message === "Equipo no encontrado") {
-        console.log("Equipo no encontrado. Ingresar un nuevo equipo...");
+        //console.log("Equipo no encontrado. Ingresar un nuevo equipo...");
         const NewEquipo = {
         idEquipo: idEquipoE,
         nombreEquipo: nombreEquipo || "default",
         descripcionEquipo: descripcionEquipo,
         idEvento: idEvento,
         };
-        console.log(NewEquipo);
+        //console.log(NewEquipo);
       axios.post('./storeEquipo', NewEquipo)
       .then((resp) => {
-       console.log("equipo guardado");
+      // console.log("equipo guardado");
                   //----------------------------------------------------------------------------
                   guardarEntrenador();
                   //------------------------------------------------------------------------------
@@ -306,7 +305,7 @@ const handleSubmit = (e) => {
       });
     }else{
   //ERRORES
- console.log("en el submit");
+ //console.log("en el submit");
 setMensajeError((mensajeError) => ({ ...mensajeError, nombreEntrenadorError: validate.validarCampoVacio(formData.nombrePersona) }));
 setMensajeError((mensajeError) => ({ ...mensajeError, apellidoEntrenadorError: validate.validarCampoVacio(formData.apellidoPersona) }));
 setMensajeError((mensajeError) => ({ ...mensajeError, ciEntrenadorError: validate.validarCampoVacio(formData.idPersona) }));
@@ -370,12 +369,12 @@ const postEntrenador = () => {
     idEquipo:idEquipoE,
   };
 
-  console.log('Datos editados', formEntrenador.idPersona);
-  console.log('Datos editados', formEntrenador.idEquipo);
+ // console.log('Datos editados', formEntrenador.idPersona);
+  //console.log('Datos editados', formEntrenador.idEquipo);
 
     axios.post('./storeEntrenador', formEntrenador)
     .then((b)=>{
-          console.log('Datos de participante guardados correctamente', formEntrenador.idPersona);
+        //  console.log('Datos de participante guardados correctamente', formEntrenador.idPersona);
           
           setFormData({
             idPersona: '',
@@ -480,12 +479,12 @@ const postEntrenador = () => {
           id="idPersona"
           name="idPersona"
           value={formData.idPersona}
-          placeholder="Ingresa tu numero de identificacion"
+          placeholder="Ingrese su número de identificación"
           onChange={handleChange}  
           disabled={inputDisabled}
         
         />
-         <p style={{ color: 'red' }}>{mensajeError.ciParticipanteError}</p>
+         <p style={{ color: 'red' }}>{mensajeError.ciEntrenadorError}</p>
       </div>
       </div>
 
@@ -506,7 +505,7 @@ const postEntrenador = () => {
           id="nombrePersona"
           name="nombrePersona"
           value={formData.nombrePersona}
-          placeholder="Ingresa tu nombre"
+          placeholder="Ingrese su nombre"
           onChange={handleChange}
           disabled={inputDisabled}
 
@@ -521,7 +520,7 @@ const postEntrenador = () => {
           id="apellidoPersona"
           name="apellidoPersona"
           value={formData.apellidoPersona}
-          placeholder="Ingresa tus apellidos"
+          placeholder="Ingrese sus apellidos"
           onChange={handleChange}  
           disabled={inputDisabled}
         

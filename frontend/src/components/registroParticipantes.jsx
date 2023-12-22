@@ -89,7 +89,7 @@ const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
       };
       axios.post('./storeParticipante', formParticipante)
       .then((b)=>{
-            console.log('Datos de participante guardados correctamente', formParticipante.idParticipante);
+         //   console.log('Datos de participante guardados correctamente', formParticipante.idParticipante);
             
             setFormData({
               idPersona: '',
@@ -106,7 +106,7 @@ const [isModalOpenPersona, setIsModalOpenPersona] = useState(false);
       })
       .catch((error) => {          
         console.error('Error al guardar participante ', error);
-        setMensajeErrorModal("Este participante ya esta registrado en este evento")
+        setMensajeErrorModal("Este participante ya está registrado en este evento")
         setInputDisabled(false);
         setFormData({
           idPersona: '',
@@ -155,13 +155,13 @@ const buscarPersona = async (elpais,cipersonsa)=>{
   try{     
     const response = await axios.get(`./buscarPorId/${elpais}/${cipersonsa}`);
      if(!response.data.persona){
-      console.log("no hay coincidencias",elpais)
+      //console.log("no hay coincidencias",elpais)
       
      }else{
       setPersonData(response.data.persona);
       setIsModalOpenPersona(true);
-      console.log("si hay coincidencias",personData);
-      console.log("es truuue?", isModalOpenPersona);
+    //  console.log("si hay coincidencias",personData);
+     // console.log("es truuue?", isModalOpenPersona);
     //  aqui mostrar el modal, cuando se pecione el boton si se actualiza los datos de formData
    
      }
@@ -193,7 +193,7 @@ const handleChangePC = (e) => {
         pais: pai || 'BO',
       });
     //  buscarPersona(pai, formData.idPersona);
-      console.log("el pais id es ",formData.idPersona)
+     // console.log("el pais id es ",formData.idPersona)
  
 }
 };
@@ -299,9 +299,7 @@ const handleChangePC = (e) => {
       generoParticipanteError: validate.validarCampoVacio(formData.genero),
       correoParticipanteError: validate.validarCampoVacio(formData.correo),
     });
-      console.log(formData);
-      console.log(formData.apellidoPersona);
-      console.log(formData.correo);
+     
 
 
       const v1=validate.validarNombre(formData.nombrePersona);
@@ -322,10 +320,10 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
 
       axios.post('./storePersona', formData)
         .then((a) => {
-          console.log(a.data.message);
+         // console.log(a.data.message);
 
-          console.log("ellllll datooo essss", evento)
-         console.log('Datos guardados correctamente', formData.idPersona);
+        //  console.log("ellllll datooo essss", evento)
+         //console.log('Datos guardados correctamente', formData.idPersona);
         guardarParticipante();
         
       })
@@ -335,7 +333,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
          guardarParticipante();
       } else {
           // Maneja otros errores
-          setMensajeErrorModal("Ha ocurrido un error al realizar el registro, intentelo nuevamente")
+          setMensajeErrorModal("Ha ocurrido un error al realizar el registro. Inténtelo nuevamente.")
 
           console.error('Error en la solicitud:', error.message);
           console.error('Error al guardar los datos de persona', error);
@@ -387,7 +385,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           id="idPersona"
           name="idPersona"
           value={formData.idPersona}
-          placeholder="Ingresa tu numero de identificacion"
+          placeholder="Ingrese su número de identificación"
           onChange={handleChange}
           disabled={inputDisabled}
           
@@ -407,7 +405,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           id="nombrePersona"
           name="nombrePersona"
           value={formData.nombrePersona}
-          placeholder="Ingresa tu nombre"
+          placeholder="Ingrese su nombre"
           onChange={handleChange}
           disabled={inputDisabled}
 
@@ -422,7 +420,7 @@ if (v1 !== "" || v2 !== "" || v3 !== "" || v5 !== "" || v6 !== "") {
           id="apellidoPersona"
           name="apellidoPersona"
           value={formData.apellidoPersona}
-          placeholder="Ingresa tus apellidos"
+          placeholder="Ingrese sus apellidos"
           onChange={handleChange}    
           disabled={inputDisabled}
       

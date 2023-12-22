@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from './api/conexionApi';
 
 const CorreoForm = () => {
   const [email, setEmail] = useState('');
@@ -22,7 +22,7 @@ const CorreoForm = () => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:8000/api/correos', {
+      await axios.post('./correos', {
         correoC: email,
         estadoNotificacion: activarNotificacion,
         idPersona: idPersona, // Agregar el valor del idPersona

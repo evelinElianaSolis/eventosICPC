@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from './api/conexionApi';
 import Alert from'./Alert';
 import ModalCreacionEvento from './ModalCreacionRG.jsx';
 
@@ -32,13 +32,13 @@ const ModalRegla = ({ mostrar, cerrar, nombre, descripcion1 , setDescripcion1, s
     
     try {
 
-      const response = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
+      const response = await axios.get('./obtenerUltimoIdEvento');
       const ultimoId = response.data.ultimoId;
       const eventId = ultimoId;
       if(nombreRegla == ""){
         setError(false);
       }else{
-      await axios.post('http://localhost:8000/api/postRegla', {
+      await axios.post('./postRegla', {
         nombreRegla: nombreRegla,
         descripcionRegla:descripcion,
         idEvento:eventId

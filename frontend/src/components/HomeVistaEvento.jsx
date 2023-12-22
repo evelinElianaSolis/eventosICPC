@@ -71,7 +71,7 @@ const HomeVistaEvento = () => {
                 </div>
               ))}
               <div className='to-padd'>
-             <p><strong   className="fechas-cont" >Descripción: </strong></p> 
+             {eventoConProgramaGeneral.evento.descripcionEvento && <p><strong   className="fechas-cont" >Descripción: </strong></p> }
               {eventoConProgramaGeneral.evento.descripcionEvento && <p className='mini-cont2' > {eventoConProgramaGeneral.evento.descripcionEvento}</p>}
              </div>
              <p> <strong>Estado:</strong></p>

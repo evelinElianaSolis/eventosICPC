@@ -18,7 +18,7 @@ import EventosEditarEvento from './pages/EventosEditarEvento';
 import RegistrarEquipoOp2 from './pages/RegistrarEquipoOp2';
 import EventosParaNotificar from './pages/EventosParaNotificarP';
 import EnviarNotificaciones from './pages/EnviarNotificacionesP';
-
+import EventosParaVerInformacion from './pages/EventosParaVerInfo'
 function App(){
   return(
     <BrowserRouter>
@@ -40,6 +40,7 @@ function App(){
         <Route path = "/EventosParaNotificar/" element={<EventosParaNotificar/>}/>
         <Route path = "/EnviarNotificaciones/:id/:id2" element={<EnviarNotificaciones/>}/>
 
+        <Route path = "/EventosParaVerInformacion/" element={<EventosParaVerInformacion/>}/>
         <Route path = "/RegistrarEquipoOp2/:id/:id2/:numE/:numP" element={<RegistrarEquipoOp2/>}/>
         <Route path = "*" element ={<Home />} />
       </Routes>

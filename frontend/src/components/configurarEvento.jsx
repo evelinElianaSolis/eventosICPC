@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from './api/conexionApi';
 import '../components/assets/FormCrearEvento.css';
 import Alert from'./Alert';
 import ModalSalir from './ModalCancelarCreacion';
@@ -48,12 +48,12 @@ const EventForm =
   const obtenerEvento = async () => {
   try {
     
-  const response2 = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
+  const response2 = await axios.get('./obtenerUltimoIdEvento');
   const ultimoId2 = response2.data.ultimoId;
-  const response = await axios.get(`http://localhost:8000/api/obtener-evento/${ultimoId2}`);
+  const response = await axios.get(`./obtener-evento/${ultimoId2}`);
   
-  const responseActividad = await axios.get(`http://localhost:8000/api/obtener-actividad/${ultimoId2}`); 
-  const responseTipo = await axios.get(`http://localhost:8000/api/obtener-tipo-evento/${response.data.evento.idTipoEvento}`);
+  const responseActividad = await axios.get(`./obtener-actividad/${ultimoId2}`); 
+  const responseTipo = await axios.get(`./obtener-tipo-evento/${response.data.evento.idTipoEvento}`);
   
 if (miBooleano == "true") {
 
@@ -128,7 +128,7 @@ if ('' === tituloEvento){
         
       
 
-      const nombExist = await axios.get(`http://localhost:8000/api/verificar-nombre-existente/${tituloEvento}`);
+      const nombExist = await axios.get(`./verificar-nombre-existente/${tituloEvento}`);
       console.log(nombExist.data.existeNombre);
       if( tituloEvento ==""     || 
           horaEvento == "00:00" || 
@@ -152,12 +152,12 @@ if ('' === tituloEvento){
             }
         
       }else{
-      const response = await axios.get('http://localhost:8000/api/obtenerUltimoIdEvento');
+      const response = await axios.get('./obtenerUltimoIdEvento');
       
       const ultimoId = response.data.ultimoId + 1;
         
 
-      await axios.post('http://localhost:8000/api/evento', {
+      await axios.post('./evento', {
         idEvento: ultimoId,
         tituloEvento: tituloEvento,
         participacion:"ninguna",
@@ -169,7 +169,7 @@ if ('' === tituloEvento){
         idTipoEvento:idTipoEvento,
         idAdministrador:"87654321"
       });
-      await axios.post('http://localhost:8000/api/postActividad', {
+      await axios.post('./postActividad', {
         nombreActividad:"Cronograma general",
         descripcionActividad:descripcion,
         modalidad:modalidad,
@@ -207,8 +207,7 @@ if ('' === tituloEvento){
 
   return (
     <form onSubmit={handleSubmit} className="tweet-composer">
-      <h4>Evento 1/2</h4>
-      <h1 className="CrearEvento">Crear Evento</h1>
+      <h1 className="CrearEvento">Crear Evento 1/2</h1>
     <div className="PrimeraFila">
 
     <div className="TituloEvento">

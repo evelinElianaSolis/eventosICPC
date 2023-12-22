@@ -23,6 +23,8 @@ const Modal = ({ onClose, handleYes, correo }) => {
   const enviarCodigo = async () => {
     const nuevoCodigo = generarCodigo();
     setCodigo(nuevoCodigo);
+    console.log('codigo enviado');
+
     setErrorCodigo('');
 
     try {
@@ -37,9 +39,11 @@ const Modal = ({ onClose, handleYes, correo }) => {
   const verificarCodigo = () => {
     if (codigo === codigoIngresado) {
       setErrorCodigoTF(false);
-
+console.log('verificado');
       handleYes();
     } else {
+      console.log('nooo verificado');
+
       setErrorCodigo('El código ingresado no es correcto quiere ');
       setErrorCodigoTF(true);
     }
