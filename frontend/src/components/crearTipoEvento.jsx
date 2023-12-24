@@ -13,14 +13,15 @@ const EventForm = () => {
   const [descripcionError, setDescripcionError] = useState('');
   const [Error, setError] = useState(false);
   const [mostrarModalSalir, setMostrarModalSalir] = useState(false);
-  const handleInicioClick = () => {
-    setMostrarModalSalir(true);
-  };  
-
   const [mostrarModalTipo, setMostrarModalTipo] = useState(false);
-  const handleInicioTipo = () => {
+  
+  
+  const handleInicioClick = () => {setMostrarModalSalir(true);};  
+  const handleInicioTipo = (e) => {
+    e.preventDefault(); // Prevent the default form submission
     setMostrarModalTipo(true);
-  };  
+    handleSubmit(e); // Pass the event object to handleSubmit
+  };
 
 
   const handleButtonCancelarCE = () => {  setMostrarModalSalir(false);  };
@@ -69,7 +70,6 @@ const EventForm = () => {
       
       setNombre('');
       setDescripcion('');
-      handleInicioTipo();
     } catch (error) {
       console.error('Error al crear evento', error);
       setModalVisible(false);
@@ -78,7 +78,7 @@ const EventForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="tweet-composer">
-      <h1 className="CrearEvento">Crear Tipo de Evento</h1>
+      <h1 className="CrearEvento">CREAR TIPO DE EVENTO</h1>
       <div className="composer-form">
 
     
@@ -93,7 +93,7 @@ const EventForm = () => {
         onChange={handleNombreChange}
         onBlur={() => (setNombreError(nombre.trim() === ""), setError(nombre.trim() === ""))}
         className={nombreError ? "campo-vacio" : ""}
-        required
+        
       />
 
 <div className="error-message">{nombreError}</div>
@@ -126,19 +126,19 @@ const EventForm = () => {
             Cancelar
           </button>
         
-          <button className="tweet-button" type="submit" onClick={handleSubmit}>
+          <button className="tweet-button" type="submit" onClick={handleInicioTipo}>
             Crear
           </button>
         </div> 
         </div>
       </div>
       {mostrarModalSalir && (
-        <ModalSalir message="Cancelar Registro" onClose={handleButtonCancelarCE} />
+        <ModalSalir message="Cancelar creación" onClose={handleButtonCancelarCE} />
         
       )}
 
     {mostrarModalTipo && (
-        <ModalTipo message="Registrar Tipo de Evento" onClose={handleButtonCancelarTI} />
+        <ModalTipo message="Creación del tipo de evento" onClose={handleButtonCancelarTI} />
         
       )}
     </form>

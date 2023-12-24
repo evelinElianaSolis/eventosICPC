@@ -2,13 +2,43 @@ import React, { useState, useEffect } from 'react';
 import './assets/HomeVistaEvento.css';
 import axios from '../components/api/conexionApi';
 import { useNavigate, NavLink } from 'react-router-dom';
+
+
+
+
 const VistaEditarEventos = () => {
+  const EliminarEventoViwew = async (idEvento) => {
+    try {
+      console.log(idEvento);
+      console.log('Eliminando evento...');
+      await axios.delete(`http://localhost:8000/api/eliminarActividades/${idEvento}`);
+      const req = await axios.delete(`http://localhost:8000/api/eventosdestroy/${idEvento}`);
+      
+      
+      console.log(req);
+      obtenerEventos();
+    } catch (error) {
+      console.error('Error al eliminar evento:', error);
+    }
+  };
+
+
+
+
+  
   const [eventos, setEventos] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
  
+
+
+
+
+
+
     const obtenerEventos = async () => {
       try {
+        
         console.log('Fetching events...');
         const response = await axios.get('./eventosFuturos');        
         const data = response.data;
@@ -26,9 +56,10 @@ const VistaEditarEventos = () => {
         console.error('Error al obtener eventos:', error);
       }
     };
-  
+    
+
     obtenerEventos();
-  
+    
    
   }, []);
   
@@ -48,13 +79,18 @@ const VistaEditarEventos = () => {
 
       <div className="eventos-container1">
         {eventos.map((eventoConProgramaGeneral) => (
+          
           <div key={eventoConProgramaGeneral.evento.idEvento}
+          
            className="evento-rectangulo1">
+            
             <div className='evento-imagen'>
             <img src={eventoConProgramaGeneral.evento.aficheEvento} alt={`Evento ${eventoConProgramaGeneral.evento.idEvento}`} />
             </div>
+            
             <div className="evento-info">
-              <h4 className='evento-titulo'>{eventoConProgramaGeneral.evento.tituloEvento}</h4>
+              
+              <h4 className='evento-titulo'>{eventoConProgramaGeneral.evento.tituloEvento}  </h4>
   {eventoConProgramaGeneral.actividades.map((actividad, index) => (
                 <div key={index} className='actividad-info'>
                   
@@ -74,8 +110,8 @@ const VistaEditarEventos = () => {
                 <strong>   {eventoConProgramaGeneral.evento.estadoEvento ? 'Activo' : 'Cancelado'}</strong></p>
 
               <div className='cancelarEvento'>
-                <button className="masinfoCancelar" >
-                <img src="https://cdn-icons-png.flaticon.com/512/6722/6722986.png" alt="" className="iconoEliminar"/>
+                <button className="masinfoCancelar" onClick={() => EliminarEventoViwew(`${eventoConProgramaGeneral.evento.idEvento}`) }>
+                <img src="https://cdn-icons-png.flaticon.com/512/6722/6722986.png" className="iconoEliminar"/>
                 Cancelar Evento
               </button>
               <button className="masinfoEditar" onClick={() => handleRegistrarseClick(`${eventoConProgramaGeneral.evento.idEvento}`)}>

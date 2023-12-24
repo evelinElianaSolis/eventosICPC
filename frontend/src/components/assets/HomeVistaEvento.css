@@ -247,7 +247,9 @@
     height: 3rem;
     color: #ffffff;
 }
-
+.masinfoCancelar:hover{
+  background-color: #fd4141;
+}
 .masinfoEditar
 {
   display: flex;
@@ -264,7 +266,9 @@
   height: 3rem;
   color: #ffffff;
 }
-
+.masinfoEditar:hover{
+  background-color: #4d85ff;
+}
 
 .cuerpo1{
   max-height: 1000px;
@@ -304,4 +308,8 @@
   max-height: 700px;  /* Altura máxima del contenedor */
   overflow-y: auto; 
   gap: 20px;
+}
+
+.activoEvento{
+  background-color: #157abd;
 }

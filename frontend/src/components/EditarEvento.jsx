@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../components/assets/EditarEvento.css';
 import axios from './api/conexionApi';
 
 const nombreActividadBuscada="Cronograma general";

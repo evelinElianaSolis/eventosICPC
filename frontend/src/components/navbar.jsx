@@ -19,7 +19,7 @@ const Menu = () => {
       <NavLink to={"/CrearTipoEvento"} className="navbar-item" activeclassname="active">
       <img src="      https://cdn-icons-png.flaticon.com/512/2051/2051945.png  " alt="Usuario" />
       <div>
-        <p className='navbar-title'>Crear Tipo Evento
+        <p className='navbar-title'>Crear tipo de evento
         </p>
         <div className="line"></div>
       </div>
