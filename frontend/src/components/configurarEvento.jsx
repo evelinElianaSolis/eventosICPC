@@ -3,7 +3,7 @@ import axios from './api/conexionApi';
 import '../components/assets/FormCrearEvento.css';
 import Alert from'./Alert';
 import ModalSalir from './ModalCancelarCreacion';
-import Validaciones from './utils/Validaciones';
+//import Validaciones from './utils/Validaciones';
 import Ops from './modalOpss';
 const EventForm =
  () => {
@@ -25,13 +25,13 @@ const EventForm =
   const [modalidadError,      setModalidadError] =      useState(false);
   const [idTipoEventoError,   setIdTipoEventoError] =   useState(false);
   const [ubicacionError,      setUbicacionError] =      useState(false);
-  const [descripcionError,    setDescripcionError] =    useState(false);
+  //const [descripcionError,    setDescripcionError] =    useState(false);
   const [modalVisible,        setModalVisible] =        useState(false);
   const [Error,               setError] =               useState(false);
   const [mostrarModalSalir,   setMostrarModalSalir] =   useState(false);
   const [mostrarModalOps,   setMostrarModalOps] =   useState(false);
   const [mostrarModalOpsEvento,   setMostrarModalOpsEvento] =   useState(false);
-  const [Bandera,   setBandera] =   useState(false);
+ // const [Bandera,   setBandera] =   useState(false);
 
   const handleInicioClick       = () => {setMostrarModalSalir(true);};  
   const handleButtonCancelarCE  = () => {setMostrarModalSalir(false);};
@@ -55,7 +55,7 @@ const EventForm =
   const responseActividad = await axios.get(`./obtener-actividad/${ultimoId2}`); 
   const responseTipo = await axios.get(`./obtener-tipo-evento/${response.data.evento.idTipoEvento}`);
   
-if (miBooleano == "true") {
+if (miBooleano === "true") {
 
 
   const evento = response.data.evento;
@@ -130,10 +130,10 @@ if ('' === tituloEvento){
 
       const nombExist = await axios.get(`./verificar-nombre-existente/${tituloEvento}`);
       console.log(nombExist.data.existeNombre);
-      if( tituloEvento ==""     || 
-          horaEvento == "00:00" || 
-          fechaInicio == "null" || 
-          fechaFin == "null"    || 
+      if( tituloEvento ===""     || 
+          horaEvento === "00:00" || 
+          fechaInicio === "null" || 
+          fechaFin === "null"    || 
           fechaFin < fechaInicio ||
           nombExist.data.existeNombre){
             
@@ -142,10 +142,10 @@ if ('' === tituloEvento){
               setMostrarModalOpsEvento(true)
             }
 
-            if(tituloEvento ==""     || 
-            horaEvento == "00:00" || 
-            fechaInicio == "null" || 
-            fechaFin == "null"    || 
+            if(tituloEvento ===""     || 
+            horaEvento === "00:00" || 
+            fechaInicio === "null" || 
+            fechaFin === "null"    || 
             fechaFin < fechaInicio){
               setMostrarModalOps(true);
               setError(true);
