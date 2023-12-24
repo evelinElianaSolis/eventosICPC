@@ -6,3 +6,23 @@ footer {
     color: #fff;
     text-align: center;
 }
+
+
+.redessociales img{
+    max-width: 2rem;
+    padding: 0 1rem;
+    filter:   contrast(130%);
+
+}
+
+
+.redes-sociales{
+    display: flex;
+    justify-content: left;
+}
+
+.redes{
+    display: flex;
+    padding-left: 6.2rem;
+    
+}

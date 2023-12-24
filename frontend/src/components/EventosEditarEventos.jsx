@@ -42,14 +42,14 @@ const VistaEditarEventos = () => {
   };
 
   return (
-    <div className="cuerpo">
-      <h3 className="titulo_home">Eventos que se pueden editar</h3>
+    <div className="cuerpo1">
+      <h3 className="titulo_home">Lista de eventos</h3>
       <hr />
 
-      <div className="eventos-container">
+      <div className="eventos-container1">
         {eventos.map((eventoConProgramaGeneral) => (
           <div key={eventoConProgramaGeneral.evento.idEvento}
-           className="evento-rectangulo">
+           className="evento-rectangulo1">
             <div className='evento-imagen'>
             <img src={eventoConProgramaGeneral.evento.aficheEvento} alt={`Evento ${eventoConProgramaGeneral.evento.idEvento}`} />
             </div>
@@ -73,9 +73,15 @@ const VistaEditarEventos = () => {
               <p className={`evento-rectangulo2 ${eventoConProgramaGeneral.evento.estadoEvento ? 'activo' : 'cancelado'}`}>  
                 <strong>   {eventoConProgramaGeneral.evento.estadoEvento ? 'Activo' : 'Cancelado'}</strong></p>
 
-              <button className="masinfo" onClick={() => handleRegistrarseClick(`${eventoConProgramaGeneral.evento.idEvento}`)}>
+              <div className='cancelarEvento'>
+                <button className="masinfoCancelar" >
+                <img src="https://cdn-icons-png.flaticon.com/512/6722/6722986.png" alt="" className="iconoEliminar"/>
+                Cancelar Evento
+              </button>
+              <button className="masinfoEditar" onClick={() => handleRegistrarseClick(`${eventoConProgramaGeneral.evento.idEvento}`)}>
                 Editar Evento
               </button>
+              </div>
             </div>
           </div>
         ))}

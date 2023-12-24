@@ -34,10 +34,10 @@ const Menu = () => {
       </div>
       </NavLink>
 
-      <NavLink to={"/EventosParaVerInformacion"} className="navbar-item" activeclassname="active">
+      <NavLink to={"/EventosEditarEvento"} className="navbar-item" activeclassname="active">
       <img src="      https://cdn-icons-png.flaticon.com/512/13191/13191252.png " alt="Usuario" />
       <div>
-        <p className='navbar-title'>Ver información de un evento 
+        <p className='navbar-title'>Editar información <br/>de un evento
         </p>
         <div className="line"></div>
       </div>
@@ -46,7 +46,7 @@ const Menu = () => {
         <NavLink to={"/EventosRegistroParticipantes"} className="navbar-item" activeclassname="active">
       <img src="         https://cdn-icons-png.flaticon.com/512/5134/5134051.png   " alt="Usuario" />
       <div>
-        <p className='navbar-title'>Registrar Participantes a un evento 
+        <p className='navbar-title'>Registrar Participantes <br/>a un evento 
         </p>
         <div className="line"></div>
       </div>
@@ -55,7 +55,7 @@ const Menu = () => {
       <NavLink to={"/EventosRegistrarEquipo"} className="navbar-item" activeclassname="active">
   <img src="   https://cdn-icons-png.flaticon.com/512/6823/6823086.png " alt="Usuario" />
   <div className='lineablock'>
-    <p className='navbar-title'>Registrar equipo a un evento</p>
+    <p className='navbar-title'>Registrar equipo <br/>a un evento</p>
     <div className="line"></div>
   </div>
 </NavLink>

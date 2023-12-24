@@ -96,7 +96,7 @@ const EventForm = () => {
         required
       />
 
-<p className="error-message">{nombreError}</p>
+<div className="error-message">{nombreError}</div>
         
 <br></br>
 
