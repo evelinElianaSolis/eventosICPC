@@ -222,6 +222,7 @@ button[type="submit"]:hover {
  .ConfbuttonRequisitos{
   display: flex;
   justify-content: center;
+  width: 100%;
  }
 
 .tweet-actions .tweet-button:hover {
@@ -612,12 +613,14 @@ text-align: center;
 .buttonRequisitos1{
   background-color: #1da1f2;
   color: #ffffff;
-  padding: 5px 25.3rem;
+  padding: 5px 1rem;
+  width: 100%;
   border: none;
   border-radius: 7px;
   cursor: pointer;
   font-size: 27px;
   margin-bottom: 1rem;
+  
 }
 
 .buttonRequisitos2{
@@ -640,6 +643,7 @@ text-align: center;
 
 .ErrorForm{
   color: red;
+  margin-top: 0.5rem;
   
 }
 

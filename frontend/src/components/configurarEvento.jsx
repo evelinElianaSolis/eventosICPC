@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import axios from './api/conexionApi';
 import '../components/assets/FormCrearEvento.css';
 import Alert from'./Alert';
@@ -41,6 +41,46 @@ const EventForm =
   const urlParams = new URLSearchParams(window.location.search);
   
   const miBooleano = urlParams.get('miBooleano');
+
+
+  const [tiposDeEvento, setTiposDeEvento] = useState([]);
+
+
+
+  useEffect(() => {
+    const obtenerTiposDeEvento = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/obtener-tipos-de-evento');
+        console.log(response.data.tiposDeEvento); // Imprime la respuesta en la consola
+        setTiposDeEvento(response.data.tiposDeEvento);
+      } catch (error) {
+        console.error('Error al obtener tipos de evento:', error);
+        // Manejar el error según tus necesidades
+      }
+    };
+    obtenerTiposDeEvento();
+  }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -263,6 +303,8 @@ if ('' === tituloEvento){
         <label htmlFor="fecha-inicio">Fecha inicio:</label>
         <div className="ColorCampoVacio">*</div>
       </div>
+      
+         
       <input
         className={`FechaDesing ${fechaInicioError ? 'campo-vacio' : 'null'}`}
         type="date"
@@ -273,6 +315,7 @@ if ('' === tituloEvento){
         onBlur={() => (setFechaInicioError(fechaInicio.trim() === "null"), setError(fechaInicio.trim() === "null"))}
         required
       />
+      
     </div>
         <div className="FechaFinal">
           <div className="Campovacio">
@@ -289,6 +332,8 @@ if ('' === tituloEvento){
             onBlur={() => (setFechaFinError(fechaFin.trim() === "null"), setError(fechaFin.trim() === "null"))}
             required
           />
+          {(fechaFin < fechaInicio)&& <div className="ErrorForm">Fecha invalida</div>}
+       
         </div>
       </div>
 
@@ -300,21 +345,22 @@ if ('' === tituloEvento){
             <div className="ColorCampoVacio">*</div>
           </div>
           <select
-            id="idTipoEvento"
-            name="idTipoEvento"
-            value={idTipoEvento}
-            onChange={(e) => setIdTipoEvento(e.target.value)}
-            onBlur={() => (setIdTipoEventoError(idTipoEvento.trim() === "-- seleccione --"), setError(idTipoEvento.trim() === "-- seleccione --"))}
-            className={idTipoEventoError ? "campo-vacio" : "-- seleccione --"}
-            required
-            >
-            <option value="0">-- seleccione --</option>
-            <option value="1">Competencia</option>
-            <option value="2">Taller de Entrenamiento</option>
-            <option value="3">Seminario</option>
-            <option value="4">Feria</option>
-            <option value="5">Convencion</option>
-          </select>
+        id="idTipoEvento"
+        name="idTipoEvento"
+        value={idTipoEvento}
+        onChange={(e) => setIdTipoEvento(e.target.value)}
+        onBlur={() => (setIdTipoEventoError(idTipoEvento.trim() === '-- seleccione --'), setError(idTipoEvento.trim() === '-- seleccione --'))}
+        className={idTipoEventoError ? 'campo-vacio' : ''}
+        required
+      >
+        <option value="-- seleccione --">-- seleccione --</option>
+        {tiposDeEvento.map((tipo) => (
+          
+          <option key={tipo.id} value={tipo.id}>
+            {tipo.nombreTipoEvento}
+          </option>
+        ))}
+      </select>
         </div>
 
         <div className="Modalidad">
@@ -381,7 +427,6 @@ if ('' === tituloEvento){
           
 
           {(Error) && <Alert/>}
-          {(fechaFin < fechaInicio)&& <div className="ErrorForm">Fecha invalida</div>}
           
         </div>
         <div className="BotonPosicion">

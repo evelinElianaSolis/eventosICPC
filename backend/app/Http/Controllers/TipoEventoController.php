@@ -87,5 +87,20 @@ class TipoEventoController extends Controller
         }
     }
 
+    public function obtenerTiposDeEvento()
+    {
+        try {
+            $tiposDeEvento = TipoEvento::all();
+            return response()->json(['tiposDeEvento' => $tiposDeEvento], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al obtener tipos de evento', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+
 
 }
+
+
+
+   
