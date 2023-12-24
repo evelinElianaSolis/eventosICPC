@@ -90,3 +90,4 @@ Route::GET('/obtener-evento/{id}',[EventoController::class,'obtenerEventoPorId']
 Route::GET('/obtener-actividad/{id}', [ActividadController::class,'obtenerActividadPorId']);
 Route::GET('/obtener-tipo-evento/{id}', [TipoEventoController::class,'obtenerTipoEventoPorId']);
 
+Route::GET('/obtener-tipos-de-evento', [TipoEventoController::class, 'obtenerTiposDeEvento']);
