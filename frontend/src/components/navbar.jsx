@@ -9,7 +9,7 @@ const Menu = () => {
       
       
       <NavLink to={'/Home'} className="navbar-item" activeclassname="active" >
-        <img src="https://cdn-icons-png.flaticon.com/512/8280/8280362.png" alt="Usuario" />
+        <img src="   https://cdn-icons-png.flaticon.com/512/13271/13271154.png " alt="Usuario" />
         <div>
           <p className='navbar-title'>Visualizar eventos creados</p>
           <div className="line"></div>
@@ -17,7 +17,7 @@ const Menu = () => {
       </NavLink>
       
       <NavLink to={"/CrearTipoEvento"} className="navbar-item" activeclassname="active">
-      <img src="   https://cdn-icons-png.flaticon.com/512/9790/9790435.png " alt="Usuario" />
+      <img src="      https://cdn-icons-png.flaticon.com/512/2051/2051945.png  " alt="Usuario" />
       <div>
         <p className='navbar-title'>Crear Tipo Evento
         </p>
@@ -26,7 +26,7 @@ const Menu = () => {
       </NavLink>
       
       <NavLink to={"/ConfigurarEvento"} className="navbar-item" activeclassname="active">
-      <img src="   https://cdn-icons-png.flaticon.com/512/10746/10746540.png " alt="Usuario" />
+      <img src="      https://cdn-icons-png.flaticon.com/512/780/780575.png  " alt="Usuario" />
       <div>
         <p className='navbar-title'>Crear Evento
         </p>
@@ -35,7 +35,7 @@ const Menu = () => {
       </NavLink>
 
       <NavLink to={"/EventosParaVerInformacion"} className="navbar-item" activeclassname="active">
-      <img src="   https://cdn-icons-png.flaticon.com/512/9790/9790435.png " alt="Usuario" />
+      <img src="      https://cdn-icons-png.flaticon.com/512/13191/13191252.png " alt="Usuario" />
       <div>
         <p className='navbar-title'>Ver información de un evento 
         </p>
@@ -44,7 +44,7 @@ const Menu = () => {
       </NavLink>   
       
         <NavLink to={"/EventosRegistroParticipantes"} className="navbar-item" activeclassname="active">
-      <img src="   https://cdn-icons-png.flaticon.com/512/9790/9790435.png " alt="Usuario" />
+      <img src="         https://cdn-icons-png.flaticon.com/512/5134/5134051.png   " alt="Usuario" />
       <div>
         <p className='navbar-title'>Registrar Participantes a un evento 
         </p>
@@ -53,8 +53,8 @@ const Menu = () => {
       </NavLink>
 
       <NavLink to={"/EventosRegistrarEquipo"} className="navbar-item" activeclassname="active">
-  <img src="https://cdn-icons-png.flaticon.com/512/9790/9790435.png" alt="Usuario" />
-  <div>
+  <img src="   https://cdn-icons-png.flaticon.com/512/6823/6823086.png " alt="Usuario" />
+  <div className='lineablock'>
     <p className='navbar-title'>Registrar equipo a un evento</p>
     <div className="line"></div>
   </div>
@@ -63,7 +63,7 @@ const Menu = () => {
 
 
 <NavLink to={"/EventosParaNotificar"} className="navbar-item" activeclassname="active">
-  <img src="https://cdn-icons-png.flaticon.com/512/9790/9790435.png" alt="Usuario" />
+  <img src="   https://cdn-icons-png.flaticon.com/512/925/925040.png " alt="Usuario" />
   <div>
     <p className='navbar-title'>Enviar notificación</p>
     <div className="line"></div>

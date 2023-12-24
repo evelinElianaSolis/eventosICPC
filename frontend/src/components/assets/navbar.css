@@ -1,11 +1,4 @@
-navbar {
-  width: 8%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  padding: 2rem;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-}
+
 
 .navbar .navbar-item{
   display: flex;
@@ -26,9 +19,11 @@ padding-left: 10%;
   transition: color 0.3s ease;
 }
 
+
+
 .navbar-item div{
  
-  padding-left: 3%;
+  padding-left: 1.3rem;
  
 }
 
@@ -37,9 +32,9 @@ padding-left: 10%;
   
   display: flex;
   align-content: center;
-  max-height: 3.2rem;
+  max-height: 3rem;
   padding-top: 0.5rem;
-  border-radius: 50%;
+  border-radius: 10%;
 }
 
 .navbar-item.active .line{
@@ -58,14 +53,16 @@ color: orange;
 .navbar .navbar-item:hover p{
   color: #ff8c00;
 }
-
+.lineablock{
+  width: max-content;
+}
 .line {
-  min-width: 5%;
-  width: 9%;
+  min-width: 1rem;
+  width: 11rem;
   height: 8px;
   background: linear-gradient(to bottom, #ffffff, #21679A);
   display: block;
-  position: absolute;
+  position:absolute;
 }
 @media (max-width: 100px) {
   .navbar-item div {

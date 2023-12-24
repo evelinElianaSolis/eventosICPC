@@ -202,7 +202,7 @@ const eliminarActividad = (index) => {
       } else if (error.request) {
         console.error('No se recibió respuesta del servidor:', error.request);
       } else {
-        console.error('Error durante la configuración de la solicitud:', error.message);
+        console.error('Error durante la configuración de la solicituds:', error.message);
       }
       setModalVisible(false);
     }
@@ -351,7 +351,6 @@ const eliminarActividad = (index) => {
 <div>
       <div className='Campovacio'>
         <label htmlFor="Actividad">Actividad:</label>
-        <div className="ColorCampoVacio">*</div>
       </div>
 
       {/* Componente del modal */}
