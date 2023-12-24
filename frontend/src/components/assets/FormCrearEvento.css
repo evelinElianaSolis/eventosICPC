@@ -141,7 +141,7 @@ button[type="submit"] {
 
 .BotonPosicion{
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 
@@ -305,7 +305,7 @@ button[type="submit"]:hover {
 
 .tipoeventob {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .tipoeventob .tweet-button{
   margin: 1rem;

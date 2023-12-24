@@ -1,5 +1,3 @@
-
-/* Estilos para el cuerpo del formulario */
 body {
     font-family: Arial, sans-serif;
     background-color: #D2ECFD;
@@ -197,7 +195,7 @@ button[type="submit"]:hover {
 
 .tipoeventob {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .tipoeventob .tweet-button{
   margin: 1rem;
