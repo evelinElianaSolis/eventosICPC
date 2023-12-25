@@ -19,7 +19,6 @@ const EventForm = () => {
   const handleInicioClick = () => {setMostrarModalSalir(true);};  
   const handleInicioTipo = (e) => {
     e.preventDefault(); // Prevent the default form submission
-    setMostrarModalTipo(true);
     handleSubmit(e); // Pass the event object to handleSubmit
   };
 
@@ -65,6 +64,7 @@ const EventForm = () => {
     try {
       // Realizar la solicitud POST con formData usando axios
       await axios.post('crearTipoEvento', formData);
+      setMostrarModalTipo(true);
       setModalVisible(true);
       console.log('Evento creado con éxito');
       
@@ -95,6 +95,7 @@ const EventForm = () => {
         className={nombreError ? "campo-vacio" : ""}
         
       />
+      {(Error && <Alert/>)}
 
 <div className="error-message">{nombreError}</div>
         
@@ -116,7 +117,7 @@ const EventForm = () => {
         
 
   
-{(Error && <Alert/>)}
+
 <div className="container">
         <div className="CreadoExitosamente">
           
