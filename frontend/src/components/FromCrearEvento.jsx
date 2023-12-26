@@ -16,8 +16,8 @@ const EventForm = (ultimoId) => {
   // Formuraio
   const [fechaInicio,                 setFechaInicio]           =    useState('null');
   const [fechaFin,                    setFechaFin]              =    useState('null');
-  const [participacion,               setParticipacion]         =    useState('0');
-  const [numEntrenadores,             setNumEntrenadores]       =    useState('0');
+  const [participacion,               setParticipacion]         =    useState('');
+  const [numEntrenadores,             setNumEntrenadores]       =    useState('');
   const [numParticipantes,            setNumParticipantes]      =    useState("");
   const [imagen,                      setImagen]                =    useState("");
   const [file,                        setFile]                  =    useState(null)
@@ -218,7 +218,7 @@ const eliminarActividad = (index) => {
   return (
     <form onSubmit={handleSubmit} className="tweet-composer">
       
-      <h1 className="CrearEvento">Crear Evento 2/2 </h1>
+      <h1 className="CrearEvento">CREAR EVENTO 2/2 </h1>
         <div className="SubirImagen">
         <div className='Campovacio'>
           <label htmlFor="afiche">Afiche del evento:</label>
@@ -425,7 +425,7 @@ const eliminarActividad = (index) => {
                 name="participacion"
                 value="Individual"
                 checked={participacion === "Individual"}
-                onChange={(e) => (setParticipacion(e.target.value), setMostrarParticipacion(false))}
+                onChange={(e) => (setParticipacion("Individual"), setMostrarParticipacion(false))}
                 onBlur={() => (setParticipacionError(participacion.trim() === ""), setMostrarParticipacion(false))}
                 className={participacionError ? "campo-vacio" : ""}
               />
@@ -439,7 +439,7 @@ const eliminarActividad = (index) => {
                 name="participacion"
                 value="Grupal"
                 checked={participacion === "Grupal"}
-                onChange={(e) => (setParticipacion(e.target.value), setMostrarParticipacion(true))}
+                onChange={(e) => (setParticipacion("Grupal"), setMostrarParticipacion(true))}
                 onBlur={() => (setParticipacionError(participacion.trim() === ""), setMostrarParticipacion(true))}
                 className={participacionError ? "campo-vacio" : ""}
               />

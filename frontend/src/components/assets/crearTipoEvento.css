@@ -212,3 +212,6 @@ button[type="submit"]:hover {
   font-size: 15px;
   /*hola*/
 }
+.error-message{
+  text-decoration-color: red;
+}

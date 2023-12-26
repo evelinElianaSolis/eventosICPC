@@ -453,6 +453,47 @@ public function nameequals($nombre)
      */
     public function destroy($id)
     {
-        
+        try {
+            // Encontrar el evento por su id
+            $evento = Evento::find($id);
+
+            // Verificar si el evento existe
+            if (!$evento) {
+                return response()->json(['message' => 'No se encontró el evento'], 404);
+            }
+
+            // Eliminar el evento
+            $evento->delete();
+
+            return response()->json(['message' => 'Evento eliminado con éxito'], 200);
+        } catch (\Exception $e) {
+            // Manejar errores
+            return response()->json(['message' => 'Error al eliminar el evento', 'error' => $e->getMessage()], 500);
+        }
     }
+
+
+    public function updateEstadoEvento(Request $request, $id)
+{
+    try {
+        // Encontrar el evento por su id
+        $evento = Evento::find($id);
+
+        // Verificar si el evento existe
+        if (!$evento) {
+            return response()->json(['message' => 'No se encontró el evento'], 404);
+        }
+
+        // Actualizar el campo estadoEvento con el nuevo valor
+        $evento->estadoEvento = $request->input('estadoEvento');
+
+        // Guardar los cambios
+        $evento->save();
+
+        return response()->json(['message' => 'Campo estadoEvento actualizado con éxito', 'evento' => $evento], 200);
+    } catch (\Exception $e) {
+        // Manejar errores
+        return response()->json(['message' => 'Error al actualizar el campo estadoEvento', 'error' => $e->getMessage()], 500);
+    }
+}
 }

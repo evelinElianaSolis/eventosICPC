@@ -91,3 +91,7 @@ Route::GET('/obtener-actividad/{id}', [ActividadController::class,'obtenerActivi
 Route::GET('/obtener-tipo-evento/{id}', [TipoEventoController::class,'obtenerTipoEventoPorId']);
 
 Route::GET('/obtener-tipos-de-evento', [TipoEventoController::class, 'obtenerTiposDeEvento']);
+
+Route::PUT('/eventos/{id}/update-estado', 'EventoController@updateEstadoEvento');
+Route::DELETE('/eventosdestroy/{id}',[EventoController::class,'destroy']);
+Route::DELETE('/eliminarActividades/{idEvento}', [ActividadController::class,'eliminarActividadesPorIdEvento']);

@@ -118,6 +118,7 @@ const [showSeleccionModal, setShowSeleccionModal] = useState(false);
             
             <div className='date-box'>
                 <strong>Participacion:</strong>  
+                
                 <p className='info-box'> {evento.participacion}</p>
         <br />
 

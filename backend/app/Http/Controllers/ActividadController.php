@@ -102,11 +102,17 @@ class ActividadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    public function eliminarActividadesPorIdEvento($idEvento)
+{
+    try {
+        // Find and delete activities based on the provided idEvento
+        Actividad::where('idEvento', $idEvento)->delete();
 
+        return response()->json(['message' => 'Actividades eliminadas con éxito'], 200);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Error al eliminar las actividades', 'error' => $e->getMessage()], 500);
+    }
+}
 
     public function obtenerActividadPorId($idEvento)
     {

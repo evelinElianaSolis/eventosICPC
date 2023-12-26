@@ -2,6 +2,10 @@ import React from 'react';
 import './assets/header.css'
 
 const Header = () => {
+  const toggleMenu = () => {
+    console.log("hola")
+  }
+
   return (
     <header>
       <div className="menuheader">
