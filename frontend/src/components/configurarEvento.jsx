@@ -134,7 +134,20 @@ if ('' === tituloEvento){
 
 
 
+const handleFechaFinChange = (e) => {
+  const nuevaFecha = e.target.value;
+  const fechaActual = new Date().toISOString().split('T')[0];
 
+  // Validar que la nueva fecha no sea anterior a la actual
+  if (nuevaFecha < fechaActual) {
+    setFechaInicioError(true);
+    setFechaFinError(true);
+  } else {
+    setFechaInicioError(false);
+    setFechaFin(nuevaFecha);
+    setFechaFinError(false);
+  }
+};
 
 
 
@@ -149,9 +162,13 @@ if ('' === tituloEvento){
     // Validar que la nueva fecha no sea anterior a la actual
     if (nuevaFecha < fechaActual) {
       setFechaInicioError(true);
+      setFechaFinError(true);
+      
     } else {
       setFechaInicioError(false);
       setFechaInicio(nuevaFecha);
+      setFechaFin(nuevaFecha);
+      setFechaFinError(false);
     }
   };
 
@@ -315,7 +332,7 @@ if ('' === tituloEvento){
         onBlur={() => (setFechaInicioError(fechaInicio.trim() === "null"), setError(fechaInicio.trim() === "null"))}
         required
       />
-      
+      {(fechaFin < fechaInicio)&& <div className="ErrorForm">Fecha invalida</div>}
     </div>
         <div className="FechaFinal">
           <div className="Campovacio">
@@ -328,11 +345,11 @@ if ('' === tituloEvento){
             id="fecha-fin"
             name="fecha-fin"
             value={fechaFin}
-            onChange={(e) => setFechaFin(e.target.value)}
+            onChange={handleFechaFinChange}
             onBlur={() => (setFechaFinError(fechaFin.trim() === "null"), setError(fechaFin.trim() === "null"))}
             required
           />
-          {(fechaFin < fechaInicio)&& <div className="ErrorForm">Fecha invalida</div>}
+          
        
         </div>
       </div>

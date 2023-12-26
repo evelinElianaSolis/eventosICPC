@@ -9,112 +9,201 @@ const nombreActividadBuscada="Cronograma general";
 
 const EditarEvento = (eventoId) => {
 
+  const [tituloEvento,                setTituloEvento]  = useState('');
+  const [horaEvento,                  setHoraEvento]    = useState('--:--');
+  const [fechaInicio,                 setFechaInicio]   = useState('null');
+  const [fechaFin,                    setFechaFin]      = useState('null');
+  const [ubicacion,                   setUbicacion]     = useState("");
+  const [idTipoEvento,                setIdTipoEvento]  = useState('');
+  const [modalidad,                   setModalidad]     = useState('-- seleccione --');
+  const [descripcion,                 setDescripcion]    = useState('');
+  const [participacion,               setParticipacion]         =    useState('');
+  const [numEntrenadores,             setNumEntrenadores]       =    useState('');
+  const [numParticipantes,            setNumParticipantes]      =    useState("");
+  const [tituloEventoError,   setTituloEventoError] =   useState(false);
+  const [horaEventoError,     setHoraEventoError] =     useState(false);
+  const [fechaInicioError,    setFechaInicioError] =    useState(false);
+  const [fechaFinError,       setFechaFinError] =       useState(false);
+  const [modalidadError,      setModalidadError] =      useState(false);
+  const [idTipoEventoError,   setIdTipoEventoError] =   useState(false);
+  const [ubicacionError,      setUbicacionError] =      useState(false);
+  //const [descripcionError,    setDescripcionError] =    useState(false);
+  const [modalVisible,        setModalVisible] =        useState(false);
+  const [Error,               setError] =               useState(false);
+ 
+  const [numParticipantesError,       setNumParticipantesError] = useState(false);
+  const [participacionError,          setParticipacionError] = useState(false);
+  const [numparticipacionError,       setnumParticipantesError] = useState(false);
+  const [numEntrenadoresError,        setNumEntrenadoresError] = useState(false);
+  const [actividadError,              setActividadError] = useState(false);
   
-  const [eventoEditado, setEventoEditado] = useState({
-    tituloEvento: '',
-    participacion: '',
-    numParticipantes: 0,
-    numEntrenadores: 0,
-    descripcionEvento: '',
-    estadoEvento: '',
-    aficheEvento: '',
-    idTipoEvento: 0,
-    idAdministrador: 0,
-  });
-  const [ActividadCronograma, setActividadCronograma] = useState({
-    nombreActividad:"",
-    descripcionActividad:"",
-    modalidad:"",
-    fechaInicioActividad:"",
-    fechaFinActividad:"",
-    horaInicioActividad:"",
-    ubicacionActividad:"",
-  })
-  const [ActividadEditado, setActividadEditado] = useState([{
-    nombreActividad:"",
-    descripcionActividad:"",
-    modalidad:"",
-    fechaInicioActividad:"",
-    fechaFinActividad:"",
-    horaInicioActividad:"",
-    ubicacionActividad:"",
-  },
-]);
-  const [Requisitos, setRequisitos] = useState([{
-    nombreRequisito:"",
-    descripcionRequisito:""
+  const [errorActividades,              setActividadesError] = useState(false);
+
+  const [MostrarParticipacion,              setMostrarParticipacion]     =  useState(false);
+  const [tiposDeEvento, setTiposDeEvento] = useState([]);
+
+ 
+  const obtenerEvento = async () => {
+    
+    try {
+      const response = await axios.get(`./obtener-evento/${eventoId.eventoId}`);
+      const responseActividad = await axios.get(`./obtener-actividad/${eventoId.eventoId}`); 
+      const responseTipo = await axios.get(`./obtener-tipo-evento/${response.data.evento.idTipoEvento}`);
       
-  },
-]);
-  const [Reglas, setReglas] = useState([{
-    nombreRegla:"",
-    descripcionRegla:""
-  },
-]);
-   
+    
+    
+      const evento = response.data.evento;
+      const Actividad = responseActividad.data.actividad;
+      const Tipo = responseTipo.data.tipoEvento;
+      
+      setTituloEvento(evento.tituloEvento);
+      setDescripcion(evento.descripcionEvento);
+      setFechaInicio(Actividad.fechaInicioActividad);
+      setFechaFin(Actividad.fechaFinActividad);
+      setHoraEvento(Actividad.horaInicioActividad);
+      setModalidad(Actividad.modalidad);
+      setUbicacion(Actividad.ubicacionActividad);
+      setIdTipoEvento(Tipo.nombreTipoEvento);
+      console.log(tituloEvento);
+      } catch (error) {
+        console.error('Error al obtener el evento:', error);
+      }
+
+  }
+
+  obtenerEvento();
+
+  const handleSubmit = async ()=> {
+    e.preventDefault();
+    try {
+
+      
+     
+        
+      
+
+      const nombExist = await axios.get(`./verificar-nombre-existente/${tituloEvento}`);
+      console.log(nombExist.data.existeNombre);
+      if( tituloEvento ===""     || 
+          horaEvento === "00:00" || 
+          fechaInicio === "null" || 
+          fechaFin === "null"    || 
+          fechaFin < fechaInicio ||
+          nombExist.data.existeNombre){
+            
+
+            if(nombExist.data.existeNombre){
+              setMostrarModalOpsEvento(true)
+            }
+
+            if(tituloEvento ===""     || 
+            horaEvento === "00:00" || 
+            fechaInicio === "null" || 
+            fechaFin === "null"    || 
+            fechaFin < fechaInicio){
+              setMostrarModalOps(true);
+              setError(true);
+            }
+        
+      }else{
+      const response = await axios.get('./obtenerUltimoIdEvento');
+      
+      const ultimoId = response.data.ultimoId + 1;
+        
+
+      await axios.post('./evento', {
+        idEvento: ultimoId,
+        tituloEvento: tituloEvento,
+        participacion:"ninguna",
+        numParticipantes:0,
+        numEntrenadores:0,
+        descripcionEvento: descripcion,
+        estadoEvento:true,
+        aficheEvento:"N/N",
+        idTipoEvento:idTipoEvento,
+        idAdministrador:"87654321"
+      });
+      await axios.post('./postActividad', {
+        nombreActividad:"Cronograma general",
+        descripcionActividad:descripcion,
+        modalidad:modalidad,
+        fechaInicioActividad:fechaInicio,
+        fechaFinActividad:fechaFin,
+        horaInicioActividad:horaEvento,
+        ubicacionActividad:ubicacion,
+        idEvento:ultimoId
+      });
+
+
+      console.log('Evento creado con éxito');
+      setModalVisible(true);
+      
+      window.location.href =`/CrearEvento/${ultimoId}`;
+    }
+    } catch (error) {
+      if (error.response) {
+        
+        console.error('Respuesta del servidor con error:', error.response);
+        console.error('Código de estado HTTP:', error.response.status);
+      } else if (error.request) {
+        console.error('No se recibió respuesta del servidor:', error.request);
+      } else {
+        console.error('Error durante la configuración de la solicitud:', error.message);
+      }
+
+      setModalVisible(false);
+      
+    }
+
+  };
 
 
 
+  const handleFechaInicioChange = (e) => {
+    const nuevaFecha = e.target.value;
+    const fechaActual = new Date().toISOString().split('T')[0];
 
+    // Validar que la nueva fecha no sea anterior a la actual
+    if (nuevaFecha < fechaActual) {
+      setFechaInicioError(true);
+      setFechaFinError(true);
+      
+    } else {
+      setFechaInicioError(false);
+      setFechaInicio(nuevaFecha);
+      setFechaFin(nuevaFecha);
+      setFechaFinError(false);
+    }
+  };
 
-
-
-
-
-
-
-
-
-
-
-
+  const handleFechaFinChange = (e) => {
+    const nuevaFecha = e.target.value;
+    const fechaActual = new Date().toISOString().split('T')[0];
+  
+    // Validar que la nueva fecha no sea anterior a la actual
+    if (nuevaFecha < fechaActual) {
+      setFechaInicioError(true);
+      setFechaFinError(true);
+    } else {
+      setFechaInicioError(false);
+      setFechaFin(nuevaFecha);
+      setFechaFinError(false);
+    }
+  };
+  
 
   useEffect(() => {
-  
-    const obtenerInformacion = async () => {
+    const obtenerTiposDeEvento = async () => {
       try {
-        const responseEvento = await axios.get(`eventos/${eventoId.eventoId}`);
-        setEventoEditado(responseEvento.data.evento);
-  
-        const responseActividad = await axios.get(`buscarActividadPorNombre/${eventoId.eventoId}/${encodeURIComponent(nombreActividadBuscada)}`);
-        setActividadCronograma(responseActividad.data.actividadPorNombre[0]);
-  
+        const response = await axios.get('http://localhost:8000/api/obtener-tipos-de-evento');
+        setTiposDeEvento(response.data.tiposDeEvento);
       } catch (error) {
-        console.error('Error al obtener información', error);
+        console.error('Error al obtener tipos de evento:', error);
+        // Manejar el error según tus necesidades
       }
     };
-  
-    obtenerInformacion();
-  }, []); 
-  
-  
-
-
-
-
-
-
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setEventoEditado({
-      ...eventoEditado,
-      [name]: value,
-    });
-  };
-    
-
-  const handleSubmit = e => {
-    e.preventDefault();
-        axios.put(`./eventoActualizar/${eventoId.eventoId}`, eventoEditado)
-      .then(response => {
-        console.log('Evento actualizado con éxito', response.data.evento);
-      })
-      .catch(error => {
-        console.error('Error al actualizar el eventoEditado', error);
-      });
-  };
-
-
+    obtenerTiposDeEvento();
+  }, []);
 
 
 
@@ -125,17 +214,26 @@ const EditarEvento = (eventoId) => {
       <form onSubmit={handleSubmit} className="tweet-composer">
       <div className="PrimeraFila">
       <div className="TituloEvento">
+
+        
       <div className='Campovacio'>
-
-
-
-        <label>Título del Evento:</label>
-        <div className="ColorCampoVacio">*</div>
-        </div>
-          <input type="text" 
-          name="tituloEvento" 
-          value={eventoEditado.tituloEvento} 
-          onChange={handleInputChange} />
+    <label htmlFor="tituloEvento">Nombre del evento:</label>
+    <div className="ColorCampoVacio">*</div>
+  </div>
+  <input
+    type="text"
+    id="tituloEvento"
+    name="tituloEvento"
+    placeholder="Nombre"
+    value={tituloEvento}
+    onChange={(e) => {
+      const inputValue = e.target.value;
+      if (!/^\D*$/.test(inputValue)) {
+        return;
+      }
+      setTituloEvento(inputValue);
+    }}
+  />
         </div>
 
 
@@ -149,45 +247,54 @@ const EditarEvento = (eventoId) => {
         <input
           type="time"
           id="horaEvento"
-          name="horaInicioActividad"
-          value={ActividadCronograma.horaInicioActividad} 
-          onChange={handleInputChange}
+          name="horaEvento"
+          value={horaEvento}
+          onChange={(e) => setHoraEvento(e.target.value)}
+          required
         />
+        
+
       </div>
       </div>
     
 
       <div className="Fecha">
         <div className="FechaInicio">
-          <div className="Campovacio">
-            <label htmlFor="fecha-inicio">Fecha inicio:</label>
-            <div className="ColorCampoVacio">*</div>
-          </div>
-          <input
-            className={"FechaDesing"}
-            type="date"
-            id="fecha-inicio"
-            name="fechaInicioActividad"
-            value={ActividadCronograma.fechaInicioActividad}
-            onChange={handleInputChange}
-            required
-          />
-
-        </div>
+      <div className="Campovacio">
+        <label htmlFor="fecha-inicio">Fecha inicio:</label>
+        <div className="ColorCampoVacio">*</div>
+      </div>
+      
+         
+      <input
+        className={`FechaDesing ${fechaInicioError ? 'campo-vacio' : 'null'}`}
+        type="date"
+        id="fecha-inicio"
+        name="fecha-inicio"
+        value={fechaInicio}
+        onChange={handleFechaInicioChange}
+        onBlur={() => (setFechaInicioError(fechaInicio.trim() === "null"), setError(fechaInicio.trim() === "null"))}
+        required
+      />
+      {(fechaFin < fechaInicio)&& <div className="ErrorForm">Fecha invalida</div>}
+    </div>
         <div className="FechaFinal">
           <div className="Campovacio">
             <label htmlFor="fecha-fin">Fecha fin:</label>
             <div className="ColorCampoVacio">*</div>
           </div>         
           <input
-            className="FechaDesing"
+            className={`FechaDesing ${fechaFinError ? "campo-vacio" : "null"}`}
             type="date"
             id="fecha-fin"
-            name="fechaFinActividad"
-            value={ActividadCronograma.fechaFinActividad}
-            onChange={handleInputChange}
+            name="fecha-fin"
+            value={fechaFin}
+            onChange={handleFechaFinChange}
+            onBlur={() => (setFechaFinError(fechaFin.trim() === "null"), setError(fechaFin.trim() === "null"))}
             required
           />
+          
+       
         </div>
       </div>
 
@@ -196,20 +303,24 @@ const EditarEvento = (eventoId) => {
 
 <div className="composer-form">
     <div className="Ubicacion">
-      <div className='Campovacio'>
-        <label htmlFor="ubicacion">Ubicación:</label>
+    <div className="Campovacio">
+        <label htmlFor="ubicacion">Ubicación</label>
         <div className="ColorCampoVacio">*</div>
       </div>
-        <input
-          type="text"
-          id="ubicacion"
-          name="ubicacionActividad"
-          placeholder="Ubicación"
-          value={ActividadCronograma.ubicacionActividad} 
-          onChange={handleInputChange}
-          required
-          
-        />
+      
+      <input
+        type="text"
+        id="ubicacion"
+        name="ubicacion"
+        placeholder="Ubicación"
+        value={ubicacion}
+        onChange={(e) => setUbicacion(e.target.value)}
+        onBlur={() => (setUbicacionError(ubicacion.trim() === ""), setError(ubicacion.trim() === "") )}
+        className={ubicacionError ? "campo-vacio" : ""}
+        required
+        
+      />{(ubicacion.length > 60)&& <div className="ErrorForm">máximo 60 caracteres alfanuméricos</div>}
+      
     </div>
     </div>
 
@@ -221,7 +332,11 @@ const EditarEvento = (eventoId) => {
           <select
             id="modalidad"
             name="modalidad"
-            value={ActividadCronograma.modalidad}
+            value={modalidad}
+            onChange={(e) => setModalidad(e.target.value)}
+            onBlur={() => (setModalidadError(modalidad.trim() === "-- seleccione --"), setError(modalidad.trim() === "-- seleccione --"))}
+            className={modalidadError ? "campo-vacio" : "-- seleccione --"}
+            required
           >
             <option value="null">-- seleccione --</option>
             <option value="Virtual">Virtual</option>
@@ -235,64 +350,128 @@ const EditarEvento = (eventoId) => {
 
     <div className="Campovacio">
         <label htmlFor="descripcion">Descripción</label>
-        <div className="ColorCampoVacio">*</div>
       </div>
       <textarea
         id="descripcion"
-        name="descripcionActividad"
+        name="descripcion"
         placeholder="Descripcion del evento"
         rows="4"
-        value={ActividadCronograma.descripcionActividad} 
-        onChange={handleInputChange}
+        value={descripcion}
+        onChange={(e) => setDescripcion(e.target.value)}
+        required
       >
         
       </textarea>
+      
 
+      {(descripcion.length > 250)&& <div className="ErrorForm">máximo 250 caracteres alfanuméricos</div>}
+    
 
-      <label>Participacion:
-          <input type="text" 
-          name="participacion" 
-          value={eventoEditado.participacion} 
-          onChange={handleInputChange} />
-        </label>
-
-
+      <div className="Participantes">
+        <div>
+          <label>Participación</label>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="participacion"
+                value="Individual"
+                checked={participacion === "Individual"}
+                onChange={(e) => (setParticipacion("Individual"), setMostrarParticipacion(false))}
+                onBlur={() => (setParticipacionError(participacion.trim() === ""), setMostrarParticipacion(false))}
+                className={participacionError ? "campo-vacio" : ""}
+              />
+              Individual
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="participacion"
+                value="Grupal"
+                checked={participacion === "Grupal"}
+                onChange={(e) => (setParticipacion("Grupal"), setMostrarParticipacion(true))}
+                onBlur={() => (setParticipacionError(participacion.trim() === ""), setMostrarParticipacion(true))}
+                className={participacionError ? "campo-vacio" : ""}
+              />
+              Grupal
+            </label>
+          </div>
+          
+        </div >
         
 
+        
+        
+        {MostrarParticipacion &&
+        <div className='Participantes1'>
+       <div>
+          <div className="errorInf">
+            <label htmlFor="numParticipantes">Número de participantes</label>
+            {numParticipantesError && <p>*</p>}
+          </div> 
+          <input
+            type="text"
+            id="numParticipantes"
+            name="numParticipantes"
+            placeholder="Número de participantes"
+            value={numParticipantes}
+            onChange={(e) => setNumParticipantes(e.target.value)}
+            onBlur={() => setnumParticipantesError(numParticipantes.trim() === "")}
+            className={numParticipantesError ? "campo-vacio" : ""}
+            required
+          />
+        </div>
 
+        <div>
 
+          <div className="errorInf">
+          <label htmlFor="numEntrenadores">Número de entrenadores</label>
+          {numEntrenadoresError && <p>*</p>}
+          </div> 
+          <input
+            type="text"
+            id="numEntrenadores"
+            name="numEntrenadores"
+            placeholder="Número de entrenadores"
+            value={numEntrenadores}
+            onChange={(e) => setNumEntrenadores(e.target.value)}
+            onBlur={() => setNumEntrenadoresError(numEntrenadores.trim() === "")}
+            className={numEntrenadoresError ? "campo-vacio" : ""}
+            required
+          />
+        </div>
+        </div>
+      }
+      </div>
+      
 
+      <div className="composer-form">
+          <div className='Campovacio'>
+            <label htmlFor="idTipoEvento">Seleccione el tipo de evento:</label>
+            <div className="ColorCampoVacio">*</div>
+          </div>
+          <select
+        id="idTipoEvento"
+        name="idTipoEvento"
+        value={idTipoEvento}
+        onChange={(e) => setIdTipoEvento(e.target.value)}
+        onBlur={() => (setIdTipoEventoError(idTipoEvento.trim() === '-- seleccione --'), setError(idTipoEvento.trim() === '-- seleccione --'))}
+        className={idTipoEventoError ? 'campo-vacio' : ''}
+        required
+      >
 
-        <label>Estado Evento:
-          <input type="text" 
-          name="estadoEvento" 
-          value={eventoEditado.estadoEvento} 
-          onChange={handleInputChange} />
-        </label>
-
-        <label>Numero de Entrenadores:
-          <input type="text" 
-          name="numEntrenadores" 
-          value={eventoEditado.numEntrenadores} 
-          onChange={handleInputChange} />
-        </label>
-
-        <label>Numero Participantes:
-          <input type="text" 
-          name="numParticipantes" 
-          value={eventoEditado.numParticipantes} 
-          onChange={handleInputChange} />
-        </label>
-
-        <label>Tipo de evento:
-          <input type="text" 
-          name="idTipoEvento" 
-          value={eventoEditado.idTipoEvento} 
-          onChange={handleInputChange} />
-         </label>
-
-
-
+        <option value="-- seleccione --">-- seleccione --</option>
+        {tiposDeEvento.map((tipo) => (
+          
+          <option key={tipo.id} value={tipo.idTipoEvento}>
+            {tipo.nombreTipoEvento}
+            
+          </option>
+        ))}
+      </select>
+        </div>
 
 
 
@@ -343,7 +522,7 @@ export default EditarEvento;
                 type="text"
                 name="nombreActividad"
                 value={actividad.nombreActividad}
-                onChange={(e) => handleInputChangeActividad(e, index)}
+                onChange={(e) => ""Actividad(e, index)}
               />
             </label>
           </div>
@@ -354,7 +533,7 @@ export default EditarEvento;
                 type="text"
                 name="fechaInicioActividad"
                 value={actividad.fechaInicioActividad}
-                onChange={(e) => handleInputChangeActividad(e, index)}
+                onChange={(e) => ""Actividad(e, index)}
               />
             </label>
           </div>
