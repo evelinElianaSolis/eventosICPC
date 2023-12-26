@@ -9,8 +9,8 @@ footer {
 
 
 .redessociales img{
-    max-width: 2rem;
-    padding: 0 1rem;
+    max-width: 1.9rem;
+    padding: 0 0.6rem;
     filter:   contrast(130%);
 
 }
@@ -23,6 +23,6 @@ footer {
 
 .redes{
     display: flex;
-    padding-left: 6.2rem;
+    padding-left: 5rem;
     
 }

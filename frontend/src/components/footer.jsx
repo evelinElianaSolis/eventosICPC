@@ -9,7 +9,7 @@ const Footer = () => {
 
       <div className="footer-section social">
         
-      <div><h3 className='redes'>Redes Sociales</h3>
+      <div><h4 className='redes'>Redes Sociales</h4>
         <ul className="redes-sociales">
         
         <a href="https://www.facebook.com/tu_pagina"  className='redessociales'>
