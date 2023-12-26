@@ -37,7 +37,7 @@ const Menu = () => {
       <NavLink to={"/EventosEditarEvento"} className="navbar-item" activeclassname="active">
       <img src="      https://cdn-icons-png.flaticon.com/512/13191/13191252.png " alt="Usuario" />
       <div>
-        <p className='navbar-title'>Editar información <br/>de un evento
+        <p className='navbar-title'>Editar un evento
         </p>
         <div className="line"></div>
       </div>

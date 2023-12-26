@@ -13,10 +13,7 @@ const VistaEditarEventos = () => {
       console.log('Eliminando evento...');
       await axios.delete(`http://localhost:8000/api/eliminarActividades/${idEvento}`);
       const req = await axios.delete(`http://localhost:8000/api/eventosdestroy/${idEvento}`);
-      
-      
       console.log(req);
-      obtenerEventos();
     } catch (error) {
       console.error('Error al eliminar evento:', error);
     }

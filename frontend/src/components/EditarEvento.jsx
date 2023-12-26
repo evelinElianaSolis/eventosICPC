@@ -4,7 +4,12 @@ import axios from './api/conexionApi';
 
 const nombreActividadBuscada="Cronograma general";
 
+
+
+
 const EditarEvento = (eventoId) => {
+
+  
   const [eventoEditado, setEventoEditado] = useState({
     tituloEvento: '',
     participacion: '',
@@ -41,57 +46,53 @@ const EditarEvento = (eventoId) => {
       
   },
 ]);
-  
   const [Reglas, setReglas] = useState([{
     nombreRegla:"",
     descripcionRegla:""
   },
 ]);
    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   useEffect(() => {
-    console.log("el id es: ", eventoId.eventoId);
   
     const obtenerInformacion = async () => {
       try {
         const responseEvento = await axios.get(`eventos/${eventoId.eventoId}`);
         setEventoEditado(responseEvento.data.evento);
-        console.log("el eventoEditado es: ", responseEvento.data.evento);
   
-        // Esperar 1 segundo antes de la siguiente solicitud
-        await new Promise(resolve => setTimeout(resolve, 1000));
-  
-        const responseActividad = await axios.get(
-          `buscarActividadPorNombre/${eventoId.eventoId}/${encodeURIComponent(nombreActividadBuscada)}`
-        );
+        const responseActividad = await axios.get(`buscarActividadPorNombre/${eventoId.eventoId}/${encodeURIComponent(nombreActividadBuscada)}`);
         setActividadCronograma(responseActividad.data.actividadPorNombre[0]);
   
-        // Esperar 1 segundo antes de la siguiente solicitud
-        await new Promise(resolve => setTimeout(resolve, 1000));
-  
-        const responseReglas = await axios.get(`obtenerReglasDeEvento/${eventoId.eventoId}`);
-        setReglas(responseReglas.data.reglas);
-        console.log("reglas es: ", responseReglas.data.evento);
-  
-        // Esperar 1 segundo antes de la siguiente solicitud
-        await new Promise(resolve => setTimeout(resolve, 1000));
-  
-        const responseRequisitos = await axios.get(`obtenerRequisitosDeEvento/${eventoId.eventoId}`);
-        setRequisitos(responseRequisitos.data.requisitos);
-  
-        // Esperar 1 segundo antes de la siguiente solicitud
-        await new Promise(resolve => setTimeout(resolve, 1000));
-  
-        const responseActividades = await axios.get(`ActividadesSinCronGral/${eventoId.eventoId}`);
-        setActividadEditado(responseActividades.data.actividades);
       } catch (error) {
         console.error('Error al obtener información', error);
       }
     };
   
     obtenerInformacion();
-  }, []); // La dependencia vacía garantiza que este efecto se ejecute solo en el montaje y desmontaje del componente
+  }, []); 
   
   
+
+
+
+
+
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -100,38 +101,24 @@ const EditarEvento = (eventoId) => {
       [name]: value,
     });
   };
-    const handleInputChangeReglas = (e, index) => {
-    const { name, value } = e.target;
-    const newReglas = [...Reglas];
-    newReglas[index] = { ...newReglas[index], [name]: value };
-    setReglas(newReglas);
-  };
-  const handleInputChangeRequisitos = (e, index) => {
-    const { name, value } = e.target;
-    const newRequisitos = [...Requisitos];
-    newRequisitos[index] = { ...newRequisitos[index], [name]: value };
-    setRequisitos(newRequisitos);
-  };
-  const handleInputChangeActividad = (e, index) => {
-    const { name, value } = e.target;
-    const newActividadEditado = [...ActividadEditado];
-    newActividadEditado[index] = { ...newActividadEditado[index], [name]: value };
-    setActividadEditado(newActividadEditado);
-  };
+    
 
   const handleSubmit = e => {
     e.preventDefault();
-    
-    // Hacer una solicitud para actualizar la información del eventoEditado
-    axios.put(`./eventoActualizar/${eventoId.eventoId}`, eventoEditado)
+        axios.put(`./eventoActualizar/${eventoId.eventoId}`, eventoEditado)
       .then(response => {
         console.log('Evento actualizado con éxito', response.data.evento);
-        // Puedes redirigir al usuario a la página del eventoEditado o realizar otras acciones después de la actualización
       })
       .catch(error => {
         console.error('Error al actualizar el eventoEditado', error);
       });
   };
+
+
+
+
+
+
     return (
     <div>
       <h2 className="CrearEvento">Editar Evento</h2>
@@ -139,6 +126,9 @@ const EditarEvento = (eventoId) => {
       <div className="PrimeraFila">
       <div className="TituloEvento">
       <div className='Campovacio'>
+
+
+
         <label>Título del Evento:</label>
         <div className="ColorCampoVacio">*</div>
         </div>
@@ -147,6 +137,10 @@ const EditarEvento = (eventoId) => {
           value={eventoEditado.tituloEvento} 
           onChange={handleInputChange} />
         </div>
+
+
+
+
         <div className="horaEvento">
         <div className="Campovacio">
           <label htmlFor="horaEvento">Hora de inicio</label>
@@ -158,7 +152,6 @@ const EditarEvento = (eventoId) => {
           name="horaInicioActividad"
           value={ActividadCronograma.horaInicioActividad} 
           onChange={handleInputChange}
-          required
         />
       </div>
       </div>
@@ -221,26 +214,24 @@ const EditarEvento = (eventoId) => {
     </div>
 
     <div className="Modalidad">
-    <div className='Campovacio'>
-    <label htmlFor="modalidad">Modalidad: </label>
-    <div className="ColorCampoVacio">*</div>
-    </div>
-    <select
-    id="modalidad"
-    name="modalidad"
-    value={ActividadCronograma.modalidad} 
-    onChange={handleInputChange}
-    required
-    >
-    <option value=" ">-- seleccione --</option>
-    <option value="Virtual">Virtual</option>
-    <option value="Presencial">Presencial</option>
-    <option value="Hibrida">Hibrida</option>
-    </select>
-    </div>
+          <div className='Campovacio'>
+            <label htmlFor="modalidad">Modalidad: </label>
+            <div className="ColorCampoVacio">*</div>
+          </div>
+          <select
+            id="modalidad"
+            name="modalidad"
+            value={ActividadCronograma.modalidad}
+          >
+            <option value="null">-- seleccione --</option>
+            <option value="Virtual">Virtual</option>
+            <option value="Presencial">Presencial</option>
+            <option value="Hibrida">Hibrida</option>
+          </select>
+        </div>
     </div>
 
-
+ 
 
     <div className="Campovacio">
         <label htmlFor="descripcion">Descripción</label>
@@ -253,21 +244,24 @@ const EditarEvento = (eventoId) => {
         rows="4"
         value={ActividadCronograma.descripcionActividad} 
         onChange={handleInputChange}
-        required
       >
         
       </textarea>
 
 
-
-
-
-        <label>Participacion:
+      <label>Participacion:
           <input type="text" 
           name="participacion" 
           value={eventoEditado.participacion} 
           onChange={handleInputChange} />
         </label>
+
+
+        
+
+
+
+
 
         <label>Estado Evento:
           <input type="text" 
@@ -297,7 +291,46 @@ const EditarEvento = (eventoId) => {
           onChange={handleInputChange} />
          </label>
 
-         {ActividadEditado[0].nombreActividad !=="" && (
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+        <button type="submit">Guardar Cambios</button>
+      </form>
+    </div>
+  );
+};
+
+export default EditarEvento;
+
+
+
+/** 
+{ActividadEditado[0].nombreActividad !=="" && ( 
   <div>
     <h2>Actividades del Evento</h2>
     <ul>
@@ -466,12 +499,4 @@ const EditarEvento = (eventoId) => {
 ))}
         </ul> 
          </div>
-)}
-     
-        <button type="submit">Guardar Cambios</button>
-      </form>
-    </div>
-  );
-};
-
-export default EditarEvento;
+)}*/
