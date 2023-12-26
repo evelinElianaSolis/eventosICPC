@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import '../components/assets/EditarEvento.css';
 import axios from './api/conexionApi';
 
+import Alert from'./Alert';
+
+import ModalSalir from './ModalCancelarCreacion';
+//import Validaciones from './utils/Validaciones';
+import Ops from './modalOpss';
 const nombreActividadBuscada="Cronograma general";
 
 
 
 
 const EditarEvento = (eventoId) => {
-
+  const [contador,                setContador]  = useState(1);
   const [tituloEvento,                setTituloEvento]  = useState('');
   const [horaEvento,                  setHoraEvento]    = useState('--:--');
   const [fechaInicio,                 setFechaInicio]   = useState('null');
@@ -20,29 +25,27 @@ const EditarEvento = (eventoId) => {
   const [participacion,               setParticipacion]         =    useState('');
   const [numEntrenadores,             setNumEntrenadores]       =    useState('');
   const [numParticipantes,            setNumParticipantes]      =    useState("");
-  const [tituloEventoError,   setTituloEventoError] =   useState(false);
-  const [horaEventoError,     setHoraEventoError] =     useState(false);
   const [fechaInicioError,    setFechaInicioError] =    useState(false);
   const [fechaFinError,       setFechaFinError] =       useState(false);
   const [modalidadError,      setModalidadError] =      useState(false);
   const [idTipoEventoError,   setIdTipoEventoError] =   useState(false);
   const [ubicacionError,      setUbicacionError] =      useState(false);
-  //const [descripcionError,    setDescripcionError] =    useState(false);
-  const [modalVisible,        setModalVisible] =        useState(false);
   const [Error,               setError] =               useState(false);
- 
   const [numParticipantesError,       setNumParticipantesError] = useState(false);
   const [participacionError,          setParticipacionError] = useState(false);
   const [numparticipacionError,       setnumParticipantesError] = useState(false);
   const [numEntrenadoresError,        setNumEntrenadoresError] = useState(false);
-  const [actividadError,              setActividadError] = useState(false);
-  
-  const [errorActividades,              setActividadesError] = useState(false);
 
   const [MostrarParticipacion,              setMostrarParticipacion]     =  useState(false);
   const [tiposDeEvento, setTiposDeEvento] = useState([]);
-
- 
+  const [mostrarModalSalir,   setMostrarModalSalir] =   useState(false);
+  const [mostrarModalOps,   setMostrarModalOps] =   useState(false);
+  const [mostrarModalOpsEvento,   setMostrarModalOpsEvento] =   useState(false);
+  const [modalVisible,        setModalVisible] =        useState(false);
+  const handleInicioClick       = () => {setMostrarModalSalir(true);};  
+  const handleButtonCancelarCE  = () => {setMostrarModalSalir(false);};
+  const handleOps               = () => {setMostrarModalOps(false);};
+  const handleOpsEvento               = () => {setMostrarModalOpsEvento(false);};
   const obtenerEvento = async () => {
     
     try {
@@ -51,7 +54,8 @@ const EditarEvento = (eventoId) => {
       const responseTipo = await axios.get(`./obtener-tipo-evento/${response.data.evento.idTipoEvento}`);
       
     
-    
+    console.log(eventoId.eventoId);
+    console.log(response.data.evento.idTipoEvento);
       const evento = response.data.evento;
       const Actividad = responseActividad.data.actividad;
       const Tipo = responseTipo.data.tipoEvento;
@@ -70,49 +74,33 @@ const EditarEvento = (eventoId) => {
       }
 
   }
+  if (contador === 1){
+    setContador(2);
+    obtenerEvento();
+    
+  }else{
+  
+  } 
 
-  obtenerEvento();
 
-  const handleSubmit = async ()=> {
-    e.preventDefault();
+
+
+
+
+
+
+
+
+  const handleSubmit = async (e) => {e.preventDefault();
+    
     try {
-
       
      
-        
+      
       
 
-      const nombExist = await axios.get(`./verificar-nombre-existente/${tituloEvento}`);
-      console.log(nombExist.data.existeNombre);
-      if( tituloEvento ===""     || 
-          horaEvento === "00:00" || 
-          fechaInicio === "null" || 
-          fechaFin === "null"    || 
-          fechaFin < fechaInicio ||
-          nombExist.data.existeNombre){
-            
-
-            if(nombExist.data.existeNombre){
-              setMostrarModalOpsEvento(true)
-            }
-
-            if(tituloEvento ===""     || 
-            horaEvento === "00:00" || 
-            fechaInicio === "null" || 
-            fechaFin === "null"    || 
-            fechaFin < fechaInicio){
-              setMostrarModalOps(true);
-              setError(true);
-            }
-        
-      }else{
-      const response = await axios.get('./obtenerUltimoIdEvento');
-      
-      const ultimoId = response.data.ultimoId + 1;
-        
-
-      await axios.post('./evento', {
-        idEvento: ultimoId,
+      await axios.post(`/evento/${eventoId.eventoId}`, {
+        idEvento: eventoId,
         tituloEvento: tituloEvento,
         participacion:"ninguna",
         numParticipantes:0,
@@ -123,7 +111,7 @@ const EditarEvento = (eventoId) => {
         idTipoEvento:idTipoEvento,
         idAdministrador:"87654321"
       });
-      await axios.post('./postActividad', {
+      await axios.post('./postActividad/eventoId', {
         nombreActividad:"Cronograma general",
         descripcionActividad:descripcion,
         modalidad:modalidad,
@@ -131,15 +119,12 @@ const EditarEvento = (eventoId) => {
         fechaFinActividad:fechaFin,
         horaInicioActividad:horaEvento,
         ubicacionActividad:ubicacion,
-        idEvento:ultimoId
+        idEvento:eventoId
       });
 
 
       console.log('Evento creado con éxito');
-      setModalVisible(true);
-      
-      window.location.href =`/CrearEvento/${ultimoId}`;
-    }
+    
     } catch (error) {
       if (error.response) {
         
@@ -195,7 +180,7 @@ const EditarEvento = (eventoId) => {
   useEffect(() => {
     const obtenerTiposDeEvento = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/obtener-tipos-de-evento');
+        const response = await axios.get('./obtener-tipos-de-evento');
         setTiposDeEvento(response.data.tiposDeEvento);
       } catch (error) {
         console.error('Error al obtener tipos de evento:', error);
@@ -492,13 +477,29 @@ const EditarEvento = (eventoId) => {
 
 
 
+        {mostrarModalOpsEvento && 
+         <Ops message="Opss el evento ya existe " onClose={handleOpsEvento}/>
+        }
 
 
-
+        {mostrarModalOps && 
+         <Ops message="Opss Ocurrio un Error " onClose={handleOps}/> 
+        }
+        {mostrarModalSalir && (
+        <ModalSalir message="Cancelar creación" onClose={handleButtonCancelarCE} />
+        
+      )}
 
 
      
-        <button type="submit">Guardar Cambios</button>
+        <div className="BotonPosicion">
+          <button className="tweet-button" type="submit" onClick={handleInicioClick}>
+            Cancelar
+          </button>
+          <button className="tweet-button" type="submit" onClick={handleSubmit}>
+            Guardar cambios
+          </button>
+        </div>
       </form>
     </div>
   );
