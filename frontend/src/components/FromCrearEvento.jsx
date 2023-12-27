@@ -512,9 +512,7 @@ const eliminarActividad = (index) => {
       <div className="container">
         <div className="other-elements"></div>
         <div>
-          <button className="tweet-button" type="submit" onClick={handleButtonCancelarCE}>
-            Atras
-          </button>
+          
           <button className="tweet-button" type="submit" onClick={handleSubmit}>
             Guardar
           </button>
