@@ -1,5 +1,5 @@
 import React from 'react';
-import VistaInformacionEvento from '../components/VistaVerInformacioEvento'
+import VistaInformacionEvento from '../components/EventosEditarEventos'
 import Aside from '../components/aside';
 import Header from '../components/header';
 import Footer from '../components/footer';

@@ -81,10 +81,6 @@ const EventForm =
 
 
 
-
-
-
-
   const obtenerEvento = async () => {
   try {
     
@@ -224,7 +220,7 @@ if ('' === tituloEvento){
       console.log('Evento creado con éxito');
       setModalVisible(true);
       
-      window.location.href =`/CrearEvento/0`;
+      window.location.href =`/CrearEvento/${ultimoId}`;
     }
     } catch (error) {
       if (error.response) {
@@ -247,7 +243,7 @@ if ('' === tituloEvento){
 
   return (
     <form onSubmit={handleSubmit} className="tweet-composer">
-      <h1 className="CrearEvento">Crear Evento 1/2</h1>
+      <h1 className="CrearEvento">CREAR EVENTO 1/2</h1>
     <div className="PrimeraFila">
 
     <div className="TituloEvento">
@@ -353,11 +349,13 @@ if ('' === tituloEvento){
         className={idTipoEventoError ? 'campo-vacio' : ''}
         required
       >
+
         <option value="-- seleccione --">-- seleccione --</option>
         {tiposDeEvento.map((tipo) => (
           
-          <option key={tipo.id} value={tipo.id}>
+          <option key={tipo.id} value={tipo.idTipoEvento}>
             {tipo.nombreTipoEvento}
+            
           </option>
         ))}
       </select>

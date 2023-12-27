@@ -97,6 +97,14 @@ class TipoEventoController extends Controller
         }
     }
 
+// En tu controlador al manejar la creación del evento
+public function nameequals($nombre)
+{
+    $existeNombre = TipoEvento::where('nombreTipoEvento', $nombre)->exists();
+    return response()->json(['existeNombre' => $existeNombre]);
+}
+
+
 
 
 }
@@ -104,3 +112,5 @@ class TipoEventoController extends Controller
 
 
    
+
+

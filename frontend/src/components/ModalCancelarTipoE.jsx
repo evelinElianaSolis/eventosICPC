@@ -15,7 +15,7 @@ const ModalSalir = ({ message, onClose}) => {
           </div>
           <div className="FondoModal4">
             <div className='TextoModal'>
-                <h2 className="CrearEvento1">¿Está seguro que desea cancelar?</h2>
+                <h2 className="CrearEvento1">¿Está seguro que desea cancelar la creación del tipo de evento?</h2>
             </div>
             
           <div className="ConfbuttonRequisitos">

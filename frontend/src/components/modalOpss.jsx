@@ -11,15 +11,14 @@ const ModalSalir = ({ message, onClose}) => {
                     Verifica los datos
                 </h2>
           </div>
-          <div className="FondoModal4">
+          <div className="FondoModal4-1">
           <img src="https://cdn-icons-png.flaticon.com/512/5741/5741824.png" className='iconoOps' alt="" />
                 
-            <div className='TextoModal'>
-                
-                <h2 className="CrearEvento">{message}</h2>
+            <div className='TextoModal-1'>                
+                <h2 >{message}</h2>
             </div>
             
-          <div className="ConfbuttonRequisitos">
+            <div className="ConfbuttonRequisitos-1">
               <button className="buttonRequisitos2" type="button" onClick={onClose}>
                 Volver a la Creacion
               </button>
