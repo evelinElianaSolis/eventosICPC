@@ -4,7 +4,7 @@ import '../components/assets/crearTipoEvento.css';
 import Alert from './Alert';
 import ModalSalir from './ModalCancelarTipoE';
 import ModalTipo from './ModalRegistrarTipoE';
-
+import Ops from './modalOpss';
 const EventForm = () => {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
@@ -14,8 +14,9 @@ const EventForm = () => {
   const [Error, setError] = useState(false);
   const [mostrarModalSalir, setMostrarModalSalir] = useState(false);
   const [mostrarModalTipo, setMostrarModalTipo] = useState(false);
-  
-  
+  const [mostrarModalOpsEvento,   setMostrarModalOpsEvento] =   useState(false);
+ // const [Bandera,   setBandera] =   useState(false);
+ const handleOpsEvento               = () => {setMostrarModalOpsEvento(false);};
   const handleInicioClick = () => {setMostrarModalSalir(true);};  
   const handleInicioTipo = (e) => {
     e.preventDefault(); // Prevent the default form submission
@@ -55,13 +56,15 @@ const EventForm = () => {
       setNombreError('El nombre no debe contener números ni caracteres especiales.');
       return;
     }
-
+    const nombExist = await axios.get(`./verificarNombreExistente/${nombre}`);
+    console.log(nombExist.data.existeNombre);
     const formData = new FormData();
     //formData.append('titulo', titulo);
     formData.append('nombreTipoEvento', nombre);
     formData.append('descripcionTipoEvento', descripcion);
 
     try {
+      if(nombExist.data.existeNombre == false){
       // Realizar la solicitud POST con formData usando axios
       await axios.post('crearTipoEvento', formData);
       setMostrarModalTipo(true);
@@ -70,10 +73,16 @@ const EventForm = () => {
       
       setNombre('');
       setDescripcion('');
+     }else{
+      if(nombExist.data.existeNombre){
+        setMostrarModalOpsEvento(true)
+      }
+     }
     } catch (error) {
       console.error('Error al crear evento', error);
       setModalVisible(false);
     }
+    
   };
 
   return (
@@ -142,6 +151,9 @@ const EventForm = () => {
         <ModalTipo message="Creación del tipo de evento" onClose={handleButtonCancelarTI} />
         
       )}
+      {mostrarModalOpsEvento && 
+         <Ops message="Opss el evento ya existe " onClose={handleOpsEvento}/>
+        }
     </form>
   );
 };
