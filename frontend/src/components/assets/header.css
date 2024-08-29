@@ -1,0 +1,80 @@
+header {
+    padding: 1.7rem 2rem;
+    background-color: #21679A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 10px 5px 4px rgba(0, 0, 0, 0.1);
+}
+
+header img {
+    width: 2.25rem;
+    height: 2.2rem;
+    border-radius: 50%;
+}
+
+
+.menuheader {
+    width: 2rem;
+    height: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.menuheader div{
+    width: 100%;
+    height: 0.25rem;
+    background-color: #ffffff;
+}
+
+.logotipo{
+    text-decoration: none;
+    font-weight: bold;
+    padding-left: 6rem;
+    font-size: 25px;
+    color: #ffffff;
+    
+}
+
+
+
+.buscador {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-right: 2.5rem;
+}
+
+.buscador input[type="text"]{
+    border: 1px solid #ffffff;
+    border-radius: 999px;
+    font-size: 16px;
+    padding-left: 2rem;
+    background-color: #f5f8fa;
+    margin-bottom: 0px;
+    max-width: 50%;
+}
+
+
+.usercontent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.usercontent a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.usercontent p {
+    margin: 0;
+    font-size: 12px;
+    padding-right: 3.9rem;
+}

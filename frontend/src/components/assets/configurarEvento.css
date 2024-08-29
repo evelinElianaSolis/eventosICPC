@@ -1,0 +1,76 @@
+/* Estilos para el contenedor principal */
+.formulario-container {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Estilos para el título */
+h2 {
+  font-size: 24px;
+  margin-bottom: 10%;
+}
+
+/* Estilos para las columnas */
+.columnas-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Estilos para cada columna */
+.columna {
+  width: 48%; /* Divide el espacio en dos columnas */
+}
+
+/* Estilos para las etiquetas de opciones */
+label {
+  display: block;
+  margin-bottom: 20px;
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+/* Estilos para los checkboxes */
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Estilos para los botones */
+.botones{
+  margin-top: 5%;
+}
+
+.boton-cancelar, .boton-siguiente {
+  cursor: pointer;
+  margin-right: 5%;
+  background-color: #1da1f2;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 16px;
+    
+}
+
+.boton-cancelar:hover, .boton-siguiente:hover {
+  background-color: #1990d6;
+}
+
+
+
+/* Estilos para las subopciones */
+.subtitulo{
+  margin-left: 5%; /* Agrega un margen a la izquierda de 10% */
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.subopciones{
+  display: flex; /* Muestra las subopciones en una fila */
+  align-items: center; /* Alinea verticalmente las subopciones en el centro */
+  margin-top: 10px; /* Espacio superior entre las subopciones y el título */
+}
+
+/* Estilos para cada subopción */
+.subopcion {
+  margin-right: 20px; /* Espacio entre las subopciones */
+}

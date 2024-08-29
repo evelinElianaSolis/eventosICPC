@@ -1,0 +1,103 @@
+/* Estilos generales para contenedor y etiquetas */
+.contenedor-form {
+    flex-direction: column;
+    text-align: left;
+    max-width: 800px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contenedor-form label {
+    margin-left: 10%;
+    width: 100%;
+    display: block;
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Estilos específicos para pantallas más pequeñas */
+  @media only screen and (max-width: 600px) {
+    .contenedor-form label {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  
+    .contenedor-form input {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  
+  .contenedor-form p {
+    margin-top: 0;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    margin-left: 10%;
+    width: 80%;
+    line-height: 1.2;
+  }
+    
+  .contenedor-form input {
+    margin-left: 10%;
+    width: 78%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #3498db;
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+  }
+  
+  .contenedor-form input:focus {
+    border-bottom: 2px solid #2250c4;
+  }
+  
+  .obligatorio::after {
+    content: " * ";
+    color: red;
+    margin-right: 4px;
+  }
+  
+  .button-container {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .rojo {
+    color: red;
+  }
+  
+  .button-container .blue-button {
+    background-color: rgb(74, 164, 237);
+    color: white;
+    border: none;
+    padding: 1.8% 8%;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 40px;
+    margin-left: 10%;
+    margin-right: 13%;
+  }
+  
+  /* Estilos específicos para pantallas más pequeñas */
+  @media only screen and (max-width: 600px) {
+    .button-container .blue-button {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  

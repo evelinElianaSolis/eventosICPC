@@ -1,0 +1,217 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #D2ECFD;
+    height: 100%;
+    margin: 0 ;
+    padding: 0;
+    
+}
+
+
+
+/* Estilos para la barra de navegación */
+
+
+/* Estilos para el formulario */
+main {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    flex: 1; 
+}
+
+/* Estilos para los campos del formulario */
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0px 10px 0px;
+}
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px; /* Aumenta el espacio interno */
+    margin-bottom: 20px;
+    border-radius: 3px;
+    border: 1px solid #000000;
+    font-size: 16px;
+    resize: none;
+    box-sizing: border-box;
+    display: block;
+    
+}
+
+#icono-tipo {
+    padding-bottom: 10px;
+}
+
+/* Cambiar el color del borde del textarea y enfocar */
+textarea:focus {
+    border-color: #1da1f2; /* Cambiar a un color de borde agradable al enfocar */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos para el botón de enviar */
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+button[type="submit"] {
+    background-color: #1da1f2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.container button{
+    margin: 10px;
+}
+
+
+button[type="submit"]:hover {
+    background-color: #1990d6;
+}
+
+
+
+  
+  /* Estilos para dispositivos más pequeños */
+  @media (max-width: 768px) {
+    .img1 {
+      flex-direction: column;
+    }
+  
+    .tipoEvento,
+    .horaEvento {
+      width: 100%; /* Ocupa el 100% del ancho en dispositivos más pequeños */
+      margin-right: 0;
+    }
+  }
+  
+
+
+
+
+
+.tweet-composer p {
+    font-size: 16px;
+    color: #555;
+}
+
+
+
+
+
+.tweet-composer  {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 1.3rem;
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    border-bottom: 1px solid #b3b3b3;
+    
+}
+
+.tweet-actions .tweet-button {
+    background-color: #1da1f2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tweet-actions .tweet-button:hover {
+    background-color: #1990d6;
+}
+
+
+/* Estilos para la sección de noticias */
+.main-container {
+    display: flex;
+    min-height: 85vh;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+  
+  .column {
+    width: 50%;
+  }
+  .column1 {
+    width: 18%;
+  }
+  .column2 {
+    width: 18%;
+  }
+  
+  .news-section {
+    background-color: #ffffff;
+    border-left: 1px solid #e1e8ed;
+    height: 100%;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.3s ease-in-out;
+    
+  }
+  
+  .news-section h2 {
+    font-size: 20px;
+  }
+  
+.Participantes {
+  display: flex;
+  justify-content: space-between;
+}
+.campo-vacio {
+  background-color: #ff000025;
+  
+}
+
+
+.composer-form select{
+  border: .5px solid #000000;
+}
+ 
+
+.tipoeventob {
+  display: flex;
+  justify-content: flex-end;
+}
+.tipoeventob .tweet-button{
+  margin: 1rem;
+}
+
+
+.CrearTipoE{
+  display: flex;
+}
+.CreadoExitosamente{
+  color: red;
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+  /*hola*/
+}
+.error-message{
+  text-decoration-color: red;
+}

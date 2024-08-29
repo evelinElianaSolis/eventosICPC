@@ -1,0 +1,183 @@
+.modal-containerPE {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-contentPE {
+  position: relative;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 50px 50px 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  /*overflow-y: auto;*/
+}
+
+/* Estilo para la div que contiene los botones */
+.modal-containerPE .modal-contentPE .botones-container {
+  display: flex; /* Utilizar el modelo de caja flexible para los botones */
+  justify-content: space-between; 
+}
+
+/* Estilo para los botones */
+.modal-containerPE .modal-contentPE .boton-okPE {
+  background-color: rgb(74, 164, 237);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  width: 26%; /* Ancho del 48% para dejar espacio entre los botones */
+  box-sizing: border-box; /* Incluir bordes y relleno en el ancho total */
+  margin: 0 12%; /* Eliminar margen para evitar espacios innecesarios entre los botones */
+}
+
+.modal-containerPE .modal-contentPE .boton-okPE:hover {
+  background-color: #0056b3;
+}
+
+
+.boton-okPE:hover {
+  background-color: #0056b3;
+}
+
+.cerrarPE {
+  position: absolute;
+  top: 9px;
+  right: 10px; /* Cambiado de 'left' a 'right' para colocar la X en la esquina derecha */
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: bold;
+  color: #000;
+}
+
+.codigo-contPE {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-containerPE .modal-contentPE label {
+position: absolute;    width: 100%;
+    display: block;
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.modal-containerPE .modal-contentPE input{
+  width: 100%;
+  max-width: 200px;
+  margin: auto;
+  padding: 10px;
+  border: none;
+  border-bottom: 1.5px solid #3498db;
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+
+.modal-containerPE .modal-contentPE input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.modal-containerPE .modal-contentPE .verificar-container {
+  display: flex; /* Utilizar el modelo de caja flexible para centrar el botón */
+  justify-content: center; /* Centrar el contenido horizontalmente */
+}
+
+/* Estilo para el botón de verificación */
+.modal-containerPE .modal-contentPE .boton-verificarPE {
+  background-color: rgb(74, 164, 237);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 40%; /* Ajusta el ancho del botón según tus necesidades */
+  box-sizing: border-box;
+  margin: 0 auto; /* Centra el botón horizontalmente */
+  font-size: 14px;
+}
+
+.modal-containerPE .modal-contentPE .boton-verificarPE:hover {
+  background-color: #0056b3;
+}
+
+
+
+.modal-containerPE .modal-contentPE .mensajePE {
+  color: #0b0b0b;
+  margin: 15px auto; /* Cambia el margen izquierdo y derecho a 'auto' para centrar horizontalmente */
+ display: block;
+  width: 100%; 
+  max-width: 400px;
+  font-size: 14px;
+  padding-top: 20px;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+/* Estilos para el mensaje de error */
+.modal-containerPE .modal-contentPE .reenvio-container .errorPE {
+  color: red; /* Cambia el color del mensaje de error a rojo */
+  margin: 0;
+  border-radius: 5px;
+  font-size: 12px;
+  background-color: transparent;
+  box-sizing: border-box;
+  margin-bottom: 8px; /* Agrega espacio entre el mensaje de error y el botón */
+}
+
+/* Estilos para el botón "Volver a enviar Código" */
+.modal-containerPE .modal-contentPE .reenvio-container .button-link {
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Sin bordes */
+  padding: 0; /* Sin relleno */
+  font-size: 12px; /* Tamaño del texto */
+  text-decoration: underline; /* Texto subrayado */
+  cursor: pointer; /* Cursor tipo puntero */
+  color: rgb(74, 164, 237); 
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.modal-containerPE .modal-contentPE .reenvio-container .button-link:hover {
+  color: rgb(18, 18, 235);
+  border-bottom-color: rgb(18, 18, 235);
+}
+
+/* Estilos adicionales para centrar el texto */
+.modal-containerPE .modal-contentPE .reenvio-container .errorPE.centered-text {
+  text-align: center;
+  margin: 0 auto; /* Centra el elemento horizontalmente */
+  max-width: 80%;
+}
+
+
+@media (max-width: 600px) {
+  .boton-okPE {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .modal-contentPE {
+    margin: 15px;
+    padding: 10px;
+  }
+}

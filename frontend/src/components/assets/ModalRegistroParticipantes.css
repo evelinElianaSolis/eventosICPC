@@ -1,0 +1,302 @@
+/* Modal Container */
+.modal-container-MRPE {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Modal Content */
+  .modal-content-MRPE {
+    /* Fondo blanco por defecto */
+    
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    
+    overflow: auto;
+    max-height: 90%;
+    padding-top: 1%;
+    padding-bottom: 10%;
+    
+  }
+    /* Estilo para el contenedor de la selección de género */
+    .contenedor-formulario-ToE-MRPE {
+      flex-direction: column;
+      text-align: left;
+      max-width: 800px;
+      width: 80%;
+      margin: 0 auto;
+      background-color: #ecf0f1;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+    }
+    
+  .contenedor-formulario-ToE-MRPE label.required::after {
+    content: ' *';
+    color: #e74c3c; 
+  }
+  
+  .contenedor-formulario-ToE-MRPE .form-group3 {
+    width:100%; 
+  }
+  /* Estilo de las etiquetas */
+  .modal-content-MRPE .form-group3  label {
+    margin-left: 10%;
+    width: 90%;
+    display: block;
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .modal-content-MRPE .form-group2  label {
+    margin-left: 10%;
+    width: 90%;
+    display: block;
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  .modal-content-MRPE .form-group  label {
+    margin-left: 10%;
+    width: 90%;
+    display: block;
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  /* Estilo para el campo de entrada de teléfono */
+  .contenedor-formulario-ToE-MRPE input{
+    margin-left: 4%;
+    width: 90%;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 2px solid #3498db;
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+    box-sizing: border-box
+  }
+  
+  /* Estilo para el mensaje de error */
+  .contenedor-formulario-ToE-MRPE input:focus {
+    border-bottom: 2px solid #007BFF; /* Cambia el color del borde inferior cuando está enfocado */
+  }
+  
+
+  
+  /* Estilo cuando el foco está en la selección */
+  .contenedor-formulario-ToE-MRPE select:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  .contenedor-formulario-ToE-MRPE p {
+    margin-top: 0;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    margin-left: 10%;
+    width: 80%;
+    line-height: 1.2;
+  }
+  
+ 
+ 
+  .modal-content-MRPE .button-container-ToE-MRPE {
+    width: 100%;
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    box-sizing: border-box; 
+  }
+  
+  .modal-content-MRPE .button-container-ToE-MRPE button[type="button"] {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    max-width: 150px; /* Ancho máximo para los botones */
+    background-color: rgb(74, 164, 237);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 40px;background-color: rgb(74, 164, 237);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 40px;
+  }
+  
+  .modal-content-MRPE .button-container-ToE-MRPE button[type="button"]:first-child {
+    margin-right: 10%; /* Agrega un margen derecho solo al primer botón */
+  }
+  
+
+  
+  .modal-content-MRPE .button-container-ToE-MRPE  button[type="submit"] {
+    background-color: rgb(74, 164, 237);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 40px;
+    margin-left: 90px;
+    margin-right: 110px;
+   width: 150px;
+  }
+ 
+  
+ 
+  .button-container-ToE-MRPE  button:hover {
+    background-color: #2980b9; /* Azul más oscuro al pasar el ratón */
+  }
+  
+
+  /* Estilo cuando el foco está en la selección */
+  .contenedor-formulario-ToE-MRPE select#genero:focus {
+    border-bottom: 2px solid #007BFF;
+    outline: none;
+  }
+  
+  /* Estilo para las opciones de género */
+  .contenedor-formulario-ToE-MRPE select#genero option {
+    border: none; /* Elimina el borde predeterminado de las opciones */
+    border-bottom: 1px solid #ccc; /* Agrega una línea inferior a las opciones */
+    padding: 10px;
+    font-size: larger;
+  }
+  
+  .contenedor-formulario-ToE-MRPE select#genero {
+    margin-left: 10%;
+    width: 78%;
+    padding: 10px;
+    font-size: 18px; /* Tamaño de fuente más grande */
+    border: none; /* Elimina el borde del input */
+    border-bottom: 1px solid #3498db; /* Borde inferior de 2px y color azul */
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .contenedor-formulario-ToE-MRPE select#pais {
+    margin-left: 10%;
+    width: 78%;
+    padding: 10px;
+    font-size: 18px; /* Tamaño de fuente más grande */
+    border: none; /* Elimina el borde del input */
+    border-bottom: 1px solid #3498db; /* Borde inferior de 2px y color azul */
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .contenedor-formulario-ToE-MRPE select#pais option {
+    border: none; /* Elimina el borde predeterminado de las opciones */
+    border-bottom: 1px solid #ccc; /* Agrega una línea inferior a las opciones */
+    padding: 10px;
+    font-size: larger;
+  }
+
+  .contenedor-formulario-ToE-MRPE select#pais:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+
+  /* Estilo para los contenedores de fila del formulario */
+.contenedor-formulario-ToE-MRPE .form-row {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  gap: 2px;
+}
+
+/* Estilo para cada grupo de formulario dentro de la fila */
+.contenedor-formulario-ToE-MRPE .form-group {
+  width:35%; /* Puedes ajustar este valor según tus necesidades */
+  margin-bottom: 12px;
+  padding-left: 7%;
+
+  flex-direction: column;
+}
+.contenedor-formulario-ToE-MRPE .form-group2 {
+  width:70%; /* Puedes ajustar este valor según tus necesidades */
+  margin-bottom: 12px;
+  padding-right: 5%;
+  flex-direction: column;
+}
+.contenedor-formulario-ToE-MRPE .form-row input{
+  width: 78%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1.5px solid #3498db;
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+/* Estilo para el campo de país y CI en dispositivos pequeños */
+@media screen and (max-width: 768px) {
+  .contenedor-formulario-ToE-MRPE .form-group {
+    width: 100%;
+  }
+}
+
+
+  /* Estilo cuando el foco está en la selección */
+ /* .contenedor-formulario-ToE-MRPE select#equipo:focus {
+    border-color: #007BFF;
+    outline: none;
+  }*/
+  
+  /* 
+  .contenedor-formulario-ToE-MRPE select#equipo option {
+    border: none; 
+    border-bottom: 1px solid #ccc; 
+    padding: 10px;
+    font-size: larger;
+  }*/
+     /*
+  .contenedor-formulario-ToE-MRPE select#equipo {
+    margin-left: 4%;
+    width: 90%;
+    padding: 10px;
+    font-size: 18px; 
+    border: none;
+    border-bottom: 2px solid #3498db; 
+    background-color: #ecf0f1;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  */
+

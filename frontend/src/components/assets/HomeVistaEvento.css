@@ -1,0 +1,312 @@
+
+
+.titulo_home {
+    font-size: 36px;
+    color:#3498db;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+}
+
+.boton_mas_informacion{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.boton_mas_informacion a{
+    text-decoration: none;
+}
+
+.masinfo:hover{
+    background-color: #4d85ff;
+}
+
+.masinfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 15px;
+    background-color: #588dff;
+    width: 10rem;
+    height: 3rem;
+    color: #ffffff;
+}
+/* Estilos para el contenedor con barra de desplazamiento */
+.scroll-containerHM {
+
+    display: flex;
+    min-height: 85vh;
+    justify-content: space-between;
+    margin: 0 auto;
+  
+
+  width: 100%; /* Ajusta esto según el ancho deseado */
+  max-height: 200px; /* Ajusta esto según la altura máxima deseada */
+  overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+  overflow-y: auto; /* Muestra una barra de desplazamiento vertical si es necesario */
+  border: 1px solid #ccc; /* Opcional: añade un borde para el contenedor */
+  box-sizing: border-box; /* Asegúrate de que el padding y el borde estén incluidos en el ancho y la altura total */
+}
+
+
+.cuerpo {
+  max-height: 1000px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+
+  }
+  
+ .titulo_home {
+  font-size: 32px;
+  text-align: center;
+  color: #333; /* Color de texto ajustado según preferencias */
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+  .hr {
+    border: 1px solid #ccc;
+    margin: 20px 0;
+    padding: 12%;
+  }
+  
+  .eventos-container {
+
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+    max-height: 700px;  /* Altura máxima del contenedor */
+    overflow-y: auto; 
+    gap: 20px;
+  }
+  
+  .evento-rectangulo {
+    display: flex;
+    border: 1px solid #ddd;
+    width: 100%;
+    background-color: #acd3ee;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    box-sizing: border-box;
+    margin-bottom: 1px;
+    gap:10px;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  .evento-rectangulo2 {
+    display: flex;
+    border: 1px solid #ddd;
+    width: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  .evento-rectangulo2.activo {
+    border-color: #4caf50;
+    background-color:#4caf50;
+  }
+  
+  .evento-rectangulo2.cancelado {
+    border-color: #e53935;
+    background-color: red;
+  }
+
+  .evento-imagen {
+    max-width: 48%; /* Ancho específico para el afiche */
+    max-height: 100%;
+  }
+
+  .evento-imagen img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    padding: 15px;
+    margin: 0 auto;
+    min-width: 40%;
+    min-height: 20%;
+    
+  }
+  
+  .evento-info {
+    display: flex;
+    flex-direction: column;
+      width: calc(99% - 10%);
+    padding: 15px;
+   
+   
+  } 
+  
+   .fechas-cont {
+    display: flex;
+    gap: 20px;
+   }
+   .mini-cont{
+    background-color: #f9f8f8;
+    width: 50%;
+    border-radius: 12px;
+   }
+
+   .mini-cont2{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: #f9f8f8;
+    width: calc(100%-220px);
+    border-radius: 12px;
+   }
+  
+  .fecha-titulo {
+    font-size: 14px;
+    color: #555; /* Color de texto más claro, ajusta según tus preferencias */
+    margin: 0;
+  }
+  
+  .fecha-valor {
+    font-size: 16px;
+    color: #333; /* Color de texto oscuro, ajusta según tus preferencias */
+    margin: 0;
+  }
+  
+  .evento-titulo {
+    
+    padding-bottom: 1%;
+    font-size: 24px;
+    color: #333; /* Color de texto oscuro, ajusta según tus preferencias */
+    margin-bottom: 10px;
+    overflow: hidden;
+    white-space: normal;
+    /*text-overflow: ellipsis;*/
+  }
+  
+
+  
+  .evento-info p {
+    margin: 5px 0;
+  padding-left: 10px;
+  }
+  .to-padd{
+    margin-top: 2%;
+  }
+  .masinfo {
+    align-self: flex-end;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 23px;
+   margin-top: auto;
+
+  }
+  
+  .masinfo:hover {
+    background-color: #2980b9;
+  }
+  
+  .cancelarEvento{
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .masinfoCancelar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 15px;
+    padding: 1.3rem;
+    margin-right: 1rem;
+    margin-top: 1.2rem;
+    background-color: #ff6262;
+    height: 3rem;
+    color: #ffffff;
+}
+.masinfoCancelar:hover{
+  background-color: #fd4141;
+}
+.masinfoEditar
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  text-decoration: none;
+  border-radius: 25px;
+  font-size: 15px;
+  margin-left: 1rem;
+  background-color: #588dff;
+  margin-top: 1.2rem;
+  width: 10rem;
+  height: 3rem;
+  color: #ffffff;
+}
+.masinfoEditar:hover{
+  background-color: #4d85ff;
+}
+
+.cuerpo1{
+  max-height: 1000px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+
+}
+
+
+.evento-rectangulo1{
+  display: flex;
+  justify-content: center;
+  border: 1px solid #ddd;
+  width: 94%;
+  background-color: #acd3ee;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  box-sizing: border-box;
+  margin: 0.2rem 1rem;
+
+  gap:10px;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+
+.eventos-container1{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+  max-height: 700px;  /* Altura máxima del contenedor */
+  overflow-y: auto; 
+  gap: 20px;
+}
+
+.activoEvento{
+  background-color: #157abd;
+}

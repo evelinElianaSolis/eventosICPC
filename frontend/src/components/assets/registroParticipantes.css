@@ -1,0 +1,314 @@
+/* Estilo del título */
+.centrar-titulo {
+  font-size: 3em;
+  text-align: center;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #3498db, #e74c3c); /* Degradado de azul a rojo */
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background 0.3s ease; 
+}
+
+
+.subtitulo {
+  color: #2c3e50; 
+  font-weight: bold;
+  font-size: 1.4em;
+  margin-bottom: 12px; 
+}
+
+
+.contenedor-form {
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0px 10px 0px;
+}
+.hola
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    font-size: 16px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+
+textarea:focus {
+    border-color: #1da1f2;
+}
+
+.split-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.split-column {
+    flex: 1;
+    margin-bottom: 20px;
+    padding: 0px 20px 0px 0;
+    box-sizing: border-box;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.role-fieldset {    
+    border: 1px solid #000; /* Establece un borde alrededor del grupo */
+    padding: 10px; /* Agrega espacio alrededor del contenido del borde */
+}
+
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  max-width: 800px;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+
+.contenedor-form label.required::after {
+  content: ' *';
+  color: #e74c3c;
+}
+
+
+.contenedor-form input#apellidoPersona {
+  margin-left: 4%;
+  width: 90%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-bottom: 2px solid #3498db;
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box
+}
+
+
+.contenedor-form input#apellidoPersona:focus {
+  border-bottom: 2px solid #007BFF; }
+
+
+.contenedor-form input#correoC:focus {
+  border-bottom: 2px solid #007BFF; 
+}
+
+
+
+
+
+
+.contenedor-form input#idPersona:focus {
+  border-bottom: 2px solid #007BFF; 
+}
+
+
+.contenedor-form input#nombrePersona {
+  margin-left: 4%;
+  min-width: 90%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-bottom: 2px solid #3498db; 
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.contenedor-form input#nombrePersona:focus {
+  border-bottom: 2px solid #007BFF; 
+}
+
+.contenedor-form input#correo {
+  margin-left: 4%;
+  min-width: 90%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-bottom: 2px solid #3498db; 
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.contenedor-form input#correo:focus {
+  border-bottom: 2px solid #007BFF; 
+}
+
+.espacio {
+  margin-top: 20px;
+}
+
+.error-message {
+  color: #e74c3c; /* Rojo */
+  margin-top: 5px;
+}
+
+/*.contenedor-form button {
+  background-color: #3498db; 
+  color: #fff;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}*/
+
+.contenedor-form button:hover {
+  background-color: #2980b9; 
+}
+
+.contenedor-form select#genero {
+  margin-left: 4%;
+  width: 90%;
+  padding: 1px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 2px solid #3498db; 
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+
+.contenedor-form select#genero:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+
+.contenedor-form select#genero option {
+  border: none; 
+  border-bottom: 1px solid #ccc; 
+  padding: 10px;
+  font-size: larger;
+}
+
+/* Estilo específico para la opción "Masculino" */
+.contenedor-form select#genero option[value="Masculino"] {
+  background-color: #81b2d3; 
+  color: rgb(160, 234, 114); 
+}
+
+/* Estilo específico para la opción "Femenino" */
+.contenedor-form select#genero option[value="Femenino"] {
+  background-color: #e74c3c; 
+  color: #fff; 
+}
+
+
+.button-container-RP {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.button-container-RP .blue-button-RP  {
+  background-color: rgb(74, 164, 237);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 40px;
+  margin-left: 90px;
+  margin-right: 110px;
+ width: 150px;
+}
+.contenedor-form p {
+  margin-left: 4%;
+  width: 90%;
+  margin-left: 32px;
+  font-size: 10px; 
+  border: none; 
+  background-color: #ecf0f1;
+  margin-bottom: 12px;
+   box-sizing: border-box;
+}
+
+
+.contenedor-form .paisCI-container {
+  width: 90%;
+  display: flex;
+  gap: 10px;
+}
+
+.contenedor-form .paisCI2-container {
+  padding-left: 4%;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.contenedor-form .paisCI2-container select {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-bottom: 2px solid #3498db;
+  background-color: #ecf0f1;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.contenedor-form .paisCI-container input#idPersona {
+  
+ width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+
+  border-bottom: 2px solid #3498db;
+  margin-bottom: 12px;
+  background-color: #ecf0f1;
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  
+}
+
+.contenedor-form input#idPersona:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+.contenedor-form .paisCI-container select#idPersona:focus {
+  border-color: #007BFF;
+  outline: none;
+}

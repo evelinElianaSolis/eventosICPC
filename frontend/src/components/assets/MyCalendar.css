@@ -1,0 +1,77 @@
+/*.react-calendar {
+    font-family: Arial, sans-serif;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(252, 45, 204, 0.1);
+  }
+  
+  .react-calendar__tile--active {
+    background-color: #ffff00; 
+    color: white;
+  }
+  
+  .react-calendar__navigation {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px 10px 0 0;
+    padding: 0px;
+  }
+  
+  .react-calendar__navigation button {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #007bff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .react-calendar__navigation button:enabled:hover,
+  .react-calendar__navigation button:enabled:focus {
+    background-color: #007bff; 
+    color: white;
+  }
+  .highlighted-date {
+    background-color: #ff69b4;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+  }
+  */
+  .mi-calendario {
+    height: 580px; /* Ajusta la altura según tus preferencias */
+    width: 90%;   /* Ajusta el ancho según tus preferencias */
+    background-color: #e0f7fa; /* Color celeste bajito */
+    font-family: 'Arial', sans-serif; /* Fuente sans-serif */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutile */
+    color: #333; /* Color de texto oscuro */
+    
+    
+  }
+  
+  .mi-contenedor {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .mi-calendario .rbc-event {
+    background-color: #45baf5; /* Cambia el color según tus preferencias */
+    border: none; /* Elimina el borde */
+    opacity: 0.8;
+    color: black;
+  }
+  
+  /* Nueva regla para eventos dentro del rango de fechas */
+  .mi-calendario .rbc-event.within-range {
+    background-color: rgb(197, 245, 192);
+  }
+
+  #mi-calendario .rbc-agenda-time-cell {
+    display: none;
+  }
+
+  
+  
+
+  
